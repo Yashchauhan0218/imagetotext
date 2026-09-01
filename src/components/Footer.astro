@@ -1,0 +1,83 @@
+---
+// Footer.astro - Rodapé minimalista estilo Vercel seguindo o DESIGN.md
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-[var(--color-canvas)] border-t border-[var(--color-hairline)] pt-12 pb-16">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12 pb-12 border-b border-[var(--color-hairline)]">
+      
+      <!-- Brand Col -->
+      <div class="col-span-2">
+        <a href="/" class="flex items-center gap-2.5 mb-4 group">
+          <div class="w-7 h-7 rounded-md bg-[var(--color-primary)] text-[var(--color-on-primary)] flex items-center justify-center shadow-xs">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+          </div>
+          <span class="font-semibold text-sm tracking-tight text-[var(--color-ink)]">Imagem Para Texto</span>
+        </a>
+        <p class="text-xs text-[var(--color-body)] max-w-sm leading-relaxed mb-4">
+          A plataforma de OCR mais precisa para desenvolvedores e criadores. Converta imagens, capturas de tela e diagramas em texto limpo e código em mais de 25 linguagens.
+        </p>
+        <div class="flex items-center gap-2 text-xs font-mono text-[var(--color-mute)]">
+          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Todos os Sistemas Operacionais</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Col 1: Ferramentas -->
+      <div>
+        <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-ink)] font-semibold mb-3">Ferramentas</h4>
+        <ul class="space-y-2 text-xs text-[var(--color-body)]">
+          <li><a href="#converter-app" class="hover:text-[var(--color-ink)] transition-colors">Imagem para Texto</a></li>
+          <li><a href="#converter-app" class="hover:text-[var(--color-ink)] transition-colors">Código de Imagem OCR</a></li>
+          <li><a href="#converter-app" class="hover:text-[var(--color-ink)] transition-colors">Extrator de Tabelas</a></li>
+          <li><a href="#converter-app" class="hover:text-[var(--color-ink)] transition-colors">OCR de Recibos & Faturas</a></li>
+          <li><a href="#converter-app" class="hover:text-[var(--color-ink)] transition-colors">Conversor em Lote</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 2: Linguagens -->
+      <div>
+        <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-ink)] font-semibold mb-3">Linguagens</h4>
+        <ul class="space-y-2 text-xs text-[var(--color-body)]">
+          <li><span class="hover:text-[var(--color-ink)] cursor-default">Python OCR</span></li>
+          <li><span class="hover:text-[var(--color-ink)] cursor-default">JavaScript / TypeScript</span></li>
+          <li><span class="hover:text-[var(--color-ink)] cursor-default">HTML / CSS / Tailwind</span></li>
+          <li><span class="hover:text-[var(--color-ink)] cursor-default">SQL & Bancos de Dados</span></li>
+          <li><span class="hover:text-[var(--color-ink)] cursor-default">Rust & Go</span></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Privacidade & Termos -->
+      <div>
+        <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-ink)] font-semibold mb-3">Privacidade & Termos</h4>
+        <ul class="space-y-2 text-xs text-[var(--color-body)]">
+          <li><span class="hover:text-[var(--color-ink)] cursor-default">Política de Privacidade</span></li>
+          <li><span class="hover:text-[var(--color-ink)] cursor-default">Termos de Uso</span></li>
+          <li><span class="hover:text-[var(--color-ink)] cursor-default">Arquitetura de Segurança</span></li>
+          <li><span class="hover:text-[var(--color-ink)] cursor-default">100% no Navegador</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--color-mute)] font-mono">
+      <div>
+        &copy; {currentYear} Imagem Para Texto (imagemparatexto.com). Todos os direitos reservados.
+      </div>
+      <div class="flex items-center gap-4">
+        <span>100% Gratuito & OCR Local</span>
+        <span>·</span>
+        <span>Feito com Astro & Tailwind v4</span>
+      </div>
+    </div>
+
+  </div>
+</footer>

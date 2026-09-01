@@ -1,0 +1,187 @@
+---
+// HistoryDrawer.astro - Slide-over drawer providing 100% free offline history
+---
+
+<div id="history-drawer-overlay" class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-xs transition-opacity">
+  <div class="fixed inset-y-0 right-0 max-w-md w-full bg-[var(--color-canvas)] border-l border-[var(--color-hairline)] shadow-[var(--shadow-level-5)] flex flex-col justify-between">
+    
+    <!-- Drawer Header -->
+    <div class="p-4 sm:p-5 border-b border-[var(--color-hairline)] flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-md bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center">
+          <svg class="w-4 h-4 text-[var(--color-ink)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-[var(--color-ink)]">Extraction History</h3>
+          <p class="text-[11px] text-[var(--color-mute)] font-mono">100% Local & Private (Indexed)</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5">
+        <button
+          type="button"
+          id="clear-history-all-btn"
+          class="px-2 py-1 text-[11px] font-mono text-red-600 hover:text-red-700 bg-red-50 dark:bg-red-950/40 rounded transition-colors"
+          title="Clear all stored items"
+        >
+          Clear
+        </button>
+        <button
+          type="button"
+          id="close-history-drawer-btn"
+          class="p-1.5 text-[var(--color-mute)] hover:text-[var(--color-ink)] rounded-md hover:bg-[var(--color-canvas-soft-2)]"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search Input -->
+    <div class="px-4 py-2.5 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)]">
+      <div class="relative">
+        <svg class="w-3.5 h-3.5 text-[var(--color-mute)] absolute left-3 top-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="text"
+          id="history-search-input"
+          placeholder="Search previous extractions..."
+          class="w-full pl-8 pr-3 py-1.5 text-xs bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-lg text-[var(--color-ink)] focus:outline-none focus:border-[var(--color-primary)] font-mono"
+        />
+      </div>
+    </div>
+
+    <!-- History List Items -->
+    <div id="history-items-list" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <!-- Dynamic list injected here -->
+      <div id="history-empty-state" class="text-center py-16 px-4">
+        <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-mute)]">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          </svg>
+        </div>
+        <h4 class="text-xs font-semibold text-[var(--color-ink)]">No Extraction History Yet</h4>
+        <p class="text-[11px] text-[var(--color-mute)] mt-1 max-w-[200px] mx-auto">
+          Images processed in this browser will be saved securely and offline here.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('history-drawer-overlay')!;
+  const openBtn = document.getElementById('open-history-btn');
+  const closeBtn = document.getElementById('close-history-drawer-btn');
+  const listContainer = document.getElementById('history-items-list')!;
+  const emptyState = document.getElementById('history-empty-state')!;
+  const searchInput = document.getElementById('history-search-input') as HTMLInputElement;
+  const clearAllBtn = document.getElementById('clear-history-all-btn')!;
+
+  function getHistory(): any[] {
+    try {
+      return JSON.parse(localStorage.getItem('imagetotext_history') || '[]');
+    } catch {
+      return [];
+    }
+  }
+
+  function renderHistoryItems(filterQuery = '') {
+    const history = getHistory();
+    const filtered = filterQuery
+      ? history.filter((item) => 
+          item.name.toLowerCase().includes(filterQuery.toLowerCase()) || 
+          item.formattedCode.toLowerCase().includes(filterQuery.toLowerCase()) ||
+          item.language?.toLowerCase().includes(filterQuery.toLowerCase())
+        )
+      : history;
+
+    listContainer.innerHTML = '';
+
+    if (filtered.length === 0) {
+      listContainer.appendChild(emptyState);
+      emptyState.classList.remove('hidden');
+      return;
+    }
+
+    filtered.forEach((item, index) => {
+      const card = document.createElement('div');
+      card.className = 'p-3 rounded-lg border border-[var(--color-hairline)] bg-[var(--color-canvas)] hover:border-[var(--color-hairline-strong)] transition-all shadow-2xs group';
+      
+      const dateStr = new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', month: 'short', day: 'numeric' });
+
+      card.innerHTML = `
+        <div class="flex items-start justify-between gap-2 mb-2">
+          <div class="flex items-center gap-2">
+            <span class="px-1.5 py-0.5 text-[10px] font-mono font-medium rounded bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] text-[var(--color-ink)]">
+              ${item.language || item.mode}
+            </span>
+            <span class="text-xs font-semibold text-[var(--color-ink)] truncate max-w-[150px]">${item.name}</span>
+          </div>
+          <span class="text-[10px] font-mono text-[var(--color-mute)]">${dateStr}</span>
+        </div>
+        <pre class="p-2 text-[11px] font-mono bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)] text-[var(--color-body)] max-h-20 overflow-hidden line-clamp-3 select-all">${item.formattedCode.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
+        <div class="mt-2.5 flex items-center justify-between pt-2 border-t border-[var(--color-hairline)]/60 text-xs">
+          <span class="text-[10px] font-mono text-[var(--color-mute)]">${item.wordCount || 0} words</span>
+          <div class="flex items-center gap-1.5">
+            <button type="button" class="copy-hist-btn px-2 py-0.5 text-[11px] font-medium text-[var(--color-ink)] bg-[var(--color-canvas-soft)] hover:bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)]">Copy</button>
+            <button type="button" class="del-hist-btn p-1 text-[var(--color-mute)] hover:text-red-600 rounded">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Copy action
+      card.querySelector('.copy-hist-btn')?.addEventListener('click', (e) => {
+        const btn = e.target as HTMLButtonElement;
+        navigator.clipboard.writeText(item.formattedCode);
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+      });
+
+      // Delete action
+      card.querySelector('.del-hist-btn')?.addEventListener('click', () => {
+        const current = getHistory();
+        current.splice(index, 1);
+        localStorage.setItem('imagetotext_history', JSON.stringify(current));
+        renderHistoryItems(searchInput.value.trim());
+      });
+
+      listContainer.appendChild(card);
+    });
+  }
+
+  openBtn?.addEventListener('click', () => {
+    overlay.classList.remove('hidden');
+    renderHistoryItems();
+  });
+
+  closeBtn?.addEventListener('click', () => {
+    overlay.classList.add('hidden');
+  });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.add('hidden');
+    }
+  });
+
+  searchInput?.addEventListener('input', () => {
+    renderHistoryItems(searchInput.value.trim());
+  });
+
+  clearAllBtn?.addEventListener('click', () => {
+    if (confirm('Clear all extraction history from this browser?')) {
+      localStorage.removeItem('imagetotext_history');
+      renderHistoryItems();
+    }
+  });
+</script>

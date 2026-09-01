@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "imagemparatexto",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -9,9 +9,19 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "astro build && wrangler pages deploy dist"
   },
   "dependencies": {
-    "astro": "^7.2.4"
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.2.4",
+    "canvas-confetti": "^1.9.4",
+    "prismjs": "^1.30.0",
+    "tailwindcss": "^4.3.3",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.127.1"
   }
 }

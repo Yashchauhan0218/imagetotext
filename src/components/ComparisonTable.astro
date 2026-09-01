@@ -1,0 +1,162 @@
+---
+// ComparisonTable.astro - Comparativo de recursos e desempenho seguindo o DESIGN.md
+---
+
+<section id="comparison" class="py-16 sm:py-24 bg-[var(--color-canvas)] border-b border-[var(--color-hairline)]">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="max-w-3xl mb-12 sm:mb-16">
+      <span class="text-xs font-mono font-medium uppercase tracking-wider text-[var(--color-mute)]">Por Que Escolher a Gente</span>
+      <h2 class="mt-2 text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-[var(--color-ink)] leading-tight">
+        Como nos comparamos às ferramentas OCR tradicionais.
+      </h2>
+      <p class="mt-3 text-base text-[var(--color-body)] leading-relaxed">
+        Veja como o <strong class="text-[var(--color-ink)] font-semibold">imagemparatexto.com</strong> supera conversores genéricos com inteligência focada em código e texto real.
+      </p>
+    </div>
+
+    <!-- Comparison Table Card -->
+    <div class="rounded-xl border border-[var(--color-hairline)] overflow-hidden shadow-[var(--shadow-level-2)] bg-[var(--color-canvas)]">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)] font-mono text-xs text-[var(--color-mute)] uppercase tracking-wider">
+              <th class="py-4 px-6 font-semibold">Recurso / Capacidade</th>
+              <th class="py-4 px-6 font-semibold text-[var(--color-ink)] bg-[var(--color-canvas-soft-2)]/60 border-x border-[var(--color-hairline)]">
+                <div class="flex items-center gap-1.5 text-cyan-700 dark:text-cyan-400 font-bold">
+                  <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+                  <span>imagemparatexto.com</span>
+                </div>
+              </th>
+              <th class="py-4 px-6 font-semibold">Concorrentes Tradicionais</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--color-hairline)] text-[var(--color-body)]">
+            
+            <!-- Row 1: Code Mode -->
+            <tr class="hover:bg-[var(--color-canvas-soft)]/50 transition-colors">
+              <td class="py-4 px-6 font-medium text-[var(--color-ink)]">
+                <div>Extração de Código e Detecção de Sintaxe</div>
+                <div class="text-xs text-[var(--color-mute)] font-normal">Preserva tabs, colchetes e detecta mais de 25 linguagens de programação</div>
+              </td>
+              <td class="py-4 px-6 bg-[var(--color-canvas-soft-2)]/40 border-x border-[var(--color-hairline)] font-medium text-emerald-600">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Sim (Visualização com Sintaxe Colorida)</span>
+                </div>
+              </td>
+              <td class="py-4 px-6 text-red-500">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  <span>Não (Destrói a indentação em texto simples)</span>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 2: Privacy -->
+            <tr class="hover:bg-[var(--color-canvas-soft)]/50 transition-colors">
+              <td class="py-4 px-6 font-medium text-[var(--color-ink)]">
+                <div>Privacidade & Processamento Local</div>
+                <div class="text-xs text-[var(--color-mute)] font-normal">Onde seus arquivos são processados e se as imagens são armazenadas</div>
+              </td>
+              <td class="py-4 px-6 bg-[var(--color-canvas-soft-2)]/40 border-x border-[var(--color-hairline)] font-medium text-emerald-600">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>100% no Navegador (Zero Uploads)</span>
+                </div>
+              </td>
+              <td class="py-4 px-6 text-[var(--color-body)]">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                  <span>Envia arquivos para servidores remotos</span>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 3: Limits & Cost -->
+            <tr class="hover:bg-[var(--color-canvas-soft)]/50 transition-colors">
+              <td class="py-4 px-6 font-medium text-[var(--color-ink)]">
+                <div>Uso Ilimitado & Gratuito</div>
+                <div class="text-xs text-[var(--color-mute)] font-normal">Sem assinaturas, sem limites diários de conversão</div>
+              </td>
+              <td class="py-4 px-6 bg-[var(--color-canvas-soft-2)]/40 border-x border-[var(--color-hairline)] font-medium text-emerald-600">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>100% Gratuito & Ilimitado</span>
+                </div>
+              </td>
+              <td class="py-4 px-6 text-red-500">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  <span>Bloqueado por planos pagos e limites</span>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 4: Advertisements & Clutter -->
+            <tr class="hover:bg-[var(--color-canvas-soft)]/50 transition-colors">
+              <td class="py-4 px-6 font-medium text-[var(--color-ink)]">
+                <div>Anúncios e Poluição Visual</div>
+                <div class="text-xs text-[var(--color-mute)] font-normal">Interface limpa e profissional sem anúncios invasivos</div>
+              </td>
+              <td class="py-4 px-6 bg-[var(--color-canvas-soft-2)]/40 border-x border-[var(--color-hairline)] font-medium text-emerald-600">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Zero Anúncios (Design Limpo)</span>
+                </div>
+              </td>
+              <td class="py-4 px-6 text-red-500">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  <span>Poluído com dezenas de banners e popups</span>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 5: Clipboard & UX -->
+            <tr class="hover:bg-[var(--color-canvas-soft)]/50 transition-colors">
+              <td class="py-4 px-6 font-medium text-[var(--color-ink)]">
+                <div>Colar da Área de Transferência (<code class="font-mono text-xs">Ctrl+V</code>)</div>
+                <div class="text-xs text-[var(--color-mute)] font-normal">Cole capturas de tela diretamente sem precisar salvar arquivo no disco</div>
+              </td>
+              <td class="py-4 px-6 bg-[var(--color-canvas-soft-2)]/40 border-x border-[var(--color-hairline)] font-medium text-emerald-600">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Instantâneo (Atalho Global)</span>
+                </div>
+              </td>
+              <td class="py-4 px-6 text-[var(--color-body)]">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                  <span>Suporte limitado ou ausente</span>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 6: Tables -->
+            <tr class="hover:bg-[var(--color-canvas-soft)]/50 transition-colors">
+              <td class="py-4 px-6 font-medium text-[var(--color-ink)]">
+                <div>OCR Estruturado de Tabelas & Faturas</div>
+                <div class="text-xs text-[var(--color-mute)] font-normal">Reconhecimento de colunas e linhas para tabelas de recibos</div>
+              </td>
+              <td class="py-4 px-6 bg-[var(--color-canvas-soft-2)]/40 border-x border-[var(--color-hairline)] font-medium text-emerald-600">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Sim (Gera tabelas Markdown e CSV)</span>
+                </div>
+              </td>
+              <td class="py-4 px-6 text-red-500">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  <span>Gera texto desalinhado e misturado</span>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>

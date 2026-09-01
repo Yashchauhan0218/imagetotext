@@ -1,0 +1,136 @@
+---
+// FeatureGrid.astro - Grade de recursos para desenvolvedores seguindo o DESIGN.md
+---
+
+<section id="features" class="py-16 sm:py-24 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)]">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Eyebrow & Title -->
+    <div class="max-w-3xl mb-12 sm:mb-16">
+      <span class="text-xs font-mono font-medium uppercase tracking-wider text-[var(--color-mute)]">Recursos Principais</span>
+      <h2 class="mt-2 text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-[var(--color-ink)] leading-tight">
+        Projetado para precisão. Feito para desenvolvedores e criadores.
+      </h2>
+      <p class="mt-3 text-base text-[var(--color-body)] leading-relaxed">
+        Ferramentas OCR tradicionais falham em indentação, colchetes de código e estruturas de tabelas. Nossa plataforma foi reconstruída do zero para converter imagem para texto técnico com zero atraso.
+      </p>
+    </div>
+
+    <!-- 3-Column Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      
+      <!-- Card 1: Code Extraction -->
+      <div class="p-6 sm:p-7 rounded-xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-[var(--shadow-level-2)] hover:shadow-[var(--shadow-level-3)] hover:border-[var(--color-hairline-strong)] transition-all group">
+        <div class="w-10 h-10 rounded-lg bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] mb-5 group-hover:scale-105 transition-transform">
+          <svg class="w-5 h-5 text-cyan-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] tracking-tight">
+          OCR de Código com Sintaxe
+        </h3>
+        <p class="mt-2 text-sm text-[var(--color-body)] leading-relaxed">
+          Extraia código de tutoriais em vídeo, capturas de tela da IDE e livros técnicos. Detecta automaticamente mais de 25 linguagens de programação, preserva a indentação e formata a sintaxe instantaneamente.
+        </p>
+        <div class="mt-4 pt-3 border-t border-[var(--color-hairline)] flex items-center gap-2 text-xs font-mono text-[var(--color-mute)]">
+          <span class="text-cyan-600 font-semibold">Python</span> · 
+          <span class="text-blue-600 font-semibold">TypeScript</span> · 
+          <span class="text-amber-600 font-semibold">JavaScript</span> · 
+          <span>SQL</span> · 
+          <span>Rust</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Privacy -->
+      <div class="p-6 sm:p-7 rounded-xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-[var(--shadow-level-2)] hover:shadow-[var(--shadow-level-3)] hover:border-[var(--color-hairline-strong)] transition-all group">
+        <div class="w-10 h-10 rounded-lg bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] mb-5 group-hover:scale-105 transition-transform">
+          <svg class="w-5 h-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] tracking-tight">
+          100% Privado no Navegador (WASM)
+        </h3>
+        <p class="mt-2 text-sm text-[var(--color-body)] leading-relaxed">
+          Todo o reconhecimento neural OCR roda localmente no seu dispositivo via WebAssembly. Seu código-fonte confidencial, documentos e faturas financeiras nunca são transmitidos para servidores externos.
+        </p>
+        <div class="mt-4 pt-3 border-t border-[var(--color-hairline)] flex items-center gap-2 text-xs font-mono text-emerald-600 font-medium">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Garantia de Zero Envio para Servidor</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Table & Document Structure -->
+      <div class="p-6 sm:p-7 rounded-xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-[var(--shadow-level-2)] hover:shadow-[var(--shadow-level-3)] hover:border-[var(--color-hairline-strong)] transition-all group">
+        <div class="w-10 h-10 rounded-lg bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] mb-5 group-hover:scale-105 transition-transform">
+          <svg class="w-5 h-5 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="3" y1="15" x2="21" y2="15"></line>
+            <line x1="9" y1="3" x2="9" y2="21"></line>
+            <line x1="15" y1="3" x2="15" y2="21"></line>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] tracking-tight">
+          Preservação de Tabelas & Faturas
+        </h3>
+        <p class="mt-2 text-sm text-[var(--color-body)] leading-relaxed">
+          Extraia dados tabulares de recibos, faturas e relatórios financeiros diretamente para tabelas limpas em Markdown ou dados estruturados, prontos para colar no Notion, Excel ou planilhas.
+        </p>
+        <div class="mt-4 pt-3 border-t border-[var(--color-hairline)] flex items-center gap-2 text-xs font-mono text-[var(--color-mute)]">
+          <span>Markdown</span> · <span>Excel</span> · <span>CSV</span> · <span>JSON</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Post-Processing Tools -->
+      <div class="p-6 sm:p-7 rounded-xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-[var(--shadow-level-2)] hover:shadow-[var(--shadow-level-3)] hover:border-[var(--color-hairline-strong)] transition-all group">
+        <div class="w-10 h-10 rounded-lg bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] mb-5 group-hover:scale-105 transition-transform">
+          <svg class="w-5 h-5 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] tracking-tight">
+          Ferramentas Inteligentes de Edição
+        </h3>
+        <p class="mt-2 text-sm text-[var(--color-body)] leading-relaxed">
+          Ferramentas em 1 clique para limpar ruídos de OCR, formatar indentação de código, converter maiúsculas/minúsculas (<code class="font-mono text-xs">camelCase</code>, <code class="font-mono text-xs">snake_case</code>, <code class="font-mono text-xs">MAIÚSCULAS</code>) e ouvir texto com síntese de voz integrada.
+        </p>
+      </div>
+
+      <!-- Card 5: Universal Input -->
+      <div class="p-6 sm:p-7 rounded-xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-[var(--shadow-level-2)] hover:shadow-[var(--shadow-level-3)] hover:border-[var(--color-hairline-strong)] transition-all group">
+        <div class="w-10 h-10 rounded-lg bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] mb-5 group-hover:scale-105 transition-transform">
+          <svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] tracking-tight">
+          Entrada Universal & Fila Múltipla
+        </h3>
+        <p class="mt-2 text-sm text-[var(--color-body)] leading-relaxed">
+          Pressione <kbd class="font-mono text-xs px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] rounded border">Ctrl + V</kbd> em qualquer lugar da tela para colar capturas de tela instantâneas. Faça upload em lote de vários arquivos, importe via URL ou tire fotos com a câmera.
+        </p>
+      </div>
+
+      <!-- Card 6: Fast Batch Processing -->
+      <div class="p-6 sm:p-7 rounded-xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-[var(--shadow-level-2)] hover:shadow-[var(--shadow-level-3)] hover:border-[var(--color-hairline-strong)] transition-all group">
+        <div class="w-10 h-10 rounded-lg bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] mb-5 group-hover:scale-105 transition-transform">
+          <svg class="w-5 h-5 text-pink-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] tracking-tight">
+          Fila em Lote de Alta Velocidade
+        </h3>
+        <p class="mt-2 text-sm text-[var(--color-body)] leading-relaxed">
+          Coloque várias imagens na fila simultaneamente e processe-as em sequência com cópia instantânea, limpeza de espaçamento, formatação de caixa e conversão de áudio.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>

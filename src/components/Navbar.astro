@@ -1,0 +1,123 @@
+---
+// Navbar.astro - Navegação limpa estilo Vercel seguindo o DESIGN.md
+---
+
+<header class="sticky top-0 z-50 w-full bg-[var(--color-canvas)]/80 backdrop-blur-md border-b border-[var(--color-hairline)] transition-all duration-200">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <!-- Brand Logo -->
+    <div class="flex items-center gap-6">
+      <a href="/" class="flex items-center gap-2.5 group">
+        <div class="w-8 h-8 rounded-lg bg-[var(--color-primary)] text-[var(--color-on-primary)] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="font-semibold text-base tracking-tight text-[var(--color-ink)]">Imagem Para Texto</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-1 pl-2">
+        <a href="#converter-app" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
+          Conversor
+        </a>
+        <button type="button" id="nav-mode-code" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors flex items-center gap-1.5">
+          <span>Código OCR</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-[#00dfd8]"></span>
+        </button>
+        <a href="#features" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
+          Recursos
+        </a>
+        <a href="#comparison" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
+          Por Que Nós
+        </a>
+        <a href="#faq" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
+          FAQ
+        </a>
+      </nav>
+    </div>
+
+    <!-- Right Controls -->
+    <div class="flex items-center gap-3">
+      <!-- Quick Paste Helper Button -->
+      <button
+        type="button"
+        id="quick-paste-btn"
+        class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-[var(--color-body)] bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded-full hover:text-[var(--color-ink)] transition-colors"
+        title="Colar imagem da área de transferência (Ctrl+V)"
+      >
+        <span>Ctrl + V</span>
+        <span class="text-[10px] text-[var(--color-mute)]">Colar</span>
+      </button>
+
+      <!-- Primary Action CTA -->
+      <a
+        href="#converter-app"
+        class="inline-flex items-center justify-center px-4 py-1.5 text-xs sm:text-sm font-medium text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full transition-all shadow-xs active:scale-95"
+      >
+        Experimente Agora
+      </a>
+
+      <!-- Dark / Light Mode Toggle Button -->
+      <button
+        type="button"
+        id="theme-toggle-btn"
+        class="w-8 h-8 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:border-[var(--color-hairline-strong)] text-[var(--color-ink)] flex items-center justify-center transition-all shadow-2xs hover:scale-105 active:scale-95 cursor-pointer"
+        title="Alternar Tema (Modo Escuro / Claro)"
+        aria-label="Alternar Modo Escuro"
+      >
+        <!-- Sun icon for Dark mode active (click to switch to Light) -->
+        <svg id="theme-icon-sun" class="hidden w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon icon for Light mode active (click to switch to Dark) -->
+        <svg id="theme-icon-moon" class="w-4 h-4 text-[var(--color-body)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  function updateThemeIcons() {
+    const isDark = document.documentElement.classList.contains('dark');
+    const sunIcon = document.getElementById('theme-icon-sun');
+    const moonIcon = document.getElementById('theme-icon-moon');
+    if (sunIcon && moonIcon) {
+      if (isDark) {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+    }
+  }
+
+  // Toggle Theme Handler
+  const themeBtn = document.getElementById('theme-toggle-btn');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateThemeIcons();
+    });
+  }
+
+  // Initial Sync
+  updateThemeIcons();
+</script>

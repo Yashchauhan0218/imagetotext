@@ -1,23 +1,138 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import "../styles/global.css";
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title = "Imagem para Texto - Conversor de Imagem para Texto Grátis & IA",
+  description = "Converter imagem para texto e código grátis online com IA. Transcrever imagem para texto, extrair texto de imagem, extrator de texto OCR e 100% privado no navegador.",
+  keywords = "imagem para texto, converter imagem para texto, conversor de imagem para texto, transcrever imagem para texto, extrair texto de imagem, extrator de texto, extrator de texto de imagem, imagem para codigo, ocr online gratis, copiar texto de imagem",
+  canonicalUrl = "https://imagemparatexto.com"
+} = Astro.props;
+
+// JSON-LD Structured Data Schema for Search Engines (Portuguese)
+const schemaData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://imagemparatexto.com/#webapp",
+      "name": "Imagem para Texto - Conversor de Imagem para Texto & Código",
+      "url": "https://imagemparatexto.com",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "inLanguage": ["pt-BR", "pt-PT", "pt"],
+      "description": description,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "BRL"
+      },
+      "featureList": [
+        "Conversão de Imagem para Texto com IA",
+        "Extração de Código e Sintaxe (Mais de 25 Linguagens)",
+        "OCR de Tabelas e Faturas Estruturadas",
+        "Colar Instantâneo da Área de Transferência (Ctrl+V)",
+        "Processamento 100% Privado no Navegador (Sem Envio para Servidor)"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://imagemparatexto.com/#website",
+      "url": "https://imagemparatexto.com",
+      "name": "Imagem para Texto",
+      "inLanguage": ["pt-BR", "pt-PT", "pt"],
+      "description": "Conversor Online Grátis de Imagem para Texto e Código com Inteligência Artificial",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://imagemparatexto.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <!-- Hreflang Markup for Portuguese (Brazil, Portugal, Global Portuguese) -->
+    <link rel="alternate" hreflang="pt" href="https://imagemparatexto.com" />
+    <link rel="alternate" hreflang="pt-BR" href="https://imagemparatexto.com" />
+    <link rel="alternate" hreflang="pt-PT" href="https://imagemparatexto.com" />
+    <link rel="alternate" hreflang="x-default" href="https://imagemparatexto.com" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Imagem para Texto (imagemparatexto.com)" />
+
+    <!-- Theme Initialization Script (prevents theme flashing) -->
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Imagem para Texto" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale:alternate" content="pt_PT" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://imagemparatexto.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Imagem para Texto - Conversor de Imagem para Texto & Código Grátis" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://imagemparatexto.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Imagem para Texto - Conversor de Imagem para Texto & Código Grátis" />
+
+    <!-- JSON-LD Structured Data Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+    <!-- Fonts: Geist, Geist Mono, Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Prism CSS Theme for Code Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  </head>
+  <body class="min-h-screen bg-[var(--color-canvas-soft)] text-[var(--color-ink)] font-sans antialiased selection:bg-[var(--color-ink)] selection:text-white flex flex-col">
+    <slot />
+  </body>
+</html>

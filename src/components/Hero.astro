@@ -1,0 +1,50 @@
+---
+// Hero.astro - Seção hero atmosférica estilo Vercel seguindo o DESIGN.md
+---
+
+<section class="relative pt-12 pb-8 sm:pt-16 sm:pb-12 overflow-hidden mesh-gradient-bg border-b border-[var(--color-hairline)]">
+  <!-- Linhas de grade decorativas sutis -->
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
+
+  <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Título Principal com tracking negativo -->
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-[-0.04em] text-[var(--color-ink)] max-w-4xl mx-auto leading-[1.08]">
+      Extraia texto limpo e <span class="mesh-gradient-code-text">código formatado</span> de qualquer imagem.
+    </h1>
+
+    <!-- Subtítulo -->
+    <p class="mt-5 text-base sm:text-lg text-[var(--color-body)] max-w-2xl mx-auto leading-relaxed font-normal">
+      Conversor de imagem para texto e OCR de alta precisão com IA para desenvolvedores, estudantes e profissionais. Suporta mais de 25 linguagens de programação, tabelas e processamento 100% privado no navegador.
+    </p>
+
+    <!-- Selos de Valor -->
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs text-[var(--color-body)]">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-2xs">
+        <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span>Zero Envio para Servidor (100% Privado)</span>
+      </div>
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-2xs">
+        <svg class="w-3.5 h-3.5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        <span>Preserva Indentação de Código</span>
+      </div>
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-2xs">
+        <svg class="w-3.5 h-3.5 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span>Colar Instantâneo <code class="font-mono text-[10px] bg-[var(--color-canvas-soft-2)] px-1 py-0.5 rounded">Ctrl+V</code></span>
+      </div>
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-2xs">
+        <svg class="w-3.5 h-3.5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        </svg>
+        <span>100% Gratuito & Sem Limites</span>
+      </div>
+    </div>
+  </div>
+</section>

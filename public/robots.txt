@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://imagemparatexto.com/sitemap-index.xml
