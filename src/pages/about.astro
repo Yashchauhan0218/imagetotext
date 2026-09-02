@@ -1,0 +1,241 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Sobre Nós - Imagem para Texto | Nossa Missão e Tecnologia OCR"
+  description="Conheça a história e os princípios por trás do Imagem para Texto: uma plataforma de OCR rápida, gratuita e 100% privada focada em desenvolvedores e criadores."
+  keywords="sobre nós imagem para texto, ocr privado navegador, conversor ocr sem servidor, tecnologia tesseract webassembly, quem somos imagem para texto"
+  canonicalUrl="https://imagemparatexto.com/about"
+>
+  <Navbar />
+
+  <main class="flex-1">
+    <!-- Hero Header -->
+    <section class="relative pt-12 pb-16 overflow-hidden mesh-gradient-bg border-b border-[var(--color-hairline)]">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
+
+      <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <!-- Breadcrumb / Badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-2xs mb-6 text-xs text-[var(--color-body)]">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Nossa História & Propósito</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-[-0.04em] text-[var(--color-ink)] leading-tight">
+          Democratizando o OCR com <span class="mesh-gradient-text">Privacidade Absoluta</span> e Alta Precisão.
+        </h1>
+
+        <p class="mt-5 text-base sm:text-lg text-[var(--color-body)] leading-relaxed max-w-2xl mx-auto">
+          O <strong>Imagem para Texto</strong> nasceu com um objetivo claro: fornecer a desenvolvedores, estudantes e profissionais uma ferramenta de extração de texto e código extremamente rápida, gratuita e sem comprometer a privacidade dos seus dados.
+        </p>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+      
+      <!-- Missão & Visão -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="p-8 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-xs flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] mb-5">
+              <svg class="w-5 h-5 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </div>
+            <h2 class="text-xl font-semibold text-[var(--color-ink)] tracking-tight mb-3">Nossa Missão</h2>
+            <p class="text-sm text-[var(--color-body)] leading-relaxed">
+              Eliminar o atrito manual de redigitar textos, tabelas e trechos de código presentes em capturas de tela e documentos escaneados, oferecendo uma experiência web instantânea, sem anúncios invasivos ou cobranças escondidas.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-xs flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] mb-5">
+              <svg class="w-5 h-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h2 class="text-xl font-semibold text-[var(--color-ink)] tracking-tight mb-3">Privacidade por Design</h2>
+            <p class="text-sm text-[var(--color-body)] leading-relaxed">
+              Acreditamos que suas imagens, notas fiscais, contratos e códigos confidenciais nunca devem transitar por servidores desconhecidos. Todo o processamento óptico ocorre exclusivamente na memória do seu próprio navegador.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- O Problema vs Nossa Solução -->
+      <div class="p-8 sm:p-10 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-xs">
+        <h2 class="text-2xl font-semibold text-[var(--color-ink)] tracking-tight mb-4">
+          Por Que Criamos o Imagem para Texto?
+        </h2>
+        <p class="text-sm sm:text-base text-[var(--color-body)] leading-relaxed mb-8">
+          A maioria dos conversores de OCR na internet segue um modelo arcaico e arriscado: exigem upload do seu arquivo para servidores remotos na nuvem, impõem limites diários rígidos (como 3 ou 5 páginas por dia) e cobram assinaturas caras para liberar recursos básicos.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-6 rounded-xl bg-red-500/5 border border-red-500/20">
+            <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-semibold text-sm mb-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+              </svg>
+              <span>Conversores Convencionais</span>
+            </div>
+            <ul class="space-y-2 text-xs sm:text-sm text-[var(--color-body)]">
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">✕</span>
+                <span>Fazem upload das suas imagens para servidores na nuvem</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">✕</span>
+                <span>Armazenam dados confidenciais de usuários em bancos remotos</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">✕</span>
+                <span>Destroem a indentação e a sintaxe de códigos de programação</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-500 font-bold">✕</span>
+                <span>Limites arbitrários de uso diário e paywalls agressivos</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="p-6 rounded-xl bg-emerald-500/5 border border-emerald-500/20">
+            <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold text-sm mb-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Imagem para Texto (Nosso Modelo)</span>
+            </div>
+            <ul class="space-y-2 text-xs sm:text-sm text-[var(--color-body)]">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span><strong>Zero-Upload:</strong> Processamento 100% no cliente via WebAssembly</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span>Total privacidade e conformidade rigorosa com a LGPD e GDPR</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span>Modo Código especializado para +25 linguagens de programação</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span>100% Gratuito, sem cadastro, sem limites e sem filas de espera</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arquitetura e Tecnologia -->
+      <div id="arquitetura" class="p-8 sm:p-10 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-xs scroll-mt-24">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)]">
+            <svg class="w-4 h-4 text-purple-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-semibold text-[var(--color-ink)] tracking-tight">
+            Nossa Arquitetura Tecnológica
+          </h2>
+        </div>
+        <p class="text-sm sm:text-base text-[var(--color-body)] leading-relaxed mb-6">
+          Utilizamos o estado da arte do ecossistema web moderno para proporcionar desempenho nativo diretamente no browser:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-4 rounded-xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)]">
+            <span class="text-xs font-mono font-bold text-blue-500 uppercase tracking-wider block mb-1">OCR Engine</span>
+            <h3 class="font-semibold text-sm text-[var(--color-ink)] mb-1">Tesseract.js & WASM</h3>
+            <p class="text-xs text-[var(--color-body)] leading-relaxed">
+              Motor de rede neural compilado em WebAssembly para execução paralela multithread.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)]">
+            <span class="text-xs font-mono font-bold text-emerald-500 uppercase tracking-wider block mb-1">Concorrência</span>
+            <h3 class="font-semibold text-sm text-[var(--color-ink)] mb-1">Web Workers</h3>
+            <p class="text-xs text-[var(--color-body)] leading-relaxed">
+              Processamento em segundo plano sem travar a interface gráfica ou rolagem da tela.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)]">
+            <span class="text-xs font-mono font-bold text-purple-500 uppercase tracking-wider block mb-1">Framework</span>
+            <h3 class="font-semibold text-sm text-[var(--color-ink)] mb-1">Astro v5+</h3>
+            <p class="text-xs text-[var(--color-body)] leading-relaxed">
+              Arquitetura orientada a componentes com carregamento instantâneo e zero JavaScript desnecessário.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)]">
+            <span class="text-xs font-mono font-bold text-amber-500 uppercase tracking-wider block mb-1">Design System</span>
+            <h3 class="font-semibold text-sm text-[var(--color-ink)] mb-1">Tailwind CSS v4</h3>
+            <p class="text-xs text-[var(--color-body)] leading-relaxed">
+              Tokens de design modernos, paleta HSL balanceada e suporte dinâmico a modo escuro.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Métricas / Números do Projeto -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
+        <div class="p-6 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-xs">
+          <div class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-ink)] font-mono">100%</div>
+          <div class="mt-1 text-xs text-[var(--color-mute)] uppercase tracking-wider font-medium">Execução no Cliente</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-xs">
+          <div class="text-3xl sm:text-4xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400 font-mono">0 KB</div>
+          <div class="mt-1 text-xs text-[var(--color-mute)] uppercase tracking-wider font-medium">Imagens Enviadas</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-xs">
+          <div class="text-3xl sm:text-4xl font-bold tracking-tight text-blue-600 dark:text-blue-400 font-mono">+25</div>
+          <div class="mt-1 text-xs text-[var(--color-mute)] uppercase tracking-wider font-medium">Linguagens de Código</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-xs">
+          <div class="text-3xl sm:text-4xl font-bold tracking-tight text-purple-600 dark:text-purple-400 font-mono">+100</div>
+          <div class="mt-1 text-xs text-[var(--color-mute)] uppercase tracking-wider font-medium">Idiomas Suportados</div>
+        </div>
+      </div>
+
+      <!-- CTA Final -->
+      <div class="p-8 sm:p-12 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] text-center shadow-xs">
+        <h2 class="text-2xl sm:text-3xl font-semibold text-[var(--color-ink)] tracking-tight mb-3">
+          Pronto para experimentar o OCR mais rápido e privado?
+        </h2>
+        <p class="text-sm sm:text-base text-[var(--color-body)] max-w-xl mx-auto mb-6">
+          Comece agora mesmo colando uma imagem com <kbd class="px-2 py-0.5 rounded bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] font-mono text-xs text-[var(--color-ink)]">Ctrl + V</kbd> ou arrastando seu arquivo.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="/#converter-app"
+            class="px-6 py-3 rounded-full bg-[var(--color-primary)] text-[var(--color-on-primary)] font-medium text-sm hover:opacity-90 transition-all shadow-xs"
+          >
+            Abrir Conversor Agora
+          </a>
+          <a
+            href="/contact"
+            class="px-6 py-3 rounded-full bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] text-[var(--color-ink)] font-medium text-sm hover:bg-[var(--color-canvas-soft)] transition-all"
+          >
+            Falar Conosco
+          </a>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

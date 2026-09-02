@@ -1,0 +1,323 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Fale Conosco - Imagem para Texto | Contato, Suporte & Sugestões"
+  description="Entre em contato com a equipe do Imagem para Texto. Envie dúvidas, sugestões de novos recursos, relatos de bugs ou fale com nosso Encarregado de Privacidade (DPO)."
+  keywords="contato imagem para texto, suporte ocr, fale conosco imagemparatexto, feedback imagem para texto, dpo imagem para texto"
+  canonicalUrl="https://imagemparatexto.com/contact"
+>
+  <Navbar />
+
+  <main class="flex-1">
+    <!-- Hero Header -->
+    <section class="relative pt-12 pb-16 overflow-hidden mesh-gradient-bg border-b border-[var(--color-hairline)]">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
+
+      <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-2xs mb-6 text-xs text-[var(--color-body)]">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Estamos Prontos Para Ouvir Você</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-[-0.04em] text-[var(--color-ink)] leading-tight">
+          Fale com a nossa <span class="mesh-gradient-text">Equipe</span>
+        </h1>
+
+        <p class="mt-4 text-sm sm:text-base text-[var(--color-body)] max-w-2xl mx-auto leading-relaxed">
+          Tem uma sugestão de recurso, encontrou algum bug no reconhecimento óptico ou precisa de esclarecimentos sobre a plataforma? Envie sua mensagem pelo formulário ou através dos nossos canais diretos.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Form & Direct Contacts Section -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Left: Interactive Contact Form (7 cols) -->
+        <div class="lg:col-span-7">
+          <div class="p-8 sm:p-10 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-xs">
+            <h2 class="text-xl font-semibold text-[var(--color-ink)] tracking-tight mb-2">
+              Envie uma Mensagem
+            </h2>
+            <p class="text-xs sm:text-sm text-[var(--color-body)] mb-6">
+              Preencha o formulário abaixo e retornaremos o mais breve possível.
+            </p>
+
+            <form id="contact-form" class="space-y-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="name" class="block text-xs font-mono uppercase tracking-wider font-semibold text-[var(--color-ink)] mb-2">
+                    Seu Nome *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    placeholder="Ex: Carlos Silva"
+                    class="w-full px-4 py-2.5 rounded-xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] text-sm text-[var(--color-ink)] placeholder-[var(--color-mute)] focus:outline-none focus:border-[var(--color-ink)] transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label for="email" class="block text-xs font-mono uppercase tracking-wider font-semibold text-[var(--color-ink)] mb-2">
+                    Seu E-mail *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    placeholder="carlos@exemplo.com"
+                    class="w-full px-4 py-2.5 rounded-xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] text-sm text-[var(--color-ink)] placeholder-[var(--color-mute)] focus:outline-none focus:border-[var(--color-ink)] transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label for="subject" class="block text-xs font-mono uppercase tracking-wider font-semibold text-[var(--color-ink)] mb-2">
+                  Assunto / Categoria *
+                </label>
+                <select
+                  id="subject"
+                  name="subject"
+                  required
+                  class="w-full px-4 py-2.5 rounded-xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] text-sm text-[var(--color-ink)] focus:outline-none focus:border-[var(--color-ink)] transition-colors"
+                >
+                  <option value="Dúvida Geral">Dúvida Geral sobre o OCR</option>
+                  <option value="Sugestão de Recurso">Sugestão de Novo Recurso / Linguagem</option>
+                  <option value="Relato de Bug">Relato de Bug ou Erro na Extração</option>
+                  <option value="Parceria e Integração">Parcerias e Integrações</option>
+                  <option value="Privacidade e DPO">Privacidade, LGPD ou DPO</option>
+                  <option value="Outro">Outro Assunto</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="message" class="block text-xs font-mono uppercase tracking-wider font-semibold text-[var(--color-ink)] mb-2">
+                  Mensagem Detalhada *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  placeholder="Escreva sua mensagem ou descreva a situação em detalhes..."
+                  class="w-full px-4 py-2.5 rounded-xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] text-sm text-[var(--color-ink)] placeholder-[var(--color-mute)] focus:outline-none focus:border-[var(--color-ink)] transition-colors resize-y"
+                ></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                id="submit-btn"
+                class="w-full sm:w-auto px-8 py-3 rounded-full bg-[var(--color-primary)] text-[var(--color-on-primary)] text-sm font-medium hover:opacity-90 transition-all shadow-xs flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
+              >
+                <span>Enviar Mensagem</span>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+
+            <!-- Success State Alert -->
+            <div id="form-success-alert" class="hidden mt-6 p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-900 dark:text-emerald-200">
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <div class="text-xs sm:text-sm">
+                  <h3 class="font-semibold text-[var(--color-ink)] text-sm mb-1">Mensagem preparada com sucesso!</h3>
+                  <p class="text-[var(--color-body)] mb-3 leading-relaxed">
+                    Você pode enviar diretamente pelo seu cliente de e-mail padrão ou copiar as informações para contato manual.
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <a
+                      id="mailto-trigger-btn"
+                      href="#"
+                      class="px-4 py-1.5 rounded-full bg-emerald-600 text-white text-xs font-medium hover:bg-emerald-700 transition-colors"
+                    >
+                      Abrir no E-mail
+                    </a>
+                    <button
+                      type="button"
+                      id="copy-message-btn"
+                      class="px-4 py-1.5 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] text-[var(--color-ink)] text-xs font-medium hover:bg-[var(--color-canvas-soft)] transition-colors"
+                    >
+                      Copiar Dados da Mensagem
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right: Contact Cards & Info (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Direct Email Card -->
+          <div class="p-6 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-xs">
+            <div class="w-10 h-10 rounded-xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] mb-4">
+              <svg class="w-5 h-5 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-[var(--color-ink)] tracking-tight mb-1">
+              E-mail de Suporte Geral
+            </h3>
+            <p class="text-xs text-[var(--color-body)] mb-3">
+              Para dúvidas gerais, feedbacks e relatos de funcionamento da ferramenta.
+            </p>
+            <a
+              href="mailto:contato@imagemparatexto.com"
+              class="font-mono text-xs sm:text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              contato@imagemparatexto.com
+            </a>
+          </div>
+
+          <!-- DPO / LGPD Card -->
+          <div id="dpo" class="p-6 rounded-2xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-xs scroll-mt-24">
+            <div class="w-10 h-10 rounded-xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] mb-4">
+              <svg class="w-5 h-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-[var(--color-ink)] tracking-tight mb-1">
+              Encarregado de Privacidade (DPO)
+            </h3>
+            <p class="text-xs text-[var(--color-body)] mb-3">
+              Canal especializado para requisições de titulares de dados e conformidade LGPD.
+            </p>
+            <a
+              href="mailto:privacidade@imagemparatexto.com"
+              class="font-mono text-xs sm:text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+            >
+              privacidade@imagemparatexto.com
+            </a>
+          </div>
+
+          <!-- Time & Commitment Card -->
+          <div class="p-6 rounded-2xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)]">
+            <h3 class="text-xs font-mono uppercase tracking-wider font-semibold text-[var(--color-ink)] mb-2">
+              Tempo Médio de Retorno
+            </h3>
+            <div class="flex items-center gap-2 text-sm text-[var(--color-body)] mb-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>Respostas em até <strong>24 horas úteis</strong></span>
+            </div>
+            <p class="text-xs text-[var(--color-mute)] leading-relaxed">
+              Priorizamos melhorias contínuas no reconhecimento de linguagens de programação e modelos em português.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Quick Resolution FAQ -->
+      <div class="mt-16 pt-16 border-t border-[var(--color-hairline)]">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-2xl font-semibold text-[var(--color-ink)] tracking-tight text-center mb-2">
+            Perguntas Rápidas antes de Entrar em Contato
+          </h2>
+          <p class="text-xs sm:text-sm text-[var(--color-body)] text-center mb-8">
+            Talvez sua dúvida já esteja respondida abaixo:
+          </p>
+
+          <div class="space-y-4">
+            <div class="p-5 rounded-xl bg-[var(--color-canvas)] border border-[var(--color-hairline)]">
+              <h3 class="text-sm font-semibold text-[var(--color-ink)] mb-2">
+                O Imagem para Texto é realmente 100% gratuito?
+              </h3>
+              <p class="text-xs text-[var(--color-body)] leading-relaxed">
+                Sim! Não cobramos mensalidades, não exigimos créditos de conversão e não temos limite diário de imagens ou páginas.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-xl bg-[var(--color-canvas)] border border-[var(--color-hairline)]">
+              <h3 class="text-sm font-semibold text-[var(--color-ink)] mb-2">
+                Minhas imagens são enviadas para algum servidor de vocês?
+              </h3>
+              <p class="text-xs text-[var(--color-body)] leading-relaxed">
+                Não. A tecnologia de OCR roda 100% no seu navegador via WebAssembly (WASM). Nenhum byte da sua imagem é enviado para a internet.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-xl bg-[var(--color-canvas)] border border-[var(--color-hairline)]">
+              <h3 class="text-sm font-semibold text-[var(--color-ink)] mb-2">
+                Como reportar uma falha de reconhecimento em um trecho de código?
+              </h3>
+              <p class="text-xs text-[var(--color-body)] leading-relaxed">
+                Selecione a categoria "Relato de Bug" no formulário acima e informe a linguagem de programação envolvida para que possamos aprimorar o modelo de pré-processamento.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const successAlert = document.getElementById('form-success-alert');
+  const mailtoBtn = document.getElementById('mailto-trigger-btn') as HTMLAnchorElement | null;
+  const copyBtn = document.getElementById('copy-message-btn');
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const name = formData.get('name') as string;
+      const email = formData.get('email') as string;
+      const subject = formData.get('subject') as string;
+      const message = formData.get('message') as string;
+
+      const emailSubject = encodeURIComponent(`[Contato Imagem para Texto] ${subject} - ${name}`);
+      const emailBody = encodeURIComponent(
+        `Nome: ${name}\nE-mail: ${email}\nAssunto: ${subject}\n\nMensagem:\n${message}`
+      );
+
+      const mailtoUrl = `mailto:contato@imagemparatexto.com?subject=${emailSubject}&body=${emailBody}`;
+
+      if (mailtoBtn) {
+        mailtoBtn.href = mailtoUrl;
+      }
+
+      if (copyBtn) {
+        copyBtn.onclick = () => {
+          const textToCopy = `Nome: ${name}\nE-mail: ${email}\nAssunto: ${subject}\n\nMensagem:\n${message}`;
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            copyBtn.textContent = 'Copiado com sucesso!';
+            setTimeout(() => {
+              copyBtn.textContent = 'Copiar Dados da Mensagem';
+            }, 2500);
+          });
+        };
+      }
+
+      if (successAlert) {
+        successAlert.classList.remove('hidden');
+        successAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      // Automatically trigger mailto link
+      window.location.href = mailtoUrl;
+    });
+  }
+</script>
