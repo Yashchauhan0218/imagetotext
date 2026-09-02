@@ -1,0 +1,170 @@
+---
+// ImageToPdfFaq.astro - Perguntas Frequentes sobre Imagem para PDF
+---
+
+<section id="faq" class="py-16 sm:py-24 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)]">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-mute)] font-medium">Tire Suas Dúvidas</span>
+      <h2 class="mt-2 text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-[var(--color-ink)] leading-tight">
+        Perguntas Frequentes sobre o Conversor de Imagem para PDF
+      </h2>
+      <p class="mt-3 text-base text-[var(--color-body)] leading-relaxed">
+        Respostas claras e diretas sobre segurança, formatos compatíveis, limites e funcionamento do nosso gerador de PDF.
+      </p>
+    </div>
+
+    <!-- Accordion Items -->
+    <div class="space-y-4">
+      
+      <!-- FAQ 1 -->
+      <div class="faq-item rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] overflow-hidden transition-all duration-200">
+        <button
+          type="button"
+          class="faq-trigger w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)] transition-colors cursor-pointer"
+          aria-expanded="false"
+        >
+          <span>É seguro converter imagens de documentos confidenciais neste site?</span>
+          <svg class="faq-chevron w-4 h-4 text-[var(--color-mute)] transition-transform duration-200 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-[var(--color-body)] leading-relaxed border-t border-[var(--color-hairline)]/50">
+          <p>
+            <strong>Sim, 100% seguro.</strong> Nosso conversor opera sob uma arquitetura exclusiva de <em>Zero-Upload</em>. Toda a renderização, posicionamento das fotos e geração do arquivo PDF acontecem diretamente na memória do seu próprio navegador (Client-Side). Nenhuma foto é transmitida pela internet ou armazenada em servidores externos.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="faq-item rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] overflow-hidden transition-all duration-200">
+        <button
+          type="button"
+          class="faq-trigger w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)] transition-colors cursor-pointer"
+          aria-expanded="false"
+        >
+          <span>Como juntar várias fotos em um único arquivo PDF?</span>
+          <svg class="faq-chevron w-4 h-4 text-[var(--color-mute)] transition-transform duration-200 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-[var(--color-body)] leading-relaxed border-t border-[var(--color-hairline)]/50">
+          <p>
+            Basta selecionar múltiplas imagens de uma vez na caixa de seleção de arquivos ou arrastar todas juntas para a área de upload. Na galeria que se abrirá, você poderá arrastar as miniaturas para colocar as páginas na ordem exata que preferir e clicar em "Baixar PDF Agora".
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="faq-item rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] overflow-hidden transition-all duration-200">
+        <button
+          type="button"
+          class="faq-trigger w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)] transition-colors cursor-pointer"
+          aria-expanded="false"
+        >
+          <span>O PDF gerado terá marca d'água ou cobrança oculta?</span>
+          <svg class="faq-chevron w-4 h-4 text-[var(--color-mute)] transition-transform duration-200 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-[var(--color-body)] leading-relaxed border-t border-[var(--color-hairline)]/50">
+          <p>
+            <strong>Não.</strong> Todos os arquivos gerados são totalmente limpos, sem qualquer marca d'água, logo ou carimbo publicitário. O serviço é 100% gratuito e não exige cartão de crédito nem cadastro.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="faq-item rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] overflow-hidden transition-all duration-200">
+        <button
+          type="button"
+          class="faq-trigger w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)] transition-colors cursor-pointer"
+          aria-expanded="false"
+        >
+          <span>Quais formatos de arquivo são suportados?</span>
+          <svg class="faq-chevron w-4 h-4 text-[var(--color-mute)] transition-transform duration-200 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-[var(--color-body)] leading-relaxed border-t border-[var(--color-hairline)]/50">
+          <p>
+            Você pode converter e mesclar arquivos nos formatos <strong>JPG / JPEG</strong>, <strong>PNG</strong>, <strong>WebP</strong>, <strong>BMP</strong> e <strong>GIF estático</strong>. Você pode inclusive combinar fotos de diferentes formatos no mesmo documento PDF.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 5 -->
+      <div class="faq-item rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] overflow-hidden transition-all duration-200">
+        <button
+          type="button"
+          class="faq-trigger w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)] transition-colors cursor-pointer"
+          aria-expanded="false"
+        >
+          <span>Posso girar fotos que foram tiradas de cabeça para baixo ou deitadas?</span>
+          <svg class="faq-chevron w-4 h-4 text-[var(--color-mute)] transition-transform duration-200 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-[var(--color-body)] leading-relaxed border-t border-[var(--color-hairline)]/50">
+          <p>
+            <strong>Sim!</strong> Cada miniatura possui um botão de rotação 90° no canto inferior. Basta clicar nele para girar a imagem no sentido horário até que fique na orientação correta para leitura antes de exportar.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 6 -->
+      <div class="faq-item rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] overflow-hidden transition-all duration-200">
+        <button
+          type="button"
+          class="faq-trigger w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)] transition-colors cursor-pointer"
+          aria-expanded="false"
+        >
+          <span>Qual é a diferença entre "Imagem para PDF" e "Imagem para Texto"?</span>
+          <svg class="faq-chevron w-4 h-4 text-[var(--color-mute)] transition-transform duration-200 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-[var(--color-body)] leading-relaxed border-t border-[var(--color-hairline)]/50">
+          <p>
+            O conversor <strong>Imagem para PDF</strong> reúne as suas fotografias em um documento PDF mantendo o aspecto visual original. Já o <strong><a href="/" class="text-indigo-600 dark:text-indigo-400 font-medium underline">Imagem para Texto (OCR)</a></strong> analisa os caracteres gráficos dentro da foto e transcreve o texto e código para que você possa copiar, editar e alterar como desejar.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Accordion Toggle Handler -->
+<script>
+  const faqTriggers = document.querySelectorAll('.faq-trigger');
+  faqTriggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      const content = trigger.nextElementSibling;
+      const chevron = trigger.querySelector('.faq-chevron');
+
+      // Close other open faqs
+      faqTriggers.forEach((other) => {
+        if (other !== trigger) {
+          other.setAttribute('aria-expanded', 'false');
+          other.nextElementSibling?.classList.add('hidden');
+          other.querySelector('.faq-chevron')?.classList.remove('rotate-180');
+        }
+      });
+
+      if (isExpanded) {
+        trigger.setAttribute('aria-expanded', 'false');
+        content?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+      } else {
+        trigger.setAttribute('aria-expanded', 'true');
+        content?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+      }
+    });
+  });
+</script>

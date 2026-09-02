@@ -1,0 +1,939 @@
+---
+// ImageToPdfApp.astro - Aplicativo interativo de Imagem para PDF 100% no navegador
+---
+
+<section id="pdf-app" class="relative pt-0 pb-16 border-b border-[var(--color-hairline)]">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Main App Container -->
+    <div class="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] shadow-[var(--shadow-level-3)] overflow-hidden transition-all duration-300">
+      
+      <!-- Top Status / Mode Header -->
+      <div class="px-4 sm:px-6 py-3.5 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)] flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-md bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-xs">
+            PDF
+          </div>
+          <div>
+            <h2 class="text-sm font-semibold text-[var(--color-ink)] leading-none">
+              Juntar e Converter Imagens em PDF
+            </h2>
+            <p class="text-[11px] text-[var(--color-mute)] mt-0.5">
+              Suporta JPG, PNG, WebP, BMP e GIF · Processamento 100% local
+            </p>
+          </div>
+        </div>
+
+        <!-- Cross Link Badge to OCR -->
+        <a
+          href="/#converter-app"
+          class="text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 transition-colors"
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 7V4h16v3"></path>
+            <path d="M9 20h6"></path>
+            <path d="M12 4v16"></path>
+          </svg>
+          <span>Quer extrair texto editável? Use Imagem para Texto &rarr;</span>
+        </a>
+      </div>
+
+      <!-- STATE 1: UPLOAD DROPZONE (Visible when no images are loaded) -->
+      <div id="pdf-upload-zone" class="p-6 sm:p-12 text-center transition-all duration-200">
+        <div
+          id="pdf-drop-area"
+          class="relative border-2 border-dashed border-[var(--color-hairline-strong)]/60 rounded-xl p-8 sm:p-14 hover:border-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]/50 transition-all duration-200 cursor-pointer group"
+        >
+          <input
+            type="file"
+            id="pdf-file-input"
+            class="hidden"
+            accept="image/png,image/jpeg,image/webp,image/bmp,image/gif"
+            multiple
+          />
+
+          <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-2xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] group-hover:scale-110 group-hover:border-[var(--color-hairline-strong)] transition-all">
+            <svg class="w-7 h-7 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <path d="M12 18v-6"></path>
+              <path d="m9 15 3-3 3 3"></path>
+            </svg>
+          </div>
+
+          <h3 class="text-base sm:text-lg font-semibold text-[var(--color-ink)] mb-1">
+            Arraste e solte suas imagens aqui
+          </h3>
+          <p class="text-xs sm:text-sm text-[var(--color-body)] max-w-md mx-auto mb-5 leading-relaxed">
+            Selecione uma ou várias fotos do seu computador ou celular para juntar em um único arquivo PDF.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              id="pdf-browse-btn"
+              class="inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-medium text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full transition-all shadow-xs active:scale-95 cursor-pointer"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span>Procurar Imagens</span>
+            </button>
+
+            <button
+              type="button"
+              id="pdf-paste-helper"
+              class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-mono text-[var(--color-body)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:text-[var(--color-ink)] rounded-full transition-colors"
+            >
+              <kbd class="px-1.5 py-0.5 rounded bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] text-[10px]">Ctrl + V</kbd>
+              <span>Colar Imagem</span>
+            </button>
+          </div>
+
+          <!-- Supported formats -->
+          <div class="mt-6 flex items-center justify-center gap-2 text-[11px] font-mono text-[var(--color-mute)]">
+            <span>Formatos aceitos:</span>
+            <span class="px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)]">JPG</span>
+            <span class="px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)]">PNG</span>
+            <span class="px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)]">WEBP</span>
+            <span class="px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)]">BMP</span>
+            <span class="px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)]">GIF</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE 2: ACTIVE CONVERTER & GALLERY (Hidden by default) -->
+      <div id="pdf-workspace" class="hidden">
+        
+        <!-- Workspace Top Toolbar -->
+        <div class="px-4 sm:px-6 py-3 bg-[var(--color-canvas)] border-b border-[var(--color-hairline)] flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <span id="pdf-image-count-badge" class="px-2.5 py-1 rounded-md bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] text-xs font-mono font-medium text-[var(--color-ink)]">
+              0 imagens selecionadas
+            </span>
+            <span class="text-xs text-[var(--color-mute)] hidden sm:inline">
+              Arraste os cards para reorganizar a ordem das páginas
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <!-- Add More Button -->
+            <button
+              type="button"
+              id="pdf-add-more-btn"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[var(--color-ink)] bg-[var(--color-canvas-soft)] hover:bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded-md transition-colors cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>Adicionar Fotos</span>
+            </button>
+
+            <!-- Clear All Button -->
+            <button
+              type="button"
+              id="pdf-clear-all-btn"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 border border-transparent hover:border-red-200 dark:hover:border-red-900 rounded-md transition-colors cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+              <span>Limpar Tudo</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Split View: Thumbnails Grid (Left/Main) + PDF Options (Right) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-[var(--color-hairline)] min-h-[480px]">
+          
+          <!-- LEFT: Image Reorder & Preview Grid (Takes 2 cols) -->
+          <div class="lg:col-span-2 p-4 sm:p-6 bg-[var(--color-canvas-soft)] flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xs font-mono uppercase tracking-wider text-[var(--color-mute)] font-semibold">
+                  Ordem das Páginas do PDF
+                </h3>
+                <span class="text-[11px] text-[var(--color-mute)]">
+                  Use os botões ou arraste para reordenar
+                </span>
+              </div>
+
+              <!-- Thumbnails Container -->
+              <div
+                id="pdf-thumbnails-container"
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5 max-h-[540px] overflow-y-auto pr-1"
+              >
+                <!-- Thumbnail cards injected dynamically via JS -->
+              </div>
+            </div>
+
+            <!-- Drag helper drop area at bottom of gallery -->
+            <div
+              id="pdf-secondary-dropzone"
+              class="mt-4 border border-dashed border-[var(--color-hairline-strong)]/40 rounded-lg p-3 text-center text-xs text-[var(--color-mute)] hover:bg-[var(--color-canvas)]/60 transition-colors cursor-pointer"
+            >
+              + Solte mais imagens aqui para adicionar páginas
+            </div>
+          </div>
+
+          <!-- RIGHT: PDF Configuration & Generation Panel (Takes 1 col) -->
+          <div class="p-4 sm:p-6 bg-[var(--color-canvas)] flex flex-col justify-between space-y-6">
+            
+            <div class="space-y-5">
+              <div class="border-b border-[var(--color-hairline)] pb-3">
+                <h3 class="text-sm font-semibold text-[var(--color-ink)]">
+                  Configurações do PDF
+                </h3>
+                <p class="text-xs text-[var(--color-body)] mt-0.5">
+                  Personalize o layout das páginas e qualidade do documento
+                </p>
+              </div>
+
+              <!-- Option 1: Page Size -->
+              <div class="space-y-1.5">
+                <label for="pdf-page-size" class="text-xs font-medium text-[var(--color-ink)] flex items-center justify-between">
+                  <span>Tamanho da Página:</span>
+                  <span class="text-[11px] font-mono text-[var(--color-mute)]" id="page-size-desc">210 x 297 mm</span>
+                </label>
+                <select
+                  id="pdf-page-size"
+                  class="w-full text-xs bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] rounded-md px-3 py-2 text-[var(--color-ink)] font-medium focus:outline-none focus:border-[var(--color-primary)] cursor-pointer"
+                >
+                  <option value="a4" selected>A4 (Padrão Internacional)</option>
+                  <option value="letter">Carta / Letter (EUA & Américas)</option>
+                  <option value="fit">Ajustar à Imagem (Mesmo tamanho da foto)</option>
+                </select>
+              </div>
+
+              <!-- Option 2: Orientation -->
+              <div class="space-y-1.5">
+                <label class="text-xs font-medium text-[var(--color-ink)]">
+                  Orientação da Página:
+                </label>
+                <div class="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    class="pdf-orient-btn active px-2.5 py-1.5 text-xs rounded-md border text-center transition-all flex flex-col items-center gap-1 bg-[var(--color-canvas-soft-2)] border-[var(--color-ink)] text-[var(--color-ink)] font-medium"
+                    data-orient="auto"
+                  >
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                    </svg>
+                    <span>Auto</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="pdf-orient-btn px-2.5 py-1.5 text-xs rounded-md border text-center transition-all flex flex-col items-center gap-1 bg-[var(--color-canvas)] border-[var(--color-hairline)] text-[var(--color-body)] hover:text-[var(--color-ink)]"
+                    data-orient="p"
+                  >
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="5" y="2" width="14" height="20" rx="2"></rect>
+                    </svg>
+                    <span>Retrato</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="pdf-orient-btn px-2.5 py-1.5 text-xs rounded-md border text-center transition-all flex flex-col items-center gap-1 bg-[var(--color-canvas)] border-[var(--color-hairline)] text-[var(--color-body)] hover:text-[var(--color-ink)]"
+                    data-orient="l"
+                  >
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                    </svg>
+                    <span>Paisagem</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Option 3: Margin -->
+              <div class="space-y-1.5">
+                <label class="text-xs font-medium text-[var(--color-ink)]">
+                  Margens das Páginas:
+                </label>
+                <div class="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    class="pdf-margin-btn active px-2.5 py-1.5 text-xs rounded-md border text-center transition-all bg-[var(--color-canvas-soft-2)] border-[var(--color-ink)] text-[var(--color-ink)] font-medium"
+                    data-margin="0"
+                  >
+                    Sem Margem
+                  </button>
+                  <button
+                    type="button"
+                    class="pdf-margin-btn px-2.5 py-1.5 text-xs rounded-md border text-center transition-all bg-[var(--color-canvas)] border-[var(--color-hairline)] text-[var(--color-body)] hover:text-[var(--color-ink)]"
+                    data-margin="5"
+                  >
+                    Pequena (5mm)
+                  </button>
+                  <button
+                    type="button"
+                    class="pdf-margin-btn px-2.5 py-1.5 text-xs rounded-md border text-center transition-all bg-[var(--color-canvas)] border-[var(--color-hairline)] text-[var(--color-body)] hover:text-[var(--color-ink)]"
+                    data-margin="12"
+                  >
+                    Normal (12mm)
+                  </button>
+                </div>
+              </div>
+
+              <!-- Option 4: Image Compression / Quality -->
+              <div class="space-y-1.5">
+                <label for="pdf-quality-select" class="text-xs font-medium text-[var(--color-ink)]">
+                  Qualidade da Imagem:
+                </label>
+                <select
+                  id="pdf-quality-select"
+                  class="w-full text-xs bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] rounded-md px-3 py-2 text-[var(--color-ink)] font-medium focus:outline-none focus:border-[var(--color-primary)] cursor-pointer"
+                >
+                  <option value="0.95" selected>Alta Resolução (Original / Imprimir)</option>
+                  <option value="0.82">Equilibrada (Ideal para Envio Web)</option>
+                  <option value="0.65">Compacta (Tamanho de Arquivo Menor)</option>
+                </select>
+              </div>
+
+              <!-- Option 5: Filename -->
+              <div class="space-y-1.5">
+                <label for="pdf-filename-input" class="text-xs font-medium text-[var(--color-ink)]">
+                  Nome do Arquivo PDF:
+                </label>
+                <div class="relative flex items-center">
+                  <input
+                    type="text"
+                    id="pdf-filename-input"
+                    value="documento-imagens"
+                    class="w-full text-xs bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] rounded-md px-3 py-2 pr-12 text-[var(--color-ink)] font-mono focus:outline-none focus:border-[var(--color-primary)]"
+                  />
+                  <span class="absolute right-3 text-xs font-mono text-[var(--color-mute)] pointer-events-none">
+                    .pdf
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Action Area: Generate & Download -->
+            <div class="pt-4 border-t border-[var(--color-hairline)] space-y-3">
+              
+              <!-- Progress Indicator (Hidden during idle) -->
+              <div id="pdf-progress-container" class="hidden space-y-1.5">
+                <div class="flex items-center justify-between text-xs text-[var(--color-body)] font-mono">
+                  <span id="pdf-progress-text">Gerando documento PDF...</span>
+                  <span id="pdf-progress-percent">0%</span>
+                </div>
+                <div class="w-full h-1.5 bg-[var(--color-canvas-soft-2)] rounded-full overflow-hidden">
+                  <div id="pdf-progress-bar" class="h-full bg-gradient-to-r from-red-500 to-amber-500 transition-all duration-200" style="width: 0%"></div>
+                </div>
+              </div>
+
+              <!-- Main Download CTA Button -->
+              <button
+                type="button"
+                id="pdf-generate-btn"
+                class="w-full py-3 px-4 rounded-lg bg-[var(--color-primary)] text-[var(--color-on-primary)] font-medium text-sm flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.99] transition-all shadow-md cursor-pointer"
+              >
+                <svg class="w-4 h-4 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="12" y1="18" x2="12" y2="12"></line>
+                  <line x1="9" y1="15" x2="12" y2="18"></line>
+                  <line x1="15" y1="15" x2="12" y2="18"></line>
+                </svg>
+                <span id="pdf-generate-btn-text">Baixar PDF Agora</span>
+              </button>
+
+              <div class="flex items-center justify-center gap-2 text-[11px] text-[var(--color-mute)]">
+                <svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Sem limite de páginas · Sem marcas d'água</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Client Script for Image to PDF Processing -->
+<script>
+  import { jsPDF } from 'jspdf';
+  import confetti from 'canvas-confetti';
+
+  interface ImageItem {
+    id: string;
+    file: File;
+    name: string;
+    sizeFormatted: string;
+    dataUrl: string;
+    width: number;
+    height: number;
+    rotation: number; // 0, 90, 180, 270
+  }
+
+  // App State
+  let imageList: ImageItem[] = [];
+  let selectedOrientation: 'auto' | 'p' | 'l' = 'auto';
+  let selectedMargin = 0; // in mm
+
+  // DOM Elements
+  const uploadZone = document.getElementById('pdf-upload-zone');
+  const dropArea = document.getElementById('pdf-drop-area');
+  const fileInput = document.getElementById('pdf-file-input') as HTMLInputElement | null;
+  const browseBtn = document.getElementById('pdf-browse-btn');
+  const pasteHelper = document.getElementById('pdf-paste-helper');
+  const workspace = document.getElementById('pdf-workspace');
+  const countBadge = document.getElementById('pdf-image-count-badge');
+  const thumbnailsContainer = document.getElementById('pdf-thumbnails-container');
+  const addMoreBtn = document.getElementById('pdf-add-more-btn');
+  const secondaryDropzone = document.getElementById('pdf-secondary-dropzone');
+  const clearAllBtn = document.getElementById('pdf-clear-all-btn');
+  const pageSizeSelect = document.getElementById('pdf-page-size') as HTMLSelectElement | null;
+  const qualitySelect = document.getElementById('pdf-quality-select') as HTMLSelectElement | null;
+  const filenameInput = document.getElementById('pdf-filename-input') as HTMLInputElement | null;
+  const generateBtn = document.getElementById('pdf-generate-btn');
+  const generateBtnText = document.getElementById('pdf-generate-btn-text');
+  const progressContainer = document.getElementById('pdf-progress-container');
+  const progressBar = document.getElementById('pdf-progress-bar');
+  const progressText = document.getElementById('pdf-progress-text');
+  const progressPercent = document.getElementById('pdf-progress-percent');
+  const orientBtns = document.querySelectorAll('.pdf-orient-btn');
+  const marginBtns = document.querySelectorAll('.pdf-margin-btn');
+
+  // Helper: Format bytes
+  function formatBytes(bytes: number, decimals = 1) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+  // Helper: Read file as ImageItem
+  function processFile(file: File): Promise<ImageItem> {
+    return new Promise((resolve, reject) => {
+      if (!file.type.startsWith('image/')) {
+        reject(new Error('Arquivo não é uma imagem'));
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const dataUrl = e.target?.result as string;
+        const img = new Image();
+        img.onload = () => {
+          resolve({
+            id: Math.random().toString(36).substring(2, 9),
+            file,
+            name: file.name,
+            sizeFormatted: formatBytes(file.size),
+            dataUrl,
+            width: img.naturalWidth || img.width,
+            height: img.naturalHeight || img.height,
+            rotation: 0
+          });
+        };
+        img.onerror = () => reject(new Error('Erro ao carregar imagem'));
+        img.src = dataUrl;
+      };
+      reader.onerror = () => reject(new Error('Erro ao ler arquivo'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Handle incoming files
+  async function handleFiles(files: FileList | File[]) {
+    if (!files || files.length === 0) return;
+
+    const promises: Promise<ImageItem>[] = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (file.type.startsWith('image/')) {
+        promises.push(processFile(file));
+      }
+    }
+
+    try {
+      const newItems = await Promise.all(promises);
+      if (newItems.length > 0) {
+        imageList = [...imageList, ...newItems];
+        renderWorkspace();
+      }
+    } catch (err) {
+      console.error('Erro ao processar imagens:', err);
+    }
+  }
+
+  // Render Thumbnails & Workspace UI
+  function renderWorkspace() {
+    if (imageList.length === 0) {
+      uploadZone?.classList.remove('hidden');
+      workspace?.classList.add('hidden');
+      if (fileInput) fileInput.value = '';
+      return;
+    }
+
+    uploadZone?.classList.add('hidden');
+    workspace?.classList.remove('hidden');
+
+    if (countBadge) {
+      countBadge.textContent = `${imageList.length} ${imageList.length === 1 ? 'imagem' : 'imagens'} (${imageList.length} ${imageList.length === 1 ? 'página' : 'páginas'})`;
+    }
+
+    if (!thumbnailsContainer) return;
+    thumbnailsContainer.innerHTML = '';
+
+    imageList.forEach((item, index) => {
+      const card = document.createElement('div');
+      card.className = 'group relative rounded-lg border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-2 shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between';
+      card.dataset.id = item.id;
+      card.dataset.index = index.toString();
+      card.draggable = true;
+
+      card.innerHTML = `
+        <div class="relative aspect-3/4 rounded bg-[var(--color-canvas-soft-2)] flex items-center justify-center overflow-hidden border border-[var(--color-hairline)] mb-2">
+          <!-- Page Number Badge -->
+          <span class="absolute top-1.5 left-1.5 z-10 px-1.5 py-0.5 rounded bg-[var(--color-ink)]/80 text-[var(--color-canvas)] text-[10px] font-mono font-medium backdrop-blur-xs">
+            Pág. ${index + 1}
+          </span>
+          
+          <!-- Delete Button -->
+          <button
+            type="button"
+            class="thumb-delete-btn absolute top-1.5 right-1.5 z-10 w-6 h-6 rounded-full bg-red-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 hover:scale-110 active:scale-95 transition-all shadow-xs cursor-pointer"
+            title="Remover esta página"
+            data-id="${item.id}"
+          >
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- Rotate Button -->
+          <button
+            type="button"
+            class="thumb-rotate-btn absolute bottom-1.5 right-1.5 z-10 w-6 h-6 rounded-full bg-[var(--color-canvas)]/90 border border-[var(--color-hairline)] text-[var(--color-ink)] flex items-center justify-center opacity-0 group-hover:opacity-100 hover:scale-110 active:scale-95 transition-all shadow-xs cursor-pointer"
+            title="Girar 90°"
+            data-id="${item.id}"
+          >
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+            </svg>
+          </button>
+
+          <!-- Image Preview -->
+          <img
+            src="${item.dataUrl}"
+            alt="${item.name}"
+            class="w-full h-full object-contain transition-transform duration-200"
+            style="transform: rotate(${item.rotation}deg);"
+          />
+        </div>
+
+        <div class="px-1">
+          <p class="text-[11px] font-medium text-[var(--color-ink)] truncate" title="${item.name}">
+            ${item.name}
+          </p>
+          <div class="flex items-center justify-between text-[10px] text-[var(--color-mute)] font-mono mt-0.5">
+            <span>${item.width}x${item.height}</span>
+            <span>${item.sizeFormatted}</span>
+          </div>
+
+          <!-- Bottom Move Controls -->
+          <div class="flex items-center justify-between mt-2 pt-1.5 border-t border-[var(--color-hairline)]">
+            <button
+              type="button"
+              class="thumb-move-left-btn text-xs p-1 rounded hover:bg-[var(--color-canvas-soft-2)] text-[var(--color-body)] hover:text-[var(--color-ink)] disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
+              title="Mover para a esquerda"
+              data-index="${index}"
+              ${index === 0 ? 'disabled' : ''}
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+
+            <span class="text-[9px] font-mono text-[var(--color-mute)] uppercase">#${index + 1}</span>
+
+            <button
+              type="button"
+              class="thumb-move-right-btn text-xs p-1 rounded hover:bg-[var(--color-canvas-soft-2)] text-[var(--color-body)] hover:text-[var(--color-ink)] disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
+              title="Mover para a direita"
+              data-index="${index}"
+              ${index === imageList.length - 1 ? 'disabled' : ''}
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Drag and Drop reordering events
+      card.addEventListener('dragstart', (e) => {
+        e.dataTransfer?.setData('text/plain', index.toString());
+        card.classList.add('opacity-40');
+      });
+
+      card.addEventListener('dragend', () => {
+        card.classList.remove('opacity-40');
+      });
+
+      card.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        card.classList.add('border-indigo-500');
+      });
+
+      card.addEventListener('dragleave', () => {
+        card.classList.remove('border-indigo-500');
+      });
+
+      card.addEventListener('drop', (e) => {
+        e.preventDefault();
+        card.classList.remove('border-indigo-500');
+        const fromIndexStr = e.dataTransfer?.getData('text/plain');
+        if (fromIndexStr !== undefined) {
+          const fromIndex = parseInt(fromIndexStr, 10);
+          const toIndex = index;
+          if (fromIndex !== toIndex && !isNaN(fromIndex)) {
+            const itemToMove = imageList.splice(fromIndex, 1)[0];
+            imageList.splice(toIndex, 0, itemToMove);
+            renderWorkspace();
+          }
+        }
+      });
+
+      thumbnailsContainer.appendChild(card);
+    });
+
+    // Attach actions to buttons inside cards
+    thumbnailsContainer.querySelectorAll('.thumb-delete-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = (btn as HTMLElement).dataset.id;
+        imageList = imageList.filter(item => item.id !== id);
+        renderWorkspace();
+      });
+    });
+
+    thumbnailsContainer.querySelectorAll('.thumb-rotate-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = (btn as HTMLElement).dataset.id;
+        const target = imageList.find(item => item.id === id);
+        if (target) {
+          target.rotation = (target.rotation + 90) % 360;
+          renderWorkspace();
+        }
+      });
+    });
+
+    thumbnailsContainer.querySelectorAll('.thumb-move-left-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt((btn as HTMLElement).dataset.index || '-1', 10);
+        if (idx > 0) {
+          const temp = imageList[idx];
+          imageList[idx] = imageList[idx - 1];
+          imageList[idx - 1] = temp;
+          renderWorkspace();
+        }
+      });
+    });
+
+    thumbnailsContainer.querySelectorAll('.thumb-move-right-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt((btn as HTMLElement).dataset.index || '-1', 10);
+        if (idx >= 0 && idx < imageList.length - 1) {
+          const temp = imageList[idx];
+          imageList[idx] = imageList[idx + 1];
+          imageList[idx + 1] = temp;
+          renderWorkspace();
+        }
+      });
+    });
+  }
+
+  // Helper: Render Image onto Canvas with current Rotation and return DataURL & Natural Dimensions
+  function getRotatedImageData(item: ImageItem, quality: number): Promise<{ dataUrl: string; width: number; height: number }> {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        const rad = (item.rotation * Math.PI) / 180;
+        const isRotated90or270 = item.rotation === 90 || item.rotation === 270;
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const finalWidth = isRotated90or270 ? img.naturalHeight : img.naturalWidth;
+        const finalHeight = isRotated90or270 ? img.naturalWidth : img.naturalHeight;
+
+        canvas.width = finalWidth;
+        canvas.height = finalHeight;
+
+        if (!ctx) {
+          resolve({ dataUrl: item.dataUrl, width: img.naturalWidth, height: img.naturalHeight });
+          return;
+        }
+
+        // Fill white background for transparent PNG/GIFs to look clean in PDF
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, finalWidth, finalHeight);
+
+        // Transform canvas context for rotation
+        ctx.translate(finalWidth / 2, finalHeight / 2);
+        ctx.rotate(rad);
+        ctx.drawImage(img, -img.naturalWidth / 2, -img.naturalHeight / 2);
+
+        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+        resolve({ dataUrl, width: finalWidth, height: finalHeight });
+      };
+      img.src = item.dataUrl;
+    });
+  }
+
+  // Generate & Download PDF
+  async function generatePdf() {
+    if (imageList.length === 0 || !generateBtn || !generateBtnText) return;
+
+    // UI Loading State
+    generateBtn.setAttribute('disabled', 'true');
+    generateBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    generateBtnText.textContent = 'Gerando PDF...';
+    if (progressContainer) progressContainer.classList.remove('hidden');
+
+    const pageSize = pageSizeSelect ? pageSizeSelect.value : 'a4';
+    const quality = qualitySelect ? parseFloat(qualitySelect.value) : 0.95;
+    const margin = selectedMargin;
+
+    try {
+      let doc: jsPDF | null = null;
+
+      for (let i = 0; i < imageList.length; i++) {
+        const item = imageList[i];
+
+        // Update progress
+        const percent = Math.round(((i + 1) / imageList.length) * 100);
+        if (progressBar) progressBar.style.width = `${percent}%`;
+        if (progressPercent) progressPercent.textContent = `${percent}%`;
+        if (progressText) progressText.textContent = `Processando página ${i + 1} de ${imageList.length}...`;
+
+        // Get rotated canvas image
+        const { dataUrl, width: imgWidth, height: imgHeight } = await getRotatedImageData(item, quality);
+
+        // Determine Page Orientation & Size
+        let pageOrientation: 'p' | 'l' = 'p';
+        if (selectedOrientation === 'auto') {
+          pageOrientation = imgWidth > imgHeight ? 'l' : 'p';
+        } else {
+          pageOrientation = selectedOrientation;
+        }
+
+        let pdfFormat: string | [number, number] = pageSize;
+        if (pageSize === 'fit') {
+          // In 'fit' mode, page dimension matches the image in mm (approx 72 DPI to mm: 1 pt = 0.352777 mm)
+          const mmWidth = imgWidth * 0.264583 + margin * 2;
+          const mmHeight = imgHeight * 0.264583 + margin * 2;
+          pdfFormat = [mmWidth, mmHeight];
+          pageOrientation = mmWidth > mmHeight ? 'l' : 'p';
+        }
+
+        if (i === 0) {
+          doc = new jsPDF({
+            orientation: pageOrientation,
+            unit: 'mm',
+            format: pdfFormat
+          });
+        } else {
+          doc?.addPage(pdfFormat, pageOrientation);
+        }
+
+        if (!doc) continue;
+
+        // Calculate printable area
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const pageHeight = doc.internal.pageSize.getHeight();
+
+        const printableWidth = pageWidth - margin * 2;
+        const printableHeight = pageHeight - margin * 2;
+
+        const imgAspectRatio = imgWidth / imgHeight;
+        const pageAspectRatio = printableWidth / printableHeight;
+
+        let renderWidth = printableWidth;
+        let renderHeight = printableHeight;
+
+        if (imgAspectRatio > pageAspectRatio) {
+          // Image is wider than printable area
+          renderWidth = printableWidth;
+          renderHeight = printableWidth / imgAspectRatio;
+        } else {
+          // Image is taller than printable area
+          renderHeight = printableHeight;
+          renderWidth = printableHeight * imgAspectRatio;
+        }
+
+        // Center image on page
+        const posX = margin + (printableWidth - renderWidth) / 2;
+        const posY = margin + (printableHeight - renderHeight) / 2;
+
+        doc.addImage(dataUrl, 'JPEG', posX, posY, renderWidth, renderHeight);
+      }
+
+      if (doc) {
+        let rawFilename = filenameInput?.value.trim() || 'documento-imagens';
+        if (rawFilename.endsWith('.pdf')) {
+          rawFilename = rawFilename.substring(0, rawFilename.length - 4);
+        }
+        const finalFilename = `${rawFilename || 'documento-imagens'}.pdf`;
+
+        // Save PDF file
+        doc.save(finalFilename);
+
+        // Trigger celebratory confetti
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+    } catch (err) {
+      console.error('Erro ao gerar PDF:', err);
+      alert('Ocorreu um erro ao gerar o PDF. Por favor, tente novamente com menos imagens.');
+    } finally {
+      // Reset UI state
+      generateBtn.removeAttribute('disabled');
+      generateBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      generateBtnText.textContent = 'Baixar PDF Agora';
+      if (progressContainer) {
+        setTimeout(() => {
+          progressContainer.classList.add('hidden');
+          if (progressBar) progressBar.style.width = '0%';
+        }, 1500);
+      }
+    }
+  }
+
+  // Event Listeners Initialization
+  browseBtn?.addEventListener('click', () => fileInput?.click());
+  dropArea?.addEventListener('click', () => fileInput?.click());
+  addMoreBtn?.addEventListener('click', () => fileInput?.click());
+  secondaryDropzone?.addEventListener('click', () => fileInput?.click());
+
+  fileInput?.addEventListener('change', (e) => {
+    const files = (e.target as HTMLInputElement).files;
+    if (files) handleFiles(files);
+  });
+
+  // Drag & Drop on main drop area
+  dropArea?.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.classList.add('border-[var(--color-ink)]', 'bg-[var(--color-canvas-soft)]');
+  });
+
+  dropArea?.addEventListener('dragleave', () => {
+    dropArea.classList.remove('border-[var(--color-ink)]', 'bg-[var(--color-canvas-soft)]');
+  });
+
+  dropArea?.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropArea.classList.remove('border-[var(--color-ink)]', 'bg-[var(--color-canvas-soft)]');
+    if (e.dataTransfer?.files) handleFiles(e.dataTransfer.files);
+  });
+
+  // Drag & Drop on secondary dropzone in workspace
+  secondaryDropzone?.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    secondaryDropzone.classList.add('border-indigo-500', 'bg-indigo-50/50');
+  });
+
+  secondaryDropzone?.addEventListener('dragleave', () => {
+    secondaryDropzone.classList.remove('border-indigo-500', 'bg-indigo-50/50');
+  });
+
+  secondaryDropzone?.addEventListener('drop', (e) => {
+    e.preventDefault();
+    secondaryDropzone.classList.remove('border-indigo-500', 'bg-indigo-50/50');
+    if (e.dataTransfer?.files) handleFiles(e.dataTransfer.files);
+  });
+
+  // Clipboard Paste Support (Ctrl+V)
+  window.addEventListener('paste', (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+
+    const files: File[] = [];
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.startsWith('image/')) {
+        const file = items[i].getAsFile();
+        if (file) files.push(file);
+      }
+    }
+    if (files.length > 0) handleFiles(files);
+  });
+
+  pasteHelper?.addEventListener('click', () => {
+    alert('Pressione Ctrl + V (ou Cmd + V no Mac) em qualquer lugar da tela para colar uma imagem da área de transferência.');
+  });
+
+  // Clear All
+  clearAllBtn?.addEventListener('click', () => {
+    if (confirm('Tem certeza de que deseja remover todas as imagens?')) {
+      imageList = [];
+      renderWorkspace();
+    }
+  });
+
+  // Orientation Selector
+  orientBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      orientBtns.forEach(b => {
+        b.classList.remove('active', 'bg-[var(--color-canvas-soft-2)]', 'border-[var(--color-ink)]', 'text-[var(--color-ink)]', 'font-medium');
+        b.classList.add('bg-[var(--color-canvas)]', 'border-[var(--color-hairline)]', 'text-[var(--color-body)]');
+      });
+      btn.classList.add('active', 'bg-[var(--color-canvas-soft-2)]', 'border-[var(--color-ink)]', 'text-[var(--color-ink)]', 'font-medium');
+      btn.classList.remove('bg-[var(--color-canvas)]', 'border-[var(--color-hairline)]', 'text-[var(--color-body)]');
+
+      selectedOrientation = ((btn as HTMLElement).dataset.orient || 'auto') as 'auto' | 'p' | 'l';
+    });
+  });
+
+  // Margin Selector
+  marginBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      marginBtns.forEach(b => {
+        b.classList.remove('active', 'bg-[var(--color-canvas-soft-2)]', 'border-[var(--color-ink)]', 'text-[var(--color-ink)]', 'font-medium');
+        b.classList.add('bg-[var(--color-canvas)]', 'border-[var(--color-hairline)]', 'text-[var(--color-body)]');
+      });
+      btn.classList.add('active', 'bg-[var(--color-canvas-soft-2)]', 'border-[var(--color-ink)]', 'text-[var(--color-ink)]', 'font-medium');
+      btn.classList.remove('bg-[var(--color-canvas)]', 'border-[var(--color-hairline)]', 'text-[var(--color-body)]');
+
+      selectedMargin = parseInt((btn as HTMLElement).dataset.margin || '0', 10);
+    });
+  });
+
+  // Page Size Description Change
+  pageSizeSelect?.addEventListener('change', () => {
+    const desc = document.getElementById('page-size-desc');
+    if (desc) {
+      if (pageSizeSelect.value === 'a4') desc.textContent = '210 x 297 mm';
+      else if (pageSizeSelect.value === 'letter') desc.textContent = '215.9 x 279.4 mm';
+      else desc.textContent = 'Auto / Proporcional';
+    }
+  });
+
+  // Generate Button Click
+  generateBtn?.addEventListener('click', generatePdf);
+</script>

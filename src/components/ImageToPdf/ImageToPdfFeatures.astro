@@ -1,0 +1,119 @@
+---
+// ImageToPdfFeatures.astro - Grade de recursos e benefícios da ferramenta Imagem para PDF
+---
+
+<section class="py-16 sm:py-24 bg-[var(--color-canvas)] border-b border-[var(--color-hairline)]">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-mute)] font-medium">Recursos Profissionais</span>
+      <h2 class="mt-2 text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-[var(--color-ink)] leading-tight">
+        A Maneira Mais Rápida e Segura de Transformar Imagens em PDF
+      </h2>
+      <p class="mt-3 text-base text-[var(--color-body)] leading-relaxed">
+        Projetado para quem precisa de rapidez, controle total de formatação e garantia de que nenhum arquivo pessoal seja enviado para terceiros.
+      </p>
+    </div>
+
+    <!-- 6-Grid Features -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      
+      <!-- Card 1: 100% Privacidade -->
+      <div class="p-6 sm:p-8 rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas-soft)] hover:border-[var(--color-hairline-strong)] transition-all shadow-2xs hover:shadow-sm group">
+        <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] mb-2">
+          Privacidade Absoluta (Zero-Upload)
+        </h3>
+        <p class="text-sm text-[var(--color-body)] leading-relaxed">
+          Ao contrário de outros sites, suas fotos não passam por servidores web. A geração do PDF ocorre inteiramente na memória RAM do seu navegador (Client-Side), garantindo conformidade com a LGPD e sigilo total.
+        </p>
+      </div>
+
+      <!-- Card 2: Múltiplas Fotos em 1 PDF -->
+      <div class="p-6 sm:p-8 rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas-soft)] hover:border-[var(--color-hairline-strong)] transition-all shadow-2xs hover:shadow-sm group">
+        <div class="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] mb-2">
+          Junte Dezenas de Fotos em 1 PDF
+        </h3>
+        <p class="text-sm text-[var(--color-body)] leading-relaxed">
+          Selecione múltiplos arquivos JPG, PNG, WebP e BMP de uma só vez. Combine notas de aula, recibos, fotos de documentos e faturas em um arquivo PDF organizado e fácil de compartilhar.
+        </p>
+      </div>
+
+      <!-- Card 3: Reordenação Visual & Rotação -->
+      <div class="p-6 sm:p-8 rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas-soft)] hover:border-[var(--color-hairline-strong)] transition-all shadow-2xs hover:shadow-sm group">
+        <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] mb-2">
+          Reordenação e Rotação 90°
+        </h3>
+        <p class="text-sm text-[var(--color-body)] leading-relaxed">
+          Arraste e solte as miniaturas para definir a ordem exata das páginas do seu PDF. Se alguma foto estiver deitada ou invertida, clique no botão de rotação para corrigi-la instantaneamente antes de salvar.
+        </p>
+      </div>
+
+      <!-- Card 4: Controle de Margens e Formato -->
+      <div class="p-6 sm:p-8 rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas-soft)] hover:border-[var(--color-hairline-strong)] transition-all shadow-2xs hover:shadow-sm group">
+        <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] mb-2">
+          Margens e Tamanhos Personalizados
+        </h3>
+        <p class="text-sm text-[var(--color-body)] leading-relaxed">
+          Escolha o padrão internacional <strong>A4</strong>, formato <strong>Carta (Letter)</strong> ou ajuste automático proporcional à imagem. Configure margens estreitas ou remova-as para imagens de página inteira.
+        </p>
+      </div>
+
+      <!-- Card 5: Sem Marca d'Água & Grátis -->
+      <div class="p-6 sm:p-8 rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas-soft)] hover:border-[var(--color-hairline-strong)] transition-all shadow-2xs hover:shadow-sm group">
+        <div class="w-10 h-10 rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m4.93 4.93 14.14 14.14"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] mb-2">
+          Sem Marcas d'Água ou Limites
+        </h3>
+        <p class="text-sm text-[var(--color-body)] leading-relaxed">
+          Gere arquivos PDF limpos e profissionais. Sem carimbos, sem logotipos impostos no cabeçalho ou rodapé e sem limites diários de conversão. 100% gratuito para sempre.
+        </p>
+      </div>
+
+      <!-- Card 6: Multiplataforma -->
+      <div class="p-6 sm:p-8 rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas-soft)] hover:border-[var(--color-hairline-strong)] transition-all shadow-2xs hover:shadow-sm group">
+        <div class="w-10 h-10 rounded-lg bg-violet-500/10 text-violet-600 dark:text-violet-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--color-ink)] mb-2">
+          Funciona em Celular, Tablet e PC
+        </h3>
+        <p class="text-sm text-[var(--color-body)] leading-relaxed">
+          Totalmente responsivo e otimizado para dispositivos móveis (Android, iPhone, iPad) e computadores (Windows, macOS, Linux). Não requer instalação de programas ou extensões.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>

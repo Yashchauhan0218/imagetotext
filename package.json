@@ -17,6 +17,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.4",
     "canvas-confetti": "^1.9.4",
+    "jspdf": "^4.2.1",
     "prismjs": "^1.30.0",
     "tailwindcss": "^4.3.3",
     "tesseract.js": "^7.0.0"

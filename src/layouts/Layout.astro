@@ -6,17 +6,19 @@ interface Props {
   description?: string;
   keywords?: string;
   canonicalUrl?: string;
+  schemaData?: object;
 }
 
 const {
   title = "Imagem para Texto - Conversor de Imagem para Texto Grátis & IA",
   description = "Converter imagem para texto e código grátis online com IA. Transcrever imagem para texto, extrair texto de imagem, extrator de texto OCR e 100% privado no navegador.",
   keywords = "imagem para texto, converter imagem para texto, conversor de imagem para texto, transcrever imagem para texto, extrair texto de imagem, extrator de texto, extrator de texto de imagem, imagem para codigo, ocr online gratis, copiar texto de imagem",
-  canonicalUrl = "https://imagemparatexto.com"
+  canonicalUrl = "https://imagemparatexto.com",
+  schemaData: customSchema
 } = Astro.props;
 
 // JSON-LD Structured Data Schema for Search Engines (Portuguese)
-const schemaData = {
+const schemaData = customSchema || {
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -80,10 +82,10 @@ const schemaData = {
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
     <!-- Hreflang Markup for Portuguese (Brazil, Portugal, Global Portuguese) -->
-    <link rel="alternate" hreflang="pt" href="https://imagemparatexto.com" />
-    <link rel="alternate" hreflang="pt-BR" href="https://imagemparatexto.com" />
-    <link rel="alternate" hreflang="pt-PT" href="https://imagemparatexto.com" />
-    <link rel="alternate" hreflang="x-default" href="https://imagemparatexto.com" />
+    <link rel="alternate" hreflang="pt" href={canonicalUrl} />
+    <link rel="alternate" hreflang="pt-BR" href={canonicalUrl} />
+    <link rel="alternate" hreflang="pt-PT" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
     <!-- Primary Meta Tags -->
     <title>{title}</title>
