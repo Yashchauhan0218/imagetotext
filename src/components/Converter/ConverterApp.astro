@@ -214,7 +214,7 @@
               id="clear-all-btn"
               class="px-2.5 py-1 text-xs font-medium text-red-600 hover:text-red-700 bg-[var(--color-canvas)] border border-red-200 rounded-md hover:bg-red-50 transition-colors cursor-pointer"
             >
-              Limpar Tudo
+              Limpar
             </button>
           </div>
         </div>
@@ -298,18 +298,18 @@
                   <button
                     type="button"
                     class="output-tab-btn active px-3 py-1 font-medium rounded-md bg-[var(--color-canvas)] text-[var(--color-ink)] shadow-2xs transition-all cursor-pointer"
-                    data-tab="code-view"
-                    id="tab-output-code"
-                  >
-                    Código & Sintaxe
-                  </button>
-                  <button
-                    type="button"
-                    class="output-tab-btn px-3 py-1 font-medium rounded-md text-[var(--color-body)] hover:text-[var(--color-ink)] transition-all cursor-pointer"
                     data-tab="plain-text"
                     id="tab-output-plain"
                   >
                     Texto Puro
+                  </button>
+                  <button
+                    type="button"
+                    class="output-tab-btn px-3 py-1 font-medium rounded-md text-[var(--color-body)] hover:text-[var(--color-ink)] transition-all cursor-pointer"
+                    data-tab="code-view"
+                    id="tab-output-code"
+                  >
+                    Código & Sintaxe
                   </button>
                   <button
                     type="button"
@@ -414,18 +414,18 @@
                   </div>
                 </div>
 
-                <!-- Tab 1: Code View with Prism Highlight -->
-                <div id="view-code-container" class="w-full h-full overflow-auto p-3 text-xs font-mono">
-                  <pre class="rounded-lg m-0"><code id="highlighted-code-output" class="language-javascript font-mono">// O código extraído aparecerá aqui com indentação preservada e destaque de sintaxe...</code></pre>
-                </div>
-
-                <!-- Tab 2: Plain Text / Editable Textarea -->
-                <div id="view-plain-container" class="hidden w-full h-full p-2">
+                <!-- Tab 1: Plain Text / Editable Textarea (Default) -->
+                <div id="view-plain-container" class="w-full h-full p-2">
                   <textarea
                     id="raw-text-output"
                     class="w-full h-[360px] p-3 text-sm bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-lg text-[var(--color-ink)] font-mono resize-none focus:outline-none focus:border-[var(--color-primary)]"
                     placeholder="O texto extraído aparecerá aqui. Você pode editar este texto diretamente..."
                   ></textarea>
+                </div>
+
+                <!-- Tab 2: Code View with Prism Highlight -->
+                <div id="view-code-container" class="hidden w-full h-full overflow-auto p-3 text-xs font-mono">
+                  <pre class="rounded-lg m-0"><code id="highlighted-code-output" class="language-javascript font-mono">// O código extraído aparecerá aqui com indentação preservada e destaque de sintaxe...</code></pre>
                 </div>
 
                 <!-- Tab 3: Markdown Rendered Preview -->
@@ -1034,5 +1034,7 @@
     workspaceView.classList.add('hidden');
     rawTextOutput.value = '';
     highlightedCodeOutput.textContent = '';
+    markdownRenderedOutput.textContent = '';
+    document.getElementById('tab-output-plain')?.click();
   });
 </script>
