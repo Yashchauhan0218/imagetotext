@@ -2,11 +2,11 @@
 // ImageToPdfApp.astro - Aplicativo interativo de Imagem para PDF 100% no navegador
 ---
 
-<section id="pdf-app" class="relative pt-0 pb-16 border-b border-[var(--color-hairline)]">
+<section id="pdf-app" class="relative pt-2 pb-12 sm:pb-16" aria-label="Ferramenta Imagem para PDF">
   <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- Main App Container -->
-    <div class="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] shadow-[var(--shadow-level-3)] overflow-hidden transition-all duration-300">
+    <div class="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] shadow-[var(--shadow-level-3)] overflow-hidden transition-all duration-300">
       
       <!-- Top Status / Mode Header -->
       <div class="px-4 sm:px-6 py-3.5 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)] flex flex-wrap items-center justify-between gap-4">
@@ -19,7 +19,7 @@
               Juntar e Converter Imagens em PDF
             </h2>
             <p class="text-[11px] text-[var(--color-mute)] mt-0.5">
-              Suporta JPG, PNG, WebP, BMP e GIF · Processamento 100% local
+              Suporta JPG, PNG, WebP, BMP e GIF · Processamento no navegador
             </p>
           </div>
         </div>
@@ -27,9 +27,9 @@
         <!-- Cross Link Badge to OCR -->
         <a
           href="/#converter-app"
-          class="text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 transition-colors"
+          class="text-xs font-medium text-[var(--color-ink)] hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:border-[var(--color-hairline-strong)] shadow-2xs transition-all"
         >
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 7V4h16v3"></path>
             <path d="M9 20h6"></path>
             <path d="M12 4v16"></path>
@@ -39,10 +39,13 @@
       </div>
 
       <!-- STATE 1: UPLOAD DROPZONE (Visible when no images are loaded) -->
-      <div id="pdf-upload-zone" class="p-6 sm:p-12 text-center transition-all duration-200">
+      <div id="pdf-upload-zone" class="p-4 sm:p-8 lg:p-12 text-center transition-all duration-200">
         <div
           id="pdf-drop-area"
-          class="relative border-2 border-dashed border-[var(--color-hairline-strong)]/60 rounded-xl p-8 sm:p-14 hover:border-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]/50 transition-all duration-200 cursor-pointer group"
+          class="relative border-2 border-dashed border-[var(--color-hairline-strong)]/60 rounded-2xl p-6 sm:p-12 lg:p-14 hover:border-[var(--color-primary)] hover:bg-[var(--color-canvas-soft)]/50 transition-all duration-200 cursor-pointer group"
+          role="button"
+          tabindex="0"
+          aria-label="Área de upload de imagem para conversão em PDF"
         >
           <input
             type="file"
@@ -52,8 +55,8 @@
             multiple
           />
 
-          <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-2xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] group-hover:scale-110 group-hover:border-[var(--color-hairline-strong)] transition-all">
-            <svg class="w-7 h-7 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 rounded-2xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] group-hover:scale-110 group-hover:border-[var(--color-primary)] transition-all shadow-xs">
+            <svg class="w-8 h-8 sm:w-10 sm:h-10 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
               <polyline points="14 2 14 8 20 8"></polyline>
               <path d="M12 18v-6"></path>
@@ -61,45 +64,27 @@
             </svg>
           </div>
 
-          <h3 class="text-base sm:text-lg font-semibold text-[var(--color-ink)] mb-1">
-            Arraste e solte suas imagens aqui
-          </h3>
-          <p class="text-xs sm:text-sm text-[var(--color-body)] max-w-md mx-auto mb-5 leading-relaxed">
-            Selecione uma ou várias fotos do seu computador ou celular para juntar em um único arquivo PDF.
+          <h2 class="text-xl sm:text-2xl font-bold text-[var(--color-ink)] tracking-tight">
+            Arraste suas imagens aqui
+          </h2>
+          <p class="mt-2 text-sm text-[var(--color-body)] max-w-md mx-auto font-normal">
+            ou cole imagens com <kbd class="font-mono text-xs font-semibold px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded text-[var(--color-ink)]">Ctrl + V</kbd>
           </p>
 
-          <div class="flex flex-wrap items-center justify-center gap-3">
+          <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
             <button
               type="button"
               id="pdf-browse-btn"
-              class="inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-medium text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full transition-all shadow-xs active:scale-95 cursor-pointer"
+              class="px-6 py-3 text-sm font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full shadow-md transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
             >
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="17 8 12 3 7 8"></polyline>
-                <line x1="12" y1="3" x2="12" y2="15"></line>
-              </svg>
-              <span>Procurar Imagens</span>
-            </button>
-
-            <button
-              type="button"
-              id="pdf-paste-helper"
-              class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-mono text-[var(--color-body)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:text-[var(--color-ink)] rounded-full transition-colors"
-            >
-              <kbd class="px-1.5 py-0.5 rounded bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] text-[10px]">Ctrl + V</kbd>
-              <span>Colar Imagem</span>
+              <span>📤 Escolher imagens</span>
             </button>
           </div>
 
-          <!-- Supported formats -->
-          <div class="mt-6 flex items-center justify-center gap-2 text-[11px] font-mono text-[var(--color-mute)]">
-            <span>Formatos aceitos:</span>
-            <span class="px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)]">JPG</span>
-            <span class="px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)]">PNG</span>
-            <span class="px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)]">WEBP</span>
-            <span class="px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)]">BMP</span>
-            <span class="px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] rounded border border-[var(--color-hairline)]">GIF</span>
+          <!-- Section: Supported Formats -->
+          <div class="mt-8 pt-5 border-t border-[var(--color-hairline)]/70 text-xs text-[var(--color-mute)] flex flex-wrap items-center justify-center gap-2 font-mono">
+            <span class="font-medium text-[var(--color-body)]">Formatos Suportados:</span>
+            <span>JPG • PNG • WEBP • BMP • GIF</span>
           </div>
         </div>
       </div>

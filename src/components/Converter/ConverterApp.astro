@@ -2,67 +2,94 @@
 // ConverterApp.astro - Aplicativo interativo principal de Imagem para Texto & Código OCR
 ---
 
-<section id="converter-app" class="relative pt-0 pb-12 sm:pb-16 border-b border-[var(--color-hairline)]">
+<section id="converter-app" class="relative pt-2 pb-12 sm:pb-16" aria-label="Ferramenta Conversor OCR">
   <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- App Container Card -->
-    <div class="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] shadow-[var(--shadow-level-3)] overflow-hidden transition-all duration-300">
+    <div class="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] shadow-[var(--shadow-level-3)] overflow-hidden transition-all duration-300">
       
-      <!-- Top Control Bar / Mode Selector -->
-      <div class="px-4 sm:px-6 py-3.5 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)] flex flex-wrap items-center justify-between gap-4">
-        <!-- Mode Tabs -->
-        <div class="flex items-center gap-1.5 p-1 bg-[var(--color-canvas-soft-2)] rounded-lg border border-[var(--color-hairline)]">
+      <!-- Top Control Bar / Mode Selector (Section 5) -->
+      <div class="px-4 sm:px-6 py-4 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        
+        <!-- Redesigned Mode Options -->
+        <div class="grid grid-cols-3 gap-1.5 sm:gap-2 bg-[var(--color-canvas-soft-2)] p-1 rounded-xl border border-[var(--color-hairline)]" role="tablist" aria-label="Modo de Reconhecimento OCR">
+          
+          <!-- Mode 1: Texto -->
           <button
             type="button"
-            class="mode-tab-btn active px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all flex items-center gap-2 bg-[var(--color-canvas)] text-[var(--color-ink)] shadow-2xs"
+            class="mode-tab-btn active text-left px-2 sm:px-3 py-2 rounded-lg transition-all flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-2.5 bg-[var(--color-canvas)] text-[var(--color-ink)] border border-[var(--color-hairline-strong)] shadow-xs ring-1 ring-[var(--color-primary)]/25 cursor-pointer"
             data-mode="text"
             id="tab-mode-text"
+            role="tab"
+            aria-selected="true"
           >
-            <svg class="w-4 h-4 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 7V4h16v3"></path>
-              <path d="M9 20h6"></path>
-              <path d="M12 4v16"></path>
-            </svg>
-            <span>Texto da Imagem</span>
+            <div class="w-7 h-7 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 7V4h16v3"></path>
+                <path d="M9 20h6"></path>
+                <path d="M12 4v16"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs sm:text-sm font-semibold tracking-tight leading-tight">📝 Texto</div>
+              <div class="text-[10px] text-[var(--color-mute)] hidden sm:block leading-tight">Textos, fotos e documentos</div>
+            </div>
           </button>
 
+          <!-- Mode 2: Código -->
           <button
             type="button"
-            class="mode-tab-btn px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all flex items-center gap-2 text-[var(--color-body)] hover:text-[var(--color-ink)]"
+            class="mode-tab-btn text-left px-2 sm:px-3 py-2 rounded-lg transition-all flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-2.5 text-[var(--color-body)] hover:text-[var(--color-ink)] border border-transparent cursor-pointer"
             data-mode="code"
             id="tab-mode-code"
+            role="tab"
+            aria-selected="false"
           >
-            <svg class="w-4 h-4 text-cyan-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="16 18 22 12 16 6"></polyline>
-              <polyline points="8 6 2 12 8 18"></polyline>
-            </svg>
-            <span>Código da Imagem</span>
+            <div class="w-7 h-7 rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs sm:text-sm font-semibold tracking-tight leading-tight">💻 Código</div>
+              <div class="text-[10px] text-[var(--color-mute)] hidden sm:block leading-tight">Código de programação</div>
+            </div>
           </button>
 
+          <!-- Mode 3: Tabela -->
           <button
             type="button"
-            class="mode-tab-btn px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all flex items-center gap-2 text-[var(--color-body)] hover:text-[var(--color-ink)]"
+            class="mode-tab-btn text-left px-2 sm:px-3 py-2 rounded-lg transition-all flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-2.5 text-[var(--color-body)] hover:text-[var(--color-ink)] border border-transparent cursor-pointer"
             data-mode="table"
             id="tab-mode-table"
+            role="tab"
+            aria-selected="false"
           >
-            <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="3" y1="9" x2="21" y2="9"></line>
-              <line x1="3" y1="15" x2="21" y2="15"></line>
-              <line x1="9" y1="3" x2="9" y2="21"></line>
-              <line x1="15" y1="3" x2="15" y2="21"></line>
-            </svg>
-            <span>Tabela & Fatura</span>
+            <div class="w-7 h-7 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="3" y1="15" x2="21" y2="15"></line>
+                <line x1="9" y1="3" x2="9" y2="21"></line>
+                <line x1="15" y1="3" x2="15" y2="21"></line>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs sm:text-sm font-semibold tracking-tight leading-tight">📊 Tabela</div>
+              <div class="text-[10px] text-[var(--color-mute)] hidden sm:block leading-tight">Tabelas, recibos e faturas</div>
+            </div>
           </button>
         </div>
 
         <!-- Language & Engine Settings -->
-        <div class="flex items-center gap-2.5">
+        <div class="flex items-center justify-end gap-3 shrink-0">
           <div class="flex items-center gap-1.5 text-xs text-[var(--color-body)]">
-            <span class="font-mono text-[11px]">Idioma OCR:</span>
+            <span class="font-mono text-[11px] text-[var(--color-mute)] font-medium">Idioma:</span>
             <select
               id="ocr-language-select"
-              class="text-xs bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-md px-2.5 py-1.5 text-[var(--color-ink)] font-medium focus:outline-none focus:border-[var(--color-primary)] cursor-pointer"
+              class="text-xs bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-lg px-2.5 py-1.5 text-[var(--color-ink)] font-medium focus:outline-none focus:border-[var(--color-primary)] cursor-pointer"
+              aria-label="Selecionar idioma para o OCR"
             >
               <option value="por" selected>Português (Brasil & Portugal)</option>
               <option value="eng">Inglês (Código / Geral)</option>
@@ -71,26 +98,27 @@
               <option value="deu">Alemão (Deutsch)</option>
               <option value="ita">Italiano (Italiano)</option>
               <option value="jpn">Japonês (日本語)</option>
-              <option value="chi_sim">Chinês Simplificado (简体中文)</option>
+              <option value="chi_sim">Chinês (简体中文)</option>
               <option value="rus">Russo (Русский)</option>
             </select>
           </div>
 
-          <div class="h-4 w-px bg-[var(--color-hairline)] hidden sm:block"></div>
-
           <!-- Auto-Enhance Toggle -->
-          <label class="hidden sm:inline-flex items-center gap-2 text-xs text-[var(--color-body)] cursor-pointer select-none">
-            <input type="checkbox" id="toggle-auto-enhance" class="rounded border-[var(--color-hairline)] text-[var(--color-primary)] focus:ring-0" checked />
-            <span>Contraste Automático</span>
+          <label class="hidden md:inline-flex items-center gap-1.5 text-xs text-[var(--color-body)] cursor-pointer select-none">
+            <input type="checkbox" id="toggle-auto-enhance" class="rounded border-[var(--color-hairline)] text-[var(--color-primary)] focus:ring-0 cursor-pointer" checked />
+            <span class="font-mono text-[11px]">Auto Contraste</span>
           </label>
         </div>
       </div>
 
-      <!-- MAIN STATE 1: UPLOAD ZONE (When no image is loaded) -->
-      <div id="upload-zone" class="p-6 sm:p-12 text-center transition-all duration-200">
+      <!-- MAIN STATE 1: PRIMARY UPLOAD ZONE (Section 3 & Section 4) -->
+      <div id="upload-zone" class="p-4 sm:p-8 lg:p-12 text-center transition-all duration-200">
         <div
           id="drop-area"
-          class="relative border-2 border-dashed border-[var(--color-hairline-strong)]/60 rounded-xl p-8 sm:p-14 hover:border-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]/50 transition-all duration-200 cursor-pointer group"
+          class="relative border-2 border-dashed border-[var(--color-hairline-strong)]/60 rounded-2xl p-6 sm:p-12 lg:p-14 hover:border-[var(--color-primary)] hover:bg-[var(--color-canvas-soft)]/50 transition-all duration-200 cursor-pointer group"
+          role="button"
+          tabindex="0"
+          aria-label="Área de upload de imagem para extração de texto"
         >
           <input
             type="file"
@@ -101,8 +129,8 @@
           />
 
           <!-- Upload Graphic / Icon -->
-          <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] group-hover:scale-110 group-hover:border-[var(--color-ink)] transition-all shadow-xs">
-            <svg class="w-8 h-8 text-[var(--color-ink)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 rounded-2xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] group-hover:scale-110 group-hover:border-[var(--color-primary)] transition-all shadow-xs">
+            <svg class="w-8 h-8 sm:w-10 sm:h-10 text-[var(--color-ink)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="17 8 12 3 7 8"></polyline>
               <line x1="12" y1="3" x2="12" y2="15"></line>
@@ -110,35 +138,30 @@
           </div>
 
           <!-- Drag and Drop Text -->
-          <h3 class="text-lg sm:text-xl font-semibold text-[var(--color-ink)] tracking-tight">
-            Arraste e solte imagens, capturas de tela ou código aqui
-          </h3>
-          <p class="mt-2 text-sm text-[var(--color-body)] max-w-md mx-auto">
-            ou clique para procurar no seu dispositivo. Você também pode colar diretamente com <kbd class="font-mono text-xs px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded text-[var(--color-ink)]">Ctrl + V</kbd>
+          <h2 class="text-xl sm:text-2xl font-bold text-[var(--color-ink)] tracking-tight">
+            Arraste sua imagem aqui
+          </h2>
+          <p class="mt-1.5 text-xs sm:text-sm text-[var(--color-body)] max-w-md mx-auto font-normal">
+            ou clique para procurar no seu dispositivo
           </p>
 
-          <!-- Input Action Buttons -->
-          <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <!-- Primary & Secondary Buttons -->
+          <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
             <button
               type="button"
               id="browse-btn"
-              class="px-5 py-2.5 text-sm font-medium text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full shadow-xs transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
+              class="px-6 py-3 text-sm font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full shadow-md transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
             >
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21 15 16 10 5 21"></polyline>
-              </svg>
-              <span>Procurar Arquivos</span>
+              <span>📤 Escolher imagem</span>
             </button>
 
             <!-- URL Input Trigger -->
             <button
               type="button"
               id="url-import-trigger"
-              class="px-4 py-2.5 text-sm font-medium text-[var(--color-ink)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:bg-[var(--color-canvas-soft)] rounded-full transition-colors flex items-center gap-2 shadow-2xs cursor-pointer"
+              class="px-4 py-2.5 text-xs sm:text-sm font-medium text-[var(--color-ink)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:bg-[var(--color-canvas-soft)] rounded-full transition-colors flex items-center gap-2 shadow-2xs cursor-pointer"
             >
-              <svg class="w-4 h-4 text-[var(--color-body)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg class="w-4 h-4 text-[var(--color-body)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
               </svg>
@@ -149,9 +172,9 @@
             <button
               type="button"
               id="camera-trigger"
-              class="px-4 py-2.5 text-sm font-medium text-[var(--color-ink)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:bg-[var(--color-canvas-soft)] rounded-full transition-colors flex items-center gap-2 shadow-2xs cursor-pointer"
+              class="px-4 py-2.5 text-xs sm:text-sm font-medium text-[var(--color-ink)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:bg-[var(--color-canvas-soft)] rounded-full transition-colors flex items-center gap-2 shadow-2xs cursor-pointer"
             >
-              <svg class="w-4 h-4 text-[var(--color-body)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg class="w-4 h-4 text-[var(--color-body)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                 <circle cx="12" cy="13" r="4"></circle>
               </svg>
@@ -159,15 +182,11 @@
             </button>
           </div>
 
-          <!-- Format Pills -->
-          <div class="mt-8 pt-4 border-t border-[var(--color-hairline)]/60 text-xs text-[var(--color-mute)] flex flex-wrap items-center justify-center gap-2 font-mono">
-            <span>Formatos Suportados:</span>
-            <span class="px-1.5 py-0.5 rounded bg-[var(--color-canvas-soft-2)] text-[var(--color-body)]">PNG</span>
-            <span class="px-1.5 py-0.5 rounded bg-[var(--color-canvas-soft-2)] text-[var(--color-body)]">JPG</span>
-            <span class="px-1.5 py-0.5 rounded bg-[var(--color-canvas-soft-2)] text-[var(--color-body)]">WEBP</span>
-            <span class="px-1.5 py-0.5 rounded bg-[var(--color-canvas-soft-2)] text-[var(--color-body)]">GIF</span>
-            <span class="px-1.5 py-0.5 rounded bg-[var(--color-canvas-soft-2)] text-[var(--color-body)]">HEIC</span>
-            <span class="px-1.5 py-0.5 rounded bg-[var(--color-canvas-soft-2)] text-[var(--color-body)]">PDF</span>
+          <!-- Section 4: Formats & Ctrl+V Line -->
+          <div class="mt-7 pt-4 border-t border-[var(--color-hairline)]/70 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-xs text-[var(--color-mute)] font-mono">
+            <span>PNG • JPG • JPEG • WEBP • HEIC • PDF</span>
+            <span class="hidden sm:inline text-[var(--color-hairline-strong)]">•</span>
+            <span class="font-sans">Você também pode colar com <kbd class="font-mono text-[11px] font-semibold px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded text-[var(--color-ink)]">Ctrl + V</kbd></span>
           </div>
         </div>
 
@@ -178,6 +197,7 @@
             id="image-url-input"
             placeholder="Cole o link direto da imagem (ex: https://exemplo.com/foto.png)"
             class="flex-1 px-3.5 py-2 text-sm bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-lg text-[var(--color-ink)] focus:outline-none focus:border-[var(--color-primary)] font-mono text-xs"
+            aria-label="URL direta da imagem"
           />
           <button
             type="button"
@@ -201,20 +221,16 @@
             <button
               type="button"
               id="add-more-btn"
-              class="px-2.5 py-1 text-xs font-medium text-[var(--color-body)] hover:text-[var(--color-ink)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-md hover:bg-[var(--color-canvas-soft)] transition-colors flex items-center gap-1 cursor-pointer"
+              class="px-3 py-1.5 text-xs font-semibold text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-              <span>Adicionar Imagem</span>
+              <span>🔄 Nova imagem</span>
             </button>
             <button
               type="button"
               id="clear-all-btn"
-              class="px-2.5 py-1 text-xs font-medium text-red-600 hover:text-red-700 bg-[var(--color-canvas)] border border-red-200 rounded-md hover:bg-red-50 transition-colors cursor-pointer"
+              class="px-3 py-1.5 text-xs font-semibold text-red-600 hover:text-red-700 bg-[var(--color-canvas)] border border-red-200 dark:border-red-900/60 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors flex items-center gap-1 cursor-pointer"
             >
-              Limpar
+              <span>🧹 Limpar</span>
             </button>
           </div>
         </div>
@@ -228,26 +244,26 @@
               <!-- Left Toolbar -->
               <div class="flex items-center justify-between mb-3 text-xs">
                 <span class="font-mono text-[11px] text-[var(--color-body)] font-medium flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  <span class="w-2 h-2 rounded-full bg-emerald-500" aria-hidden="true"></span>
                   <span id="image-meta-info">Imagem de Origem</span>
                 </span>
                 
                 <!-- Image Adjust Controls -->
-                <div class="flex items-center gap-1 bg-[var(--color-canvas)] p-0.5 rounded-md border border-[var(--color-hairline)]">
-                  <button type="button" id="btn-rotate-ccw" class="p-1 text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] rounded cursor-pointer" title="Girar para Esquerda">
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <div class="flex items-center gap-1 bg-[var(--color-canvas)] p-0.5 rounded-lg border border-[var(--color-hairline)]">
+                  <button type="button" id="btn-rotate-ccw" class="p-1 text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] rounded cursor-pointer" title="Girar 90° para a Esquerda" aria-label="Girar 90 graus para a esquerda">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <polyline points="1 4 1 10 7 10"></polyline>
                       <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
                     </svg>
                   </button>
-                  <button type="button" id="btn-rotate-cw" class="p-1 text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] rounded cursor-pointer" title="Girar para Direita">
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <button type="button" id="btn-rotate-cw" class="p-1 text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] rounded cursor-pointer" title="Girar 90° para a Direita" aria-label="Girar 90 graus para a direita">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <polyline points="23 4 23 10 17 10"></polyline>
                       <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
                     </svg>
                   </button>
-                  <button type="button" id="btn-filter-binarize" class="p-1 text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] rounded cursor-pointer" title="Alternar Filtro de Alto Contraste">
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <button type="button" id="btn-filter-binarize" class="p-1 text-[var(--color-body)] hover:text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] rounded cursor-pointer" title="Alternar Filtro de Alto Contraste" aria-label="Alternar filtro de alto contraste">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <circle cx="12" cy="12" r="10"></circle>
                       <path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor"></path>
                     </svg>
@@ -259,31 +275,23 @@
               </div>
 
               <!-- Main Canvas / Image Container -->
-              <div class="relative w-full aspect-[4/3] max-h-[380px] bg-[var(--color-canvas)] rounded-lg border border-[var(--color-hairline)] overflow-hidden flex items-center justify-center p-2 group shadow-2xs">
+              <div class="relative w-full aspect-[4/3] max-h-[380px] bg-[var(--color-canvas)] rounded-xl border border-[var(--color-hairline)] overflow-hidden flex items-center justify-center p-2 group shadow-2xs">
                 <canvas id="image-canvas" class="max-w-full max-h-full object-contain rounded transition-transform"></canvas>
-                
-                <!-- Crop Overlay Box (Hidden unless crop is enabled) -->
-                <div id="crop-box" class="hidden absolute border-2 border-dashed border-cyan-400 bg-cyan-400/10 cursor-move"></div>
               </div>
             </div>
 
             <!-- OCR Trigger Bar -->
             <div class="mt-4 pt-4 border-t border-[var(--color-hairline)] flex items-center justify-between gap-3">
-              <div class="flex items-center gap-2">
-                <button
-                  type="button"
-                  id="process-ocr-btn"
-                  class="px-5 py-2.5 text-sm font-medium text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full shadow-xs transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
-                >
-                  <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                  </svg>
-                  <span id="ocr-btn-text">Extrair Conteúdo</span>
-                </button>
-              </div>
+              <button
+                type="button"
+                id="process-ocr-btn"
+                class="px-6 py-2.5 text-sm font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full shadow-xs transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
+              >
+                <span id="ocr-btn-text">✨ Extrair texto</span>
+              </button>
 
               <div class="text-right">
-                <span id="ocr-status-pill" class="text-[11px] font-mono text-[var(--color-mute)]">Pronto</span>
+                <span id="ocr-status-pill" class="text-xs font-medium text-[var(--color-body)]">🟢 Pronto para processar</span>
               </div>
             </div>
           </div>
@@ -321,10 +329,10 @@
                   </button>
                 </div>
 
-                <!-- Detected Language Badge -->
+                <!-- Detected Language Badge & Stats -->
                 <div class="flex items-center gap-2">
                   <div id="language-badge" class="hidden items-center gap-1.5 px-2 py-0.5 rounded bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] text-xs font-mono font-medium text-[var(--color-ink)]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500" aria-hidden="true"></span>
                     <span id="detected-lang-name">JavaScript</span>
                   </div>
                   <span id="stats-summary" class="text-xs font-mono text-[var(--color-mute)]">0 palavras · 0 caracteres</span>
@@ -340,7 +348,7 @@
                     class="px-2.5 py-1 text-xs font-medium bg-[var(--color-canvas-soft)] hover:bg-[var(--color-canvas-soft-2)] text-[var(--color-ink)] border border-[var(--color-hairline)] rounded-md transition-colors flex items-center gap-1 cursor-pointer"
                     title="Formatar Indentação e Sintaxe do Código"
                   >
-                    <svg class="w-3 h-3 text-cyan-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="w-3 h-3 text-cyan-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <path d="m18 16 4-4-4-4"></path>
                       <path d="m6 8-4 4 4 4"></path>
                       <path d="m14.5 4-5 16"></path>
@@ -361,6 +369,7 @@
                   <select
                     id="case-converter-select"
                     class="px-2 py-1 text-xs bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] rounded-md text-[var(--color-body)] hover:text-[var(--color-ink)] focus:outline-none cursor-pointer"
+                    aria-label="Alterar caixa do texto"
                   >
                     <option value="" disabled selected>Mudar Formato</option>
                     <option value="uppercase">MAIÚSCULAS</option>
@@ -376,8 +385,9 @@
                     id="btn-speech"
                     class="p-1 text-[var(--color-body)] hover:text-[var(--color-ink)] bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] rounded-md hover:bg-[var(--color-canvas-soft-2)] cursor-pointer"
                     title="Ouvir Texto (Áudio)"
+                    aria-label="Ouvir texto em áudio"
                   >
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                       <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                       <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
@@ -389,24 +399,20 @@
                 <button
                   type="button"
                   id="btn-copy-result"
-                  class="px-3.5 py-1 text-xs font-semibold text-[var(--color-ink)] bg-[var(--color-canvas-soft)] hover:bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline-strong)] rounded-md transition-all active:scale-95 flex items-center gap-1.5 shadow-2xs cursor-pointer"
+                  class="px-4 py-1.5 text-xs font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full transition-all active:scale-95 flex items-center gap-1.5 shadow-2xs cursor-pointer"
                 >
-                  <svg class="w-3.5 h-3.5 text-[var(--color-ink)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                  </svg>
-                  <span id="copy-btn-text">Copiar</span>
+                  <span id="copy-btn-text">📋 Copiar texto</span>
                 </button>
               </div>
 
               <!-- Output Workspace Display Area -->
-              <div class="mt-3 relative min-h-[300px] max-h-[420px] rounded-lg border border-[var(--color-hairline)] overflow-hidden bg-[var(--color-canvas-soft)]">
+              <div class="mt-3 relative min-h-[300px] max-h-[420px] rounded-xl border border-[var(--color-hairline)] overflow-hidden bg-[var(--color-canvas-soft)]">
                 
                 <!-- Progress & Loader Bar (Overlay during OCR) -->
                 <div id="ocr-loader-overlay" class="hidden absolute inset-0 bg-white/85 dark:bg-black/85 backdrop-blur-xs z-20 flex flex-col items-center justify-center p-6 text-center">
                   <div class="w-10 h-10 border-3 border-[var(--color-hairline)] border-t-[var(--color-primary)] rounded-full animate-spin mb-3"></div>
-                  <h4 class="text-sm font-semibold text-[var(--color-ink)]" id="loader-title">Reconhecendo Conteúdo da Imagem...</h4>
-                  <p class="text-xs text-[var(--color-body)] mt-1 font-mono" id="loader-subtitle">Carregando Modelo Neural OCR</p>
+                  <h3 class="text-sm font-semibold text-[var(--color-ink)]" id="loader-title">Reconhecendo Conteúdo da Imagem...</h3>
+                  <p class="text-xs text-[var(--color-body)] mt-1 font-mono" id="loader-subtitle">Processando localmente no navegador...</p>
                   
                   <!-- Progress Bar -->
                   <div class="w-48 h-1.5 bg-[var(--color-canvas-soft-2)] rounded-full mt-3 overflow-hidden border border-[var(--color-hairline)]">
@@ -420,6 +426,7 @@
                     id="raw-text-output"
                     class="w-full h-[360px] p-3 text-sm bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-lg text-[var(--color-ink)] font-mono resize-none focus:outline-none focus:border-[var(--color-primary)]"
                     placeholder="O texto extraído aparecerá aqui. Você pode editar este texto diretamente..."
+                    aria-label="Texto extraído editável"
                   ></textarea>
                 </div>
 
@@ -444,10 +451,10 @@
 
   <!-- Camera Modal Dialog -->
   <div id="camera-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-[var(--color-canvas)] rounded-xl border border-[var(--color-hairline)] max-w-lg w-full p-5 shadow-[var(--shadow-level-5)]">
+    <div class="bg-[var(--color-canvas)] rounded-2xl border border-[var(--color-hairline)] max-w-lg w-full p-5 shadow-[var(--shadow-level-5)]">
       <div class="flex items-center justify-between mb-4">
         <h3 class="text-base font-semibold text-[var(--color-ink)]">Capturar Imagem da Câmera</h3>
-        <button type="button" id="close-camera-btn" class="p-1 text-[var(--color-mute)] hover:text-[var(--color-ink)] cursor-pointer">
+        <button type="button" id="close-camera-btn" class="p-1 text-[var(--color-mute)] hover:text-[var(--color-ink)] cursor-pointer" aria-label="Fechar modal da câmera">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
@@ -485,17 +492,15 @@
   import 'prismjs/components/prism-cpp';
   import 'prismjs/components/prism-bash';
 
-  // Application State
-  interface ProcessedItem {
-    id: string;
-    name: string;
-    imageSrc: string;
-    extractedText: string;
-    formattedCode: string;
-    language: string;
-    mode: 'code' | 'text' | 'table';
-    timestamp: number;
-    wordCount: number;
+  // Helper for safe GA tracking
+  function trackEvent(eventName: string, params: Record<string, any> = {}) {
+    if (typeof (window as any).gtag === 'function') {
+      try {
+        (window as any).gtag('event', eventName, params);
+      } catch (e) {
+        // silent fail to avoid breaking any workflow
+      }
+    }
   }
 
   let queue: { file: File | Blob; name: string; url: string }[] = [];
@@ -577,28 +582,25 @@
     return { lang: 'javascript', ext: '.txt', name: 'Código Padrão' };
   }
 
-  // 3. Code Formatter & Indentation Normalizer
+  // 2. Code Formatter & Indentation Normalizer
   function beautifyCode(code: string): string {
     const lines = code.split('\n');
     let indentLevel = 0;
-    const indentChar = '  '; // 2 spaces
+    const indentChar = '  ';
 
     return lines
       .map((rawLine) => {
         let line = rawLine.trim();
         if (!line) return '';
 
-        // Strip OCR leading garbage like line numbers e.g. "1 |", "2 >", "12:"
         line = line.replace(/^\d+[\s|:>\-\)]+\s*/, '');
 
-        // Decrease indent for closing brackets
         if (line.startsWith('}') || line.startsWith(']') || line.startsWith(')')) {
           indentLevel = Math.max(0, indentLevel - 1);
         }
 
         const formatted = indentChar.repeat(indentLevel) + line;
 
-        // Increase indent for opening brackets or Python colons
         if (line.endsWith('{') || line.endsWith('[') || line.endsWith('(') || line.endsWith(':')) {
           indentLevel++;
         }
@@ -608,7 +610,7 @@
       .join('\n');
   }
 
-  // 4. File Load & Canvas Render
+  // 3. File Load & Canvas Render
   function loadFileToCanvas(fileObj: { file: File | Blob; name: string; url: string }) {
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -618,7 +620,6 @@
       const ctx = imageCanvas.getContext('2d')!;
       ctx.clearRect(0, 0, img.width, img.height);
 
-      // Handle Rotation
       if (currentRotation !== 0) {
         ctx.save();
         ctx.translate(img.width / 2, img.height / 2);
@@ -629,7 +630,6 @@
         ctx.drawImage(img, 0, 0);
       }
 
-      // Handle High Contrast Binarize filter
       if (isBinarized) {
         const imgData = ctx.getImageData(0, 0, img.width, img.height);
         const d = imgData.data;
@@ -648,7 +648,7 @@
     img.src = fileObj.url;
   }
 
-  // 5. Update Queue UI Bar
+  // 4. Update Queue UI Bar
   function renderQueueBar() {
     queueItemsContainer.innerHTML = '';
     queue.forEach((item, index) => {
@@ -685,17 +685,20 @@
       currentFileIndex = queue.length - files.length;
       loadFileToCanvas(queue[currentFileIndex]);
       renderQueueBar();
+      ocrStatusPill.textContent = '🟢 Pronto para processar';
+      trackEvent('image_selected', { count: files.length });
     }
   }
 
-  // 6. Perform OCR Execution
+  // 5. Perform OCR Execution (WebAssembly Local)
   async function runOCR() {
     if (queue.length === 0) return;
 
     ocrLoaderOverlay.classList.remove('hidden');
-    ocrStatusPill.textContent = 'Processando OCR...';
+    ocrStatusPill.textContent = '🔄 Processando no navegador...';
     loaderTitle.textContent = 'Extraindo Texto & Caracteres...';
     ocrProgressBar.style.width = '10%';
+    trackEvent('ocr_started', { mode: activeMode });
 
     const langSelect = document.getElementById('ocr-language-select') as HTMLSelectElement;
     const selectedLang = langSelect ? langSelect.value : 'por';
@@ -714,11 +717,9 @@
         });
       }
 
-      // Recognize from current canvas
       const ret = await currentWorker.recognize(imageCanvas);
       let rawText = ret.data.text || '';
 
-      // Post-Processing based on mode
       let formattedResult = rawText;
       let detectedInfo = { lang: 'javascript', ext: '.js', name: 'JavaScript' };
 
@@ -730,7 +731,6 @@
         languageBadge.classList.remove('hidden');
         languageBadge.classList.add('flex');
       } else if (activeMode === 'table') {
-        // Table formatting (convert lines with multiple spaces/tabs into markdown table)
         const lines = rawText.split('\n').filter((l: string) => l.trim().length > 0);
         if (lines.length > 0) {
           const tableRows = lines.map((line: string) => {
@@ -742,38 +742,33 @@
         }
       }
 
-      // Update Outputs
       rawTextOutput.value = formattedResult;
       
-      // Syntax Highlighting
       const langGrammar = Prism.languages[detectedInfo.lang] || Prism.languages.javascript;
       highlightedCodeOutput.className = `language-${detectedInfo.lang} font-mono`;
       highlightedCodeOutput.innerHTML = Prism.highlight(formattedResult, langGrammar, detectedInfo.lang);
 
-      // Markdown Output
       markdownRenderedOutput.innerHTML = `<pre class="bg-transparent p-0"><code>${formattedResult.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`;
 
-      // Stats
       const wordCount = formattedResult.trim().split(/\s+/).filter(Boolean).length;
       const charCount = formattedResult.length;
       statsSummary.textContent = `${wordCount} palavras · ${charCount} caracteres`;
 
-      ocrStatusPill.textContent = 'Concluído';
+      ocrStatusPill.textContent = '✓ Texto extraído';
+      trackEvent('ocr_completed', { words: wordCount, chars: charCount });
       confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
 
     } catch (err: any) {
       console.error('OCR Error:', err);
       rawTextOutput.value = `Erro durante o reconhecimento OCR: ${err.message || err}`;
       highlightedCodeOutput.textContent = rawTextOutput.value;
-      ocrStatusPill.textContent = 'Falha';
+      ocrStatusPill.textContent = '❌ Falha no processamento';
     } finally {
       ocrLoaderOverlay.classList.add('hidden');
     }
   }
 
-  // 7. Event Listeners & Interactions
-
-  // Drag & Drop
+  // 6. Drag & Drop Listeners
   dropArea.addEventListener('dragover', (e) => {
     e.preventDefault();
     dropArea.classList.add('border-[var(--color-primary)]', 'bg-[var(--color-canvas-soft)]');
@@ -787,6 +782,7 @@
     e.preventDefault();
     dropArea.classList.remove('border-[var(--color-primary)]', 'bg-[var(--color-canvas-soft)]');
     if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+      trackEvent('upload_started', { method: 'drag_and_drop' });
       addFilesToQueue(e.dataTransfer.files);
     }
   });
@@ -797,9 +793,16 @@
     fileInput.click();
   });
   dropArea.addEventListener('click', () => fileInput.click());
+  dropArea.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fileInput.click();
+    }
+  });
 
   fileInput.addEventListener('change', () => {
     if (fileInput.files && fileInput.files.length > 0) {
+      trackEvent('upload_started', { method: 'file_picker' });
       addFilesToQueue(fileInput.files);
     }
   });
@@ -814,6 +817,7 @@
         const blob = items[i].getAsFile();
         if (blob) {
           const file = new File([blob], `imagem_colada_${Date.now()}.png`, { type: blob.type });
+          trackEvent('upload_started', { method: 'clipboard_paste' });
           addFilesToQueue([file]);
           break;
         }
@@ -832,6 +836,7 @@
             if (type.startsWith('image/')) {
               const blob = await clipboardItem.getType(type);
               const file = new File([blob], `area_transferencia_${Date.now()}.png`, { type });
+              trackEvent('upload_started', { method: 'clipboard_btn' });
               addFilesToQueue([file]);
               return;
             }
@@ -848,6 +853,9 @@
   urlImportTrigger.addEventListener('click', (e) => {
     e.stopPropagation();
     urlInputContainer.classList.toggle('hidden');
+    if (!urlInputContainer.classList.contains('hidden')) {
+      imageUrlInput.focus();
+    }
   });
 
   submitUrlBtn.addEventListener('click', () => {
@@ -857,6 +865,7 @@
       .then((res) => res.blob())
       .then((blob) => {
         const file = new File([blob], `imagem_url_${Date.now()}.png`, { type: blob.type });
+        trackEvent('upload_started', { method: 'url_import' });
         addFilesToQueue([file]);
         urlInputContainer.classList.add('hidden');
         imageUrlInput.value = '';
@@ -896,6 +905,7 @@
     canvas.toBlob((blob) => {
       if (blob) {
         const file = new File([blob], `foto_camera_${Date.now()}.jpg`, { type: 'image/jpeg' });
+        trackEvent('upload_started', { method: 'camera_capture' });
         addFilesToQueue([file]);
         stopCamera();
       }
@@ -903,29 +913,23 @@
   });
 
   // Mode Switching
+  const activeModeClasses = ['active', 'bg-[var(--color-canvas)]', 'text-[var(--color-ink)]', 'border-[var(--color-hairline-strong)]', 'shadow-xs', 'ring-1', 'ring-[var(--color-primary)]/25'];
+  const inactiveModeClasses = ['text-[var(--color-body)]', 'border-transparent'];
+
   document.querySelectorAll('.mode-tab-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.mode-tab-btn').forEach((b) => {
-        b.classList.remove('active', 'bg-[var(--color-canvas)]', 'text-[var(--color-ink)]', 'shadow-2xs');
-        b.classList.add('text-[var(--color-body)]');
+        b.classList.remove(...activeModeClasses);
+        b.classList.add(...inactiveModeClasses);
+        b.setAttribute('aria-selected', 'false');
       });
-      btn.classList.add('active', 'bg-[var(--color-canvas)]', 'text-[var(--color-ink)]', 'shadow-2xs');
-      btn.classList.remove('text-[var(--color-body)]');
+      btn.classList.add(...activeModeClasses);
+      btn.classList.remove(...inactiveModeClasses);
+      btn.setAttribute('aria-selected', 'true');
 
       activeMode = btn.getAttribute('data-mode') as any;
     });
   });
-
-  // Nav Mode Code Trigger
-  const navModeCode = document.getElementById('nav-mode-code');
-  if (navModeCode) {
-    navModeCode.addEventListener('click', () => {
-      const tabCode = document.getElementById('tab-mode-code');
-      if (tabCode) tabCode.click();
-      const section = document.getElementById('converter-app');
-      section?.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
 
   // Pre-Processing Actions (Rotate & Filter)
   document.getElementById('btn-rotate-cw')?.addEventListener('click', () => {
@@ -1017,10 +1021,11 @@
     const text = rawTextOutput.value;
     if (!text) return;
     navigator.clipboard.writeText(text).then(() => {
-      copyBtnText.textContent = 'Copiado!';
+      copyBtnText.textContent = '✅ Copiado!';
+      trackEvent('text_copied', { length: text.length });
       confetti({ particleCount: 25, spread: 45, origin: { y: 0.6 } });
       setTimeout(() => {
-        copyBtnText.textContent = 'Copiar';
+        copyBtnText.textContent = '📋 Copiar texto';
       }, 2000);
     });
   });
@@ -1035,6 +1040,7 @@
     rawTextOutput.value = '';
     highlightedCodeOutput.textContent = '';
     markdownRenderedOutput.textContent = '';
+    ocrStatusPill.textContent = '🟢 Pronto para processar';
     document.getElementById('tab-output-plain')?.click();
   });
 </script>

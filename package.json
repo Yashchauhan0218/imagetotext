@@ -23,6 +23,8 @@
     "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/prismjs": "^1.26.6",
     "wrangler": "^4.127.1"
   }
 }

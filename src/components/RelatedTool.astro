@@ -1,0 +1,39 @@
+---
+// RelatedTool.astro - Chamada compacta para a ferramenta de Imagem para PDF
+---
+
+<section class="py-10 sm:py-12 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)]" aria-label="Ferramenta Relacionada">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-5">
+      
+      <div class="flex items-center gap-4 text-left">
+        <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0 shadow-xs">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="15" y2="15"></line>
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-lg sm:text-xl font-bold text-[var(--color-ink)] tracking-tight">
+            Também precisa de PDF?
+          </h2>
+          <p class="mt-0.5 text-xs sm:text-sm text-[var(--color-body)] leading-relaxed font-normal">
+            Converta suas imagens em um único PDF.
+          </p>
+        </div>
+      </div>
+
+      <div class="shrink-0 w-full sm:w-auto text-right">
+        <a
+          href="/imagem-para-pdf"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[var(--color-primary)] text-[var(--color-on-primary)] text-xs sm:text-sm font-semibold hover:opacity-90 transition-all shadow-xs active:scale-95 w-full sm:w-auto cursor-pointer"
+        >
+          <span>Converter para PDF &rarr;</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>

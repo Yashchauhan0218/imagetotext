@@ -1,14 +1,14 @@
 ---
-// Navbar.astro - Navegação limpa estilo Vercel seguindo o DESIGN.md
+// Navbar.astro - Navegação limpa e moderna com suporte a menu mobile acessível
 ---
 
-<header class="sticky top-0 z-50 w-full bg-[var(--color-canvas)]/80 backdrop-blur-md border-b border-[var(--color-hairline)] transition-all duration-200">
+<header class="sticky top-0 z-50 w-full bg-[var(--color-canvas)]/90 backdrop-blur-md border-b border-[var(--color-hairline)] transition-all duration-200">
   <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
     <!-- Brand Logo -->
     <div class="flex items-center gap-6">
-      <a href="/" class="flex items-center gap-2.5 group">
-        <div class="w-8 h-8 rounded-lg bg-[var(--color-primary)] text-[var(--color-on-primary)] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <a href="/" class="flex items-center gap-2.5 group" aria-label="Imagem Para Texto - Página Inicial">
+        <div class="w-8 h-8 rounded-lg bg-[var(--color-primary)] text-[var(--color-on-primary)] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
             <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -16,21 +16,18 @@
             <polyline points="10 9 9 9 8 9"></polyline>
           </svg>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="font-semibold text-base tracking-tight text-[var(--color-ink)]">Imagem Para Texto</span>
-        </div>
+        <span class="font-semibold text-base tracking-tight text-[var(--color-ink)]">Imagem Para Texto</span>
       </a>
 
       <!-- Desktop Nav Links -->
-      <nav class="hidden lg:flex items-center gap-1 pl-2">
+      <nav class="hidden lg:flex items-center gap-1 pl-2" aria-label="Navegação Principal">
         <a href="/#converter-app" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
           Imagem para Texto
         </a>
-        <a href="/imagem-para-pdf" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors inline-flex items-center gap-1.5 font-medium">
-          <span>Imagem para PDF</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-red-500/10 text-red-600 dark:text-red-400 font-semibold border border-red-200 dark:border-red-900/50">Novo</span>
+        <a href="/imagem-para-pdf" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors font-medium">
+          Imagem para PDF
         </a>
-        <a href="/#features" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
+        <a href="/#recursos" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
           Recursos
         </a>
         <a href="/about" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
@@ -46,12 +43,12 @@
     </div>
 
     <!-- Right Controls -->
-    <div class="flex items-center gap-3">
-      <!-- Quick Paste Helper Button -->
+    <div class="flex items-center gap-2 sm:gap-3">
+      <!-- Quick Paste Helper Button (Desktop) -->
       <button
         type="button"
         id="quick-paste-btn"
-        class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-[var(--color-body)] bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded-full hover:text-[var(--color-ink)] transition-colors"
+        class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-[var(--color-body)] bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded-full hover:text-[var(--color-ink)] transition-colors cursor-pointer"
         title="Colar imagem da área de transferência (Ctrl+V)"
       >
         <span>Ctrl + V</span>
@@ -61,7 +58,8 @@
       <!-- Primary Action CTA -->
       <a
         href="/#converter-app"
-        class="inline-flex items-center justify-center px-4 py-1.5 text-xs sm:text-sm font-medium text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full transition-all shadow-xs active:scale-95"
+        id="nav-primary-cta"
+        class="inline-flex items-center justify-center px-4 py-2 text-xs sm:text-sm font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full transition-all shadow-xs active:scale-95 whitespace-nowrap"
       >
         Experimente Agora
       </a>
@@ -70,12 +68,11 @@
       <button
         type="button"
         id="theme-toggle-btn"
-        class="w-8 h-8 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:border-[var(--color-hairline-strong)] text-[var(--color-ink)] flex items-center justify-center transition-all shadow-2xs hover:scale-105 active:scale-95 cursor-pointer"
+        class="w-9 h-9 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:border-[var(--color-hairline-strong)] text-[var(--color-ink)] flex items-center justify-center transition-all shadow-2xs hover:scale-105 active:scale-95 cursor-pointer"
         title="Alternar Tema (Modo Escuro / Claro)"
         aria-label="Alternar Modo Escuro"
       >
-        <!-- Sun icon for Dark mode active (click to switch to Light) -->
-        <svg id="theme-icon-sun" class="hidden w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="theme-icon-sun" class="hidden w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>
           <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -86,16 +83,62 @@
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
-        <!-- Moon icon for Light mode active (click to switch to Dark) -->
-        <svg id="theme-icon-moon" class="w-4 h-4 text-[var(--color-body)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="theme-icon-moon" class="w-4 h-4 text-[var(--color-body)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        type="button"
+        id="mobile-menu-btn"
+        class="lg:hidden w-9 h-9 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:border-[var(--color-hairline-strong)] text-[var(--color-ink)] flex items-center justify-center transition-all shadow-2xs active:scale-95 cursor-pointer"
+        aria-label="Abrir menu de navegação"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg id="hamburger-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg id="close-menu-icon" class="hidden w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
     </div>
   </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden lg:hidden border-b border-[var(--color-hairline)] bg-[var(--color-canvas)]/98 backdrop-blur-lg px-4 pt-3 pb-5 space-y-1 shadow-lg transition-all"
+    aria-label="Menu Mobile"
+  >
+    <a href="/#converter-app" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+      Imagem para Texto
+    </a>
+    <a href="/imagem-para-pdf" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+      Imagem para PDF
+    </a>
+    <a href="/#recursos" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+      Recursos
+    </a>
+    <a href="/about" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+      Sobre Nós
+    </a>
+    <a href="/contact" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+      Contato
+    </a>
+    <a href="/#faq" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+      FAQ
+    </a>
+  </div>
 </header>
 
 <script>
+  // Theme Management
   function updateThemeIcons() {
     const isDark = document.documentElement.classList.contains('dark');
     const sunIcon = document.getElementById('theme-icon-sun');
@@ -111,7 +154,6 @@
     }
   }
 
-  // Toggle Theme Handler
   const themeBtn = document.getElementById('theme-toggle-btn');
   if (themeBtn) {
     themeBtn.addEventListener('click', () => {
@@ -120,7 +162,43 @@
       updateThemeIcons();
     });
   }
-
-  // Initial Sync
   updateThemeIcons();
+
+  // Mobile Menu Interaction
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeMenuIcon = document.getElementById('close-menu-icon');
+
+  function toggleMobileMenu(forceClose = false) {
+    if (!mobileMenu || !mobileMenuBtn) return;
+    const isCurrentlyHidden = mobileMenu.classList.contains('hidden');
+    const shouldOpen = forceClose ? false : isCurrentlyHidden;
+
+    if (shouldOpen) {
+      mobileMenu.classList.remove('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'true');
+      hamburgerIcon?.classList.add('hidden');
+      closeMenuIcon?.classList.remove('hidden');
+    } else {
+      mobileMenu.classList.add('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      hamburgerIcon?.classList.remove('hidden');
+      closeMenuIcon?.classList.add('hidden');
+    }
+  }
+
+  mobileMenuBtn?.addEventListener('click', () => toggleMobileMenu());
+
+  // Close mobile menu when a link is clicked
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', () => toggleMobileMenu(true));
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !mobileMenu?.classList.contains('hidden')) {
+      toggleMobileMenu(true);
+    }
+  });
 </script>

@@ -1,0 +1,39 @@
+---
+// SupportedFormats.astro - Seção compacta exibindo os formatos suportados
+const formats = [
+  { name: "PNG", desc: "Prints e capturas transparentes" },
+  { name: "JPG", desc: "Fotos e imagens fotográficas" },
+  { name: "JPEG", desc: "Documentos comprimidos" },
+  { name: "WEBP", desc: "Imagens web de alta densidade" },
+  { name: "GIF", desc: "Imagens estáticas e diagramas" },
+  { name: "HEIC", desc: "Fotos de dispositivos Apple" },
+  { name: "BMP", desc: "Imagens bitmap de alta precisão" },
+  { name: "PDF", desc: "Documentos e páginas escaneadas" }
+];
+---
+
+<section class="py-12 sm:py-16 bg-[var(--color-canvas)] border-b border-[var(--color-hairline)]" aria-label="Formatos Suportados">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+      <span class="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-mute)]">Compatibilidade Universal</span>
+      <h2 class="mt-2 text-2xl sm:text-3xl font-bold tracking-tight text-[var(--color-ink)]">
+        Formatos suportados
+      </h2>
+      <p class="mt-2 text-sm text-[var(--color-body)] font-normal">
+        Converta qualquer arquivo de imagem popular ou documento PDF em texto limpo.
+      </p>
+    </div>
+
+    <!-- Badges Row / Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 max-w-5xl mx-auto">
+      {formats.map((fmt) => (
+        <div class="p-3.5 rounded-xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] text-center shadow-2xs hover:border-[var(--color-hairline-strong)] transition-all">
+          <div class="font-mono text-sm font-bold text-[var(--color-ink)]">{fmt.name}</div>
+          <div class="text-[10px] text-[var(--color-mute)] mt-0.5 truncate">{fmt.desc}</div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

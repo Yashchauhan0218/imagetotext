@@ -1,37 +1,25 @@
 ---
-// FAQ.astro - Componente FAQ com dados estruturados JSON-LD Schema.org FAQPage em Português
+// FAQ.astro - Componente FAQ conciso em acordeom com 5 perguntas essenciais e JSON-LD FAQPage
 const faqs = [
   {
-    q: "Como converter imagem PDF para texto do Word?",
-    a: "Para converter uma imagem PDF em texto editável para o Word, basta arrastar e soltar o arquivo PDF ou documento escaneado no conversor acima. Selecione o modo 'Texto da Imagem' e clique em 'Extrair Conteúdo'. Nosso motor neural OCR reconhece e extrai todo o texto com alta precisão. Após a extração, clique em 'Copiar' para colar o texto diretamente no Microsoft Word, Google Docs ou qualquer outro editor."
+    q: "Como converter uma imagem em texto?",
+    a: "Arraste ou selecione sua imagem na ferramenta no topo da página, ou cole diretamente com Ctrl + V. Em seguida, selecione o modo desejado (Texto, Código ou Tabela) e clique em 'Extrair texto'. O conteúdo reconhecido pode ser editado e copiado imediatamente."
   },
   {
-    q: "Como extrair texto de imagem?",
-    a: "Extrair texto de uma imagem requer apenas 3 passos rápidos: 1) Faça o upload da sua imagem (PNG, JPG, WEBP, HEIC, GIF), tire uma foto com a câmera ou pressione Ctrl+V para colar um print da tela; 2) Selecione o modo 'Texto da Imagem'; 3) Clique em 'Extrair Conteúdo'. O OCR processa tudo no seu navegador em segundos com 100% de privacidade."
+    q: "Minhas imagens são armazenadas?",
+    a: "Não. O processamento OCR acontece diretamente no seu navegador usando WebAssembly. Suas fotos, capturas de tela e documentos não são enviados para servidores externos nem armazenados."
   },
   {
-    q: "Como posso converter uma imagem em código?",
-    a: "Para converter uma imagem em código, ative o modo 'Código da Imagem' e envie sua captura de tela ou foto de código. Nosso OCR com reconhecimento de sintaxe identifica automaticamente mais de 25 linguagens (incluindo Python, JavaScript, TypeScript, C++, Rust, Go, SQL e HTML), preserva as indentações de linha e entrega o código formatado e colorido pronto para executar."
+    q: "Quais formatos são suportados?",
+    a: "O conversor suporta os formatos PNG, JPG, JPEG, WEBP, GIF, HEIC (fotos de iPhone) e BMP, além de documentos em PDF."
   },
   {
-    q: "Minhas imagens e documentos enviados são mantidos em privacidade?",
-    a: "Sim, 100%. O motor OCR é executado totalmente no lado do cliente (no seu navegador) usando WebAssembly (WASM). Nenhuma imagem, documento confidencial, recibo bancário ou código-fonte é enviado para servidores externos ou registrado em bancos de dados."
+    q: "Posso extrair código de uma imagem?",
+    a: "Sim. Ao escolher o modo 'Código', o conversor preserva indentações e caracteres especiais da programação, formatando o código com destaque de sintaxe."
   },
   {
-    q: "Como usar o recurso de colar instantâneo da área de transferência (Ctrl+V)?",
-    a: "Basta tirar um print da tela usando o atalho do seu sistema operacional (como 'Win + Shift + S' no Windows ou 'Cmd + Shift + 4' no Mac) e pressionar 'Ctrl + V' (ou 'Cmd + V') em qualquer lugar desta página. A imagem é carregada instantaneamente no conversor sem necessidade de salvar no disco."
-  },
-  {
-    q: "Posso extrair tabelas, recibos e faturas para Markdown ou Excel?",
-    a: "Sim! No modo 'Tabela & Fatura', o analisador identifica alinhamentos de colunas, valores e linhas para formatar tabelas e faturas diretamente em tabelas Markdown ou dados tabulares prontos para colar no Excel, Google Planilhas ou Notion."
-  },
-  {
-    q: "Quais formatos de imagem e arquivos são suportados?",
-    a: "Suportamos arquivos PNG, JPEG, JPG, WEBP, GIF, BMP, HEIC (fotos de iPhone) e documentos PDF. Você também pode arrastar várias imagens simultaneamente para processá-las em lote."
-  },
-  {
-    q: "Existe algum limite de quantas imagens posso converter?",
-    a: "Não! Não há limites diários, restrições de quantidade ou cobranças ocultas. Você pode converter imagens, prints de tela e códigos ilimitadamente de forma 100% gratuita para sempre."
+    q: "Posso usar a ferramenta gratuitamente?",
+    a: "Sim. A ferramenta é gratuita, não requer cadastro e pode ser utilizada quantas vezes você precisar diretamente no seu navegador."
   }
 ];
 
@@ -51,32 +39,28 @@ const faqSchema = {
 };
 ---
 
-<section id="faq" class="py-16 sm:py-24 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)]">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="faq" class="py-10 sm:py-14 bg-[var(--color-canvas)] border-b border-[var(--color-hairline)]" aria-label="Perguntas Frequentes">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
     
-    <div class="text-center mb-12 sm:mb-16">
-      <span class="text-xs font-mono font-medium uppercase tracking-wider text-[var(--color-mute)]">Perguntas Frequentes</span>
-      <h2 class="mt-2 text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-[var(--color-ink)] leading-tight">
-        Perguntas Frequentes sobre OCR
+    <div class="text-center mb-8 sm:mb-10">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--color-ink)]">
+        Perguntas Frequentes
       </h2>
-      <p class="mt-3 text-base text-[var(--color-body)] leading-relaxed">
-        Tudo o que você precisa saber sobre extrair texto, converter imagens em código e transformar PDFs.
-      </p>
     </div>
 
-    <!-- Accordion List -->
+    <!-- Accessible Accordion List -->
     <div class="space-y-3">
       {faqs.map((faq, index) => (
-        <details class="group rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5 transition-all shadow-2xs open:shadow-[var(--shadow-level-2)] open:border-[var(--color-hairline-strong)]" open={index === 0}>
-          <summary class="flex items-center justify-between font-semibold text-sm sm:text-base text-[var(--color-ink)] cursor-pointer list-none select-none">
+        <details class="group rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-canvas-soft)] p-4 sm:p-5 transition-all shadow-2xs open:shadow-xs open:border-[var(--color-hairline-strong)]" open={index === 0}>
+          <summary class="flex items-center justify-between font-semibold text-sm sm:text-base text-[var(--color-ink)] cursor-pointer list-none select-none focus-visible:outline-2 focus-visible:outline-[var(--color-primary)] rounded-lg">
             <span>{faq.q}</span>
-            <span class="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-canvas-soft-2)] text-[var(--color-mute)] transition-transform duration-200 group-open:rotate-180 group-open:text-[var(--color-ink)]">
+            <span class="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] text-[var(--color-mute)] transition-transform duration-200 group-open:rotate-180 group-open:text-[var(--color-ink)]" aria-hidden="true">
               <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </span>
           </summary>
-          <div class="mt-3.5 pt-3.5 border-t border-[var(--color-hairline)]/80 text-sm text-[var(--color-body)] leading-relaxed font-normal">
+          <div class="mt-3 pt-3 border-t border-[var(--color-hairline)] text-xs sm:text-sm text-[var(--color-body)] leading-relaxed font-normal">
             {faq.a}
           </div>
         </details>
