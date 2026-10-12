@@ -1,75 +1,77 @@
 ---
-// Navbar.astro - Navegação limpa e moderna com suporte a menu mobile acessível
+// Navbar.astro - Glassmorphism navigation with gradient CTA
 ---
 
-<header class="sticky top-0 z-50 w-full bg-[var(--color-canvas)]/90 backdrop-blur-md border-b border-[var(--color-hairline)] transition-all duration-200">
-  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<header class="sticky top-0 z-50 w-full" id="site-header">
+  <!-- Glass backdrop -->
+  <div class="absolute inset-0 bg-white/80 dark:bg-[#0a0f1a]/85 backdrop-blur-xl border-b border-[var(--color-hairline)] transition-colors duration-300" aria-hidden="true"></div>
+
+  <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
     <!-- Brand Logo -->
     <div class="flex items-center gap-6">
       <a href="/" class="flex items-center gap-2.5 group" aria-label="Imagem Para Texto - Página Inicial">
-        <div class="w-8 h-8 rounded-lg bg-[var(--color-primary)] text-[var(--color-on-primary)] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white flex items-center justify-center shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition-transform">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
             <line x1="16" y1="13" x2="8" y2="13"></line>
             <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
           </svg>
         </div>
-        <span class="font-semibold text-base tracking-tight text-[var(--color-ink)]">Imagem Para Texto</span>
+        <span class="font-semibold text-[15px] tracking-tight text-[var(--color-ink)]">Imagem Para Texto</span>
       </a>
 
       <!-- Desktop Nav Links -->
-      <nav class="hidden lg:flex items-center gap-1 pl-2" aria-label="Navegação Principal">
-        <a href="/#converter-app" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
-          Imagem para Texto
+      <nav class="hidden lg:flex items-center gap-0.5 pl-2" aria-label="Navegação Principal">
+        <a href="/#converter-app" class="px-3.5 py-2 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-lg hover:bg-[var(--color-canvas-soft-2)] transition-all duration-150 font-medium">
+          Conversor
         </a>
-        <a href="/imagem-para-pdf" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors font-medium">
-          Imagem para PDF
+        <a href="/imagem-para-pdf" class="px-3.5 py-2 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-lg hover:bg-[var(--color-canvas-soft-2)] transition-all duration-150 font-medium">
+          PDF
         </a>
-        <a href="/#recursos" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
+        <a href="/#recursos" class="px-3.5 py-2 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-lg hover:bg-[var(--color-canvas-soft-2)] transition-all duration-150 font-medium">
           Recursos
         </a>
-        <a href="/about" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
-          Sobre Nós
+        <a href="/about" class="px-3.5 py-2 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-lg hover:bg-[var(--color-canvas-soft-2)] transition-all duration-150 font-medium">
+          Sobre
         </a>
-        <a href="/contact" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
-          Contato
-        </a>
-        <a href="/#faq" class="px-3 py-1.5 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-full hover:bg-[var(--color-canvas-soft)] transition-colors">
+        <a href="/#faq" class="px-3.5 py-2 text-sm text-[var(--color-body)] hover:text-[var(--color-ink)] rounded-lg hover:bg-[var(--color-canvas-soft-2)] transition-all duration-150 font-medium">
           FAQ
         </a>
       </nav>
     </div>
 
     <!-- Right Controls -->
-    <div class="flex items-center gap-2 sm:gap-3">
-      <!-- Quick Paste Helper Button (Desktop) -->
+    <div class="flex items-center gap-2">
+      <!-- Quick Paste Hint (Desktop) -->
       <button
         type="button"
         id="quick-paste-btn"
-        class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-[var(--color-body)] bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded-full hover:text-[var(--color-ink)] transition-colors cursor-pointer"
-        title="Colar imagem da área de transferência (Ctrl+V)"
+        class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-[var(--color-mute)] bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded-lg hover:text-[var(--color-body)] hover:border-[var(--color-hairline-strong)] transition-all cursor-pointer"
+        title="Colar imagem (Ctrl+V)"
       >
-        <span>Ctrl + V</span>
-        <span class="text-[10px] text-[var(--color-mute)]">Colar</span>
+        <span class="font-semibold text-[var(--color-ink)]">Ctrl+V</span>
+        <span class="text-[10px]">Colar</span>
       </button>
 
-      <!-- Primary Action CTA -->
+      <!-- Gradient CTA -->
       <a
         href="/#converter-app"
         id="nav-primary-cta"
-        class="inline-flex items-center justify-center px-4 py-2 text-xs sm:text-sm font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full transition-all shadow-xs active:scale-95 whitespace-nowrap"
+        class="inline-flex items-center justify-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 rounded-full shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 active:scale-95 whitespace-nowrap"
       >
-        Experimente Agora
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        Experimente
       </a>
 
-      <!-- Dark / Light Mode Toggle Button -->
+      <!-- Dark / Light Toggle -->
       <button
         type="button"
         id="theme-toggle-btn"
-        class="w-9 h-9 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:border-[var(--color-hairline-strong)] text-[var(--color-ink)] flex items-center justify-center transition-all shadow-2xs hover:scale-105 active:scale-95 cursor-pointer"
-        title="Alternar Tema (Modo Escuro / Claro)"
+        class="w-9 h-9 rounded-xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] hover:border-[var(--color-hairline-strong)] text-[var(--color-ink)] flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-xs"
+        title="Alternar Tema"
         aria-label="Alternar Modo Escuro"
       >
         <svg id="theme-icon-sun" class="hidden w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -88,19 +90,18 @@
         </svg>
       </button>
 
-      <!-- Mobile Hamburger Button -->
+      <!-- Mobile Hamburger -->
       <button
         type="button"
         id="mobile-menu-btn"
-        class="lg:hidden w-9 h-9 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:border-[var(--color-hairline-strong)] text-[var(--color-ink)] flex items-center justify-center transition-all shadow-2xs active:scale-95 cursor-pointer"
+        class="lg:hidden w-9 h-9 rounded-xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] hover:border-[var(--color-hairline-strong)] text-[var(--color-ink)] flex items-center justify-center transition-all active:scale-95 cursor-pointer shadow-xs"
         aria-label="Abrir menu de navegação"
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
         <svg id="hamburger-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
+          <line x1="3" y1="8" x2="21" y2="8"></line>
+          <line x1="3" y1="16" x2="21" y2="16"></line>
         </svg>
         <svg id="close-menu-icon" class="hidden w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -110,30 +111,36 @@
     </div>
   </div>
 
-  <!-- Mobile Dropdown Menu -->
+  <!-- Mobile Dropdown -->
   <div
     id="mobile-menu"
-    class="hidden lg:hidden border-b border-[var(--color-hairline)] bg-[var(--color-canvas)]/98 backdrop-blur-lg px-4 pt-3 pb-5 space-y-1 shadow-lg transition-all"
+    class="hidden lg:hidden relative border-b border-[var(--color-hairline)] bg-[var(--color-canvas)]/98 backdrop-blur-lg px-4 pt-3 pb-5 space-y-1"
     aria-label="Menu Mobile"
   >
-    <a href="/#converter-app" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+    <a href="/#converter-app" class="mobile-nav-link flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] transition-colors">
       Imagem para Texto
     </a>
-    <a href="/imagem-para-pdf" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+    <a href="/imagem-para-pdf" class="mobile-nav-link flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] transition-colors">
       Imagem para PDF
     </a>
-    <a href="/#recursos" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+    <a href="/#recursos" class="mobile-nav-link flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] transition-colors">
       Recursos
     </a>
-    <a href="/about" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+    <a href="/about" class="mobile-nav-link flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] transition-colors">
       Sobre Nós
     </a>
-    <a href="/contact" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+    <a href="/contact" class="mobile-nav-link flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] transition-colors">
       Contato
     </a>
-    <a href="/#faq" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]">
+    <a href="/#faq" class="mobile-nav-link flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft-2)] transition-colors">
       FAQ
     </a>
+    <div class="pt-3">
+      <a href="/#converter-app" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-violet-600 rounded-xl shadow-lg shadow-indigo-500/25 transition-all active:scale-95">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        Experimente Agora
+      </a>
+    </div>
   </div>
 </header>
 
@@ -164,7 +171,17 @@
   }
   updateThemeIcons();
 
-  // Mobile Menu Interaction
+  // Scroll: add shadow to header on scroll
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 8) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  // Mobile Menu
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburgerIcon = document.getElementById('hamburger-icon');
@@ -174,7 +191,6 @@
     if (!mobileMenu || !mobileMenuBtn) return;
     const isCurrentlyHidden = mobileMenu.classList.contains('hidden');
     const shouldOpen = forceClose ? false : isCurrentlyHidden;
-
     if (shouldOpen) {
       mobileMenu.classList.remove('hidden');
       mobileMenuBtn.setAttribute('aria-expanded', 'true');
@@ -189,16 +205,21 @@
   }
 
   mobileMenuBtn?.addEventListener('click', () => toggleMobileMenu());
-
-  // Close mobile menu when a link is clicked
   document.querySelectorAll('.mobile-nav-link').forEach((link) => {
     link.addEventListener('click', () => toggleMobileMenu(true));
   });
-
-  // Close on Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !mobileMenu?.classList.contains('hidden')) {
       toggleMobileMenu(true);
     }
   });
 </script>
+
+<style>
+  #site-header.scrolled > div:first-child {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  }
+  html.dark #site-header.scrolled > div:first-child {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  }
+</style>

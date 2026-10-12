@@ -1,55 +1,56 @@
 ---
-// HowItWorks.astro - Seção concisa em 3 passos
+// HowItWorks.astro - Numbered steps with gradient badges and connector lines
 ---
 
-<section id="como-funciona" class="py-10 sm:py-14 bg-[var(--color-canvas)] border-b border-[var(--color-hairline)]" aria-label="Como Funciona">
+<section id="como-funciona" class="py-10 sm:py-14 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)]" aria-label="Como Funciona">
   <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <!-- Section Header -->
-    <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--color-ink)]">
+
+    <!-- Header -->
+    <div class="text-center mb-8 sm:mb-10">
+      <div class="section-label mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-500" aria-hidden="true"></span>
+        <span>Processo</span>
+      </div>
+      <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[var(--color-ink)]">
         Como funciona?
       </h2>
     </div>
 
-    <!-- 3 Steps Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
-      
+    <!-- Steps -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto relative">
+
+      <!-- Connector line (desktop only, positioned relative to grid) -->
+      <div class="hidden md:block absolute top-[1.125rem] left-[37%] right-[37%] h-px" style="background: linear-gradient(to right, rgba(99,102,241,0.35), rgba(139,92,246,0.35), rgba(236,72,153,0.35));" aria-hidden="true"></div>
+
       <!-- Step 1 -->
-      <div class="p-5 rounded-2xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] shadow-2xs hover:border-[var(--color-hairline-strong)] transition-all">
-        <div class="w-9 h-9 rounded-xl bg-[var(--color-primary)] text-[var(--color-on-primary)] font-mono font-bold text-sm flex items-center justify-center mb-4 shadow-xs">
-          ①
-        </div>
-        <h3 class="text-base font-bold text-[var(--color-ink)] tracking-tight">
+      <div class="feature-card text-center group">
+        <div class="step-badge mx-auto mb-5">1</div>
+        <h3 class="text-base font-bold text-[var(--color-ink)] tracking-tight mb-2">
           Envie sua imagem
         </h3>
-        <p class="mt-1.5 text-sm text-[var(--color-body)] leading-relaxed font-normal">
-          Escolha, arraste ou cole.
+        <p class="text-sm text-[var(--color-body)] leading-relaxed font-normal">
+          Escolha, arraste ou cole com Ctrl+V.
         </p>
       </div>
 
       <!-- Step 2 -->
-      <div class="p-5 rounded-2xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] shadow-2xs hover:border-[var(--color-hairline-strong)] transition-all">
-        <div class="w-9 h-9 rounded-xl bg-[var(--color-primary)] text-[var(--color-on-primary)] font-mono font-bold text-sm flex items-center justify-center mb-4 shadow-xs">
-          ②
-        </div>
-        <h3 class="text-base font-bold text-[var(--color-ink)] tracking-tight">
+      <div class="feature-card text-center group">
+        <div class="step-badge mx-auto mb-5" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">2</div>
+        <h3 class="text-base font-bold text-[var(--color-ink)] tracking-tight mb-2">
           Extraia o texto
         </h3>
-        <p class="mt-1.5 text-sm text-[var(--color-body)] leading-relaxed font-normal">
+        <p class="text-sm text-[var(--color-body)] leading-relaxed font-normal">
           Nosso OCR reconhece o conteúdo.
         </p>
       </div>
 
       <!-- Step 3 -->
-      <div class="p-5 rounded-2xl bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] shadow-2xs hover:border-[var(--color-hairline-strong)] transition-all">
-        <div class="w-9 h-9 rounded-xl bg-[var(--color-primary)] text-[var(--color-on-primary)] font-mono font-bold text-sm flex items-center justify-center mb-4 shadow-xs">
-          ③
-        </div>
-        <h3 class="text-base font-bold text-[var(--color-ink)] tracking-tight">
+      <div class="feature-card text-center group">
+        <div class="step-badge mx-auto mb-5" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">3</div>
+        <h3 class="text-base font-bold text-[var(--color-ink)] tracking-tight mb-2">
           Copie o resultado
         </h3>
-        <p class="mt-1.5 text-sm text-[var(--color-body)] leading-relaxed font-normal">
+        <p class="text-sm text-[var(--color-body)] leading-relaxed font-normal">
           Edite e copie o texto extraído.
         </p>
       </div>

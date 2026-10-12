@@ -2,29 +2,29 @@
 // ConverterApp.astro - Aplicativo interativo principal de Imagem para Texto & Código OCR
 ---
 
-<section id="converter-app" class="relative pt-2 pb-12 sm:pb-16" aria-label="Ferramenta Conversor OCR">
+<section id="converter-app" class="relative pt-4 pb-12 sm:pb-16 scroll-mt-20" aria-label="Ferramenta Conversor OCR">
   <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- App Container Card -->
-    <div class="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] shadow-[var(--shadow-level-3)] overflow-hidden transition-all duration-300">
+    <div class="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] shadow-lg shadow-indigo-500/04 overflow-hidden transition-all duration-300">
       
       <!-- Top Control Bar / Mode Selector (Section 5) -->
       <div class="px-4 sm:px-6 py-4 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         
-        <!-- Redesigned Mode Options -->
-        <div class="grid grid-cols-3 gap-1.5 sm:gap-2 bg-[var(--color-canvas-soft-2)] p-1 rounded-xl border border-[var(--color-hairline)]" role="tablist" aria-label="Modo de Reconhecimento OCR">
+        <!-- Mode Segmented Controls (Section 5) -->
+        <div class="grid grid-cols-3 gap-1.5 bg-[var(--color-canvas-soft-2)] p-1 rounded-xl border border-[var(--color-hairline)]" role="tablist" aria-label="Modo de Reconhecimento OCR">
           
-          <!-- Mode 1: Texto -->
+          <!-- Mode 1: Texto (Default) -->
           <button
             type="button"
-            class="mode-tab-btn active text-left px-2 sm:px-3 py-2 rounded-lg transition-all flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-2.5 bg-[var(--color-canvas)] text-[var(--color-ink)] border border-[var(--color-hairline-strong)] shadow-xs ring-1 ring-[var(--color-primary)]/25 cursor-pointer"
+            class="mode-tab-btn active text-left px-2 sm:px-3 py-1.5 rounded-lg transition-all flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-2 bg-[var(--color-canvas)] text-[var(--color-ink)] border border-[var(--color-hairline-strong)] shadow-xs ring-1 ring-[var(--color-primary)]/20 cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--color-primary)]"
             data-mode="text"
             id="tab-mode-text"
             role="tab"
             aria-selected="true"
           >
-            <div class="w-7 h-7 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <div class="w-6 h-6 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M4 7V4h16v3"></path>
                 <path d="M9 20h6"></path>
                 <path d="M12 4v16"></path>
@@ -32,42 +32,42 @@
             </div>
             <div>
               <div class="text-xs sm:text-sm font-semibold tracking-tight leading-tight">📝 Texto</div>
-              <div class="text-[10px] text-[var(--color-mute)] hidden sm:block leading-tight">Textos, fotos e documentos</div>
+              <div class="text-[10px] text-[var(--color-mute)] hidden sm:block leading-tight">Extraia texto comum</div>
             </div>
           </button>
 
           <!-- Mode 2: Código -->
           <button
             type="button"
-            class="mode-tab-btn text-left px-2 sm:px-3 py-2 rounded-lg transition-all flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-2.5 text-[var(--color-body)] hover:text-[var(--color-ink)] border border-transparent cursor-pointer"
+            class="mode-tab-btn text-left px-2 sm:px-3 py-1.5 rounded-lg transition-all flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-2 text-[var(--color-body)] hover:text-[var(--color-ink)] border border-transparent cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--color-primary)]"
             data-mode="code"
             id="tab-mode-code"
             role="tab"
             aria-selected="false"
           >
-            <div class="w-7 h-7 rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <div class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <polyline points="16 18 22 12 16 6"></polyline>
                 <polyline points="8 6 2 12 8 18"></polyline>
               </svg>
             </div>
             <div>
               <div class="text-xs sm:text-sm font-semibold tracking-tight leading-tight">💻 Código</div>
-              <div class="text-[10px] text-[var(--color-mute)] hidden sm:block leading-tight">Código de programação</div>
+              <div class="text-[10px] text-[var(--color-mute)] hidden sm:block leading-tight">Extraia código de screenshots</div>
             </div>
           </button>
 
           <!-- Mode 3: Tabela -->
           <button
             type="button"
-            class="mode-tab-btn text-left px-2 sm:px-3 py-2 rounded-lg transition-all flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-2.5 text-[var(--color-body)] hover:text-[var(--color-ink)] border border-transparent cursor-pointer"
+            class="mode-tab-btn text-left px-2 sm:px-3 py-1.5 rounded-lg transition-all flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-2 text-[var(--color-body)] hover:text-[var(--color-ink)] border border-transparent cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--color-primary)]"
             data-mode="table"
             id="tab-mode-table"
             role="tab"
             aria-selected="false"
           >
-            <div class="w-7 h-7 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <div class="w-6 h-6 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="3" y1="9" x2="21" y2="9"></line>
                 <line x1="3" y1="15" x2="21" y2="15"></line>
@@ -77,19 +77,19 @@
             </div>
             <div>
               <div class="text-xs sm:text-sm font-semibold tracking-tight leading-tight">📊 Tabela</div>
-              <div class="text-[10px] text-[var(--color-mute)] hidden sm:block leading-tight">Tabelas, recibos e faturas</div>
+              <div class="text-[10px] text-[var(--color-mute)] hidden sm:block leading-tight">Extraia dados de tabelas</div>
             </div>
           </button>
         </div>
 
         <!-- Language & Engine Settings -->
         <div class="flex items-center justify-end gap-3 shrink-0">
-          <div class="flex items-center gap-1.5 text-xs text-[var(--color-body)]">
-            <span class="font-mono text-[11px] text-[var(--color-mute)] font-medium">Idioma:</span>
+          <div class="flex items-center gap-2 text-xs text-[var(--color-body)]">
+            <label for="ocr-language-select" class="text-xs text-[var(--color-body)] font-medium whitespace-nowrap">Idioma do texto:</label>
             <select
               id="ocr-language-select"
               class="text-xs bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-lg px-2.5 py-1.5 text-[var(--color-ink)] font-medium focus:outline-none focus:border-[var(--color-primary)] cursor-pointer"
-              aria-label="Selecionar idioma para o OCR"
+              aria-label="Idioma do texto para o OCR"
             >
               <option value="por" selected>Português (Brasil & Portugal)</option>
               <option value="eng">Inglês (Código / Geral)</option>
@@ -106,16 +106,16 @@
           <!-- Auto-Enhance Toggle -->
           <label class="hidden md:inline-flex items-center gap-1.5 text-xs text-[var(--color-body)] cursor-pointer select-none">
             <input type="checkbox" id="toggle-auto-enhance" class="rounded border-[var(--color-hairline)] text-[var(--color-primary)] focus:ring-0 cursor-pointer" checked />
-            <span class="font-mono text-[11px]">Auto Contraste</span>
+            <span class="text-[11px] font-medium">Auto Contraste</span>
           </label>
         </div>
       </div>
 
       <!-- MAIN STATE 1: PRIMARY UPLOAD ZONE (Section 3 & Section 4) -->
-      <div id="upload-zone" class="p-4 sm:p-8 lg:p-12 text-center transition-all duration-200">
+      <div id="upload-zone" class="p-6 sm:p-10 lg:p-12 text-center transition-all duration-200">
         <div
           id="drop-area"
-          class="relative border-2 border-dashed border-[var(--color-hairline-strong)]/60 rounded-2xl p-6 sm:p-12 lg:p-14 hover:border-[var(--color-primary)] hover:bg-[var(--color-canvas-soft)]/50 transition-all duration-200 cursor-pointer group"
+          class="relative border-2 border-dashed border-[var(--color-hairline-strong)]/60 rounded-2xl p-8 sm:p-12 lg:p-14 hover:border-[var(--color-primary)] hover:bg-[var(--color-canvas-soft-2)]/40 transition-all duration-200 cursor-pointer group focus-visible:outline-2 focus-visible:outline-[var(--color-primary)] shadow-2xs"
           role="button"
           tabindex="0"
           aria-label="Área de upload de imagem para extração de texto"
@@ -129,7 +129,7 @@
           />
 
           <!-- Upload Graphic / Icon -->
-          <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 rounded-2xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] group-hover:scale-110 group-hover:border-[var(--color-primary)] transition-all shadow-xs">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 rounded-2xl bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] flex items-center justify-center text-[var(--color-ink)] group-hover:scale-105 group-hover:border-[var(--color-primary)] transition-all shadow-xs">
             <svg class="w-8 h-8 sm:w-10 sm:h-10 text-[var(--color-ink)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="17 8 12 3 7 8"></polyline>
@@ -150,7 +150,7 @@
             <button
               type="button"
               id="browse-btn"
-              class="px-6 py-3 text-sm font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full shadow-md transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
+              class="px-6 py-3 text-sm font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full shadow-md transition-all active:scale-95 flex items-center gap-2 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary)]"
             >
               <span>📤 Escolher imagem</span>
             </button>
@@ -159,7 +159,7 @@
             <button
               type="button"
               id="url-import-trigger"
-              class="px-4 py-2.5 text-xs sm:text-sm font-medium text-[var(--color-ink)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:bg-[var(--color-canvas-soft)] rounded-full transition-colors flex items-center gap-2 shadow-2xs cursor-pointer"
+              class="px-4 py-2.5 text-xs sm:text-sm font-medium text-[var(--color-ink)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:bg-[var(--color-canvas-soft-2)] rounded-full transition-colors flex items-center gap-2 shadow-2xs cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--color-primary)]"
             >
               <svg class="w-4 h-4 text-[var(--color-body)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
@@ -172,7 +172,7 @@
             <button
               type="button"
               id="camera-trigger"
-              class="px-4 py-2.5 text-xs sm:text-sm font-medium text-[var(--color-ink)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:bg-[var(--color-canvas-soft)] rounded-full transition-colors flex items-center gap-2 shadow-2xs cursor-pointer"
+              class="px-4 py-2.5 text-xs sm:text-sm font-medium text-[var(--color-ink)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:bg-[var(--color-canvas-soft-2)] rounded-full transition-colors flex items-center gap-2 shadow-2xs cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--color-primary)]"
             >
               <svg class="w-4 h-4 text-[var(--color-body)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
@@ -183,11 +183,23 @@
           </div>
 
           <!-- Section 4: Formats & Ctrl+V Line -->
-          <div class="mt-7 pt-4 border-t border-[var(--color-hairline)]/70 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-xs text-[var(--color-mute)] font-mono">
-            <span>PNG • JPG • JPEG • WEBP • HEIC • PDF</span>
+          <div class="mt-7 pt-4 border-t border-[var(--color-hairline)]/80 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-xs text-[var(--color-mute)] font-mono">
+            <span>PNG • JPG • JPEG • WEBP • GIF • HEIC • BMP • PDF</span>
             <span class="hidden sm:inline text-[var(--color-hairline-strong)]">•</span>
-            <span class="font-sans">Você também pode colar com <kbd class="font-mono text-[11px] font-semibold px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded text-[var(--color-ink)]">Ctrl + V</kbd></span>
+            <span class="font-sans">Você também pode colar uma imagem com <kbd class="font-mono text-[11px] font-semibold px-2 py-0.5 bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded text-[var(--color-ink)]">Ctrl + V</kbd></span>
           </div>
+        </div>
+
+        <!-- Section 8: Sample Image Feature -->
+        <div class="mt-4 pt-2 flex flex-wrap items-center justify-center gap-2 text-xs text-[var(--color-body)]">
+          <span>Não tem uma imagem agora?</span>
+          <button
+            type="button"
+            id="sample-image-trigger"
+            class="font-semibold text-[var(--color-ink)] hover:text-[var(--color-primary)] flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:bg-[var(--color-canvas-soft-2)] shadow-2xs transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--color-primary)]"
+          >
+            <span>🧪 Testar com imagem de exemplo</span>
+          </button>
         </div>
 
         <!-- URL Input Inline Drawer (Hidden by default) -->
@@ -339,8 +351,9 @@
                 </div>
               </div>
 
-              <!-- Post-Processing Action Strip -->
-              <div class="flex flex-wrap items-center justify-between gap-2 py-2.5 border-b border-[var(--color-hairline)]/80 text-xs">
+              <!-- Post-Processing & Download Action Strip -->
+              <div class="flex flex-wrap items-center justify-between gap-2.5 py-2.5 border-b border-[var(--color-hairline)]/80 text-xs">
+                <!-- Advanced Clean & Format Tools -->
                 <div class="flex flex-wrap items-center gap-1.5">
                   <button
                     type="button"
@@ -395,14 +408,79 @@
                   </button>
                 </div>
 
-                <!-- Primary Copy Button -->
-                <button
-                  type="button"
-                  id="btn-copy-result"
-                  class="px-4 py-1.5 text-xs font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full transition-all active:scale-95 flex items-center gap-1.5 shadow-2xs cursor-pointer"
-                >
-                  <span id="copy-btn-text">📋 Copiar texto</span>
-                </button>
+                <!-- Primary Action Buttons: Copy & Download -->
+                <div class="flex items-center gap-2">
+                  <!-- Primary Copy Button -->
+                  <button
+                    type="button"
+                    id="btn-copy-result"
+                    class="px-4 py-1.5 text-xs font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full transition-all active:scale-95 flex items-center gap-1.5 shadow-2xs cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--color-primary)]"
+                  >
+                    <span id="copy-btn-text">📋 Copiar texto</span>
+                  </button>
+
+                  <!-- Primary TXT Download Button -->
+                  <button
+                    type="button"
+                    id="btn-download-txt"
+                    class="px-3.5 py-1.5 text-xs font-semibold text-[var(--color-ink)] bg-[var(--color-canvas)] border border-[var(--color-hairline-strong)] hover:bg-[var(--color-canvas-soft-2)] rounded-full transition-all active:scale-95 flex items-center gap-1.5 shadow-2xs cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--color-primary)]"
+                    title="Baixar arquivo de texto puro (.txt)"
+                  >
+                    <span>⬇ Baixar TXT</span>
+                  </button>
+
+                  <!-- Secondary Downloads Dropdown -->
+                  <div class="relative inline-block text-left" id="download-dropdown-container">
+                    <button
+                      type="button"
+                      id="btn-more-downloads-toggle"
+                      class="p-1.5 text-xs font-medium text-[var(--color-body)] hover:text-[var(--color-ink)] bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-full hover:bg-[var(--color-canvas-soft-2)] transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--color-primary)]"
+                      title="Mais opções de download"
+                      aria-label="Mais opções de download"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                    >
+                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="1"></circle>
+                        <circle cx="19" cy="12" r="1"></circle>
+                        <circle cx="5" cy="12" r="1"></circle>
+                      </svg>
+                    </button>
+                    <div
+                      id="download-dropdown-menu"
+                      class="hidden absolute right-0 mt-1 w-48 rounded-xl bg-[var(--color-canvas)] border border-[var(--color-hairline)] shadow-[var(--shadow-level-3)] py-1 z-30 text-xs font-medium text-[var(--color-ink)]"
+                      role="menu"
+                    >
+                      <button
+                        type="button"
+                        id="btn-download-md"
+                        class="w-full text-left px-3 py-2 hover:bg-[var(--color-canvas-soft)] flex items-center gap-2 cursor-pointer transition-colors"
+                        role="menuitem"
+                      >
+                        <span>📝</span>
+                        <span>Baixar Markdown (.md)</span>
+                      </button>
+                      <button
+                        type="button"
+                        id="btn-download-csv"
+                        class="w-full text-left px-3 py-2 hover:bg-[var(--color-canvas-soft)] flex items-center gap-2 cursor-pointer transition-colors"
+                        role="menuitem"
+                      >
+                        <span>📊</span>
+                        <span>Baixar CSV (.csv)</span>
+                      </button>
+                      <button
+                        type="button"
+                        id="btn-download-code"
+                        class="w-full text-left px-3 py-2 hover:bg-[var(--color-canvas-soft)] flex items-center gap-2 cursor-pointer transition-colors"
+                        role="menuitem"
+                      >
+                        <span>💻</span>
+                        <span id="btn-download-code-label">Baixar código</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <!-- Output Workspace Display Area -->
@@ -543,6 +621,137 @@
   const closeCameraBtn = document.getElementById('close-camera-btn')!;
   const cancelCameraBtn = document.getElementById('cancel-camera-btn')!;
   const takeSnapshotBtn = document.getElementById('take-snapshot-btn')!;
+  const ocrBtnText = document.getElementById('ocr-btn-text')!;
+  const sampleImageTrigger = document.getElementById('sample-image-trigger');
+  const btnDownloadTxt = document.getElementById('btn-download-txt');
+  const btnDownloadMd = document.getElementById('btn-download-md');
+  const btnDownloadCsv = document.getElementById('btn-download-csv');
+  const btnDownloadCode = document.getElementById('btn-download-code');
+  const btnDownloadCodeLabel = document.getElementById('btn-download-code-label');
+  const btnMoreDownloadsToggle = document.getElementById('btn-more-downloads-toggle');
+  const downloadDropdownMenu = document.getElementById('download-dropdown-menu');
+  let lastDetectedInfo = { lang: 'javascript', ext: '.txt', name: 'Texto' };
+
+  // Helper for triggering browser-side downloads
+  function triggerDownload(content: string, filename: string, mimeType: string) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  // Generate crisp local sample document image
+  function createSampleCanvasDocument(): Promise<File> {
+    return new Promise((resolve) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 900;
+      canvas.height = 620;
+      const ctx = canvas.getContext('2d')!;
+
+      // Background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Outer border
+      ctx.strokeStyle = '#e2e5ea';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(15, 15, canvas.width - 30, canvas.height - 30);
+
+      // Header bar
+      ctx.fillStyle = '#f7f8fa';
+      ctx.fillRect(18, 18, canvas.width - 36, 85);
+      ctx.strokeStyle = '#e2e5ea';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(18, 18, canvas.width - 36, 85);
+
+      // Document Title
+      ctx.fillStyle = '#171a1f';
+      ctx.font = 'bold 26px sans-serif';
+      ctx.fillText('FATURA DE SERVIÇOS #1042', 45, 62);
+
+      ctx.font = '14px sans-serif';
+      ctx.fillStyle = '#5f6672';
+      ctx.fillText('Data de Emissão: 15/05/2024   |   Vencimento: 30/05/2024', 45, 88);
+
+      // Client section
+      ctx.font = 'bold 16px sans-serif';
+      ctx.fillStyle = '#171a1f';
+      ctx.fillText('DADOS DO CLIENTE', 45, 145);
+
+      ctx.font = '15px sans-serif';
+      ctx.fillStyle = '#333333';
+      ctx.fillText('Cliente: Tech Solutions Brasil Ltda', 45, 175);
+      ctx.fillText('CNPJ: 12.345.678/0001-90', 45, 202);
+      ctx.fillText('Endereço: Av. Paulista, 1000 - São Paulo, SP', 45, 229);
+
+      // Divider
+      ctx.strokeStyle = '#cbd0d8';
+      ctx.beginPath();
+      ctx.moveTo(45, 255);
+      ctx.lineTo(canvas.width - 45, 255);
+      ctx.stroke();
+
+      // Table Header
+      ctx.font = 'bold 16px sans-serif';
+      ctx.fillStyle = '#171a1f';
+      ctx.fillText('DESCRIÇÃO DO SERVIÇO', 45, 290);
+      ctx.fillText('VALOR (R$)', 700, 290);
+
+      // Divider
+      ctx.beginPath();
+      ctx.moveTo(45, 305);
+      ctx.lineTo(canvas.width - 45, 305);
+      ctx.stroke();
+
+      // Table Items
+      ctx.font = '15px sans-serif';
+      ctx.fillStyle = '#333333';
+      ctx.fillText('1. Consultoria Técnica em Desenvolvimento de Software', 45, 340);
+      ctx.fillText('850,00', 740, 340);
+
+      ctx.fillText('2. Licenciamento Anual de Software e Suporte Técnico', 45, 380);
+      ctx.fillText('400,00', 740, 380);
+
+      // Divider
+      ctx.beginPath();
+      ctx.moveTo(45, 415);
+      ctx.lineTo(canvas.width - 45, 415);
+      ctx.stroke();
+
+      // Totals
+      ctx.font = '15px sans-serif';
+      ctx.fillStyle = '#5f6672';
+      ctx.fillText('Subtotal:', 630, 450);
+      ctx.fillText('R$ 1.250,00', 710, 450);
+
+      ctx.font = 'bold 20px sans-serif';
+      ctx.fillStyle = '#171a1f';
+      ctx.fillText('VALOR TOTAL:', 580, 495);
+      ctx.fillText('R$ 1.250,00', 710, 495);
+
+      // Status Badge
+      ctx.fillStyle = '#e6f4ea';
+      ctx.fillRect(45, 530, 260, 40);
+      ctx.strokeStyle = '#34a853';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(45, 530, 260, 40);
+
+      ctx.font = 'bold 14px sans-serif';
+      ctx.fillStyle = '#137333';
+      ctx.fillText('STATUS: PAGAMENTO CONFIRMADO', 60, 555);
+
+      canvas.toBlob((blob) => {
+        if (blob) {
+          resolve(new File([blob], 'exemplo-fatura-documento.png', { type: 'image/png' }));
+        }
+      }, 'image/png');
+    });
+  }
 
   // 1. Language Detection & Syntax Recognition Engine
   function detectProgrammingLanguage(text: string): { lang: string; ext: string; name: string } {
@@ -686,6 +895,8 @@
       loadFileToCanvas(queue[currentFileIndex]);
       renderQueueBar();
       ocrStatusPill.textContent = '🟢 Pronto para processar';
+      ocrBtnText.textContent = '✨ Extrair texto';
+      (processOcrBtn as HTMLButtonElement).disabled = false;
       trackEvent('image_selected', { count: files.length });
     }
   }
@@ -696,6 +907,8 @@
 
     ocrLoaderOverlay.classList.remove('hidden');
     ocrStatusPill.textContent = '🔄 Processando no navegador...';
+    ocrBtnText.textContent = '⏳ Processando...';
+    (processOcrBtn as HTMLButtonElement).disabled = true;
     loaderTitle.textContent = 'Extraindo Texto & Caracteres...';
     ocrProgressBar.style.width = '10%';
     trackEvent('ocr_started', { mode: activeMode });
@@ -725,11 +938,15 @@
 
       if (activeMode === 'code') {
         detectedInfo = detectProgrammingLanguage(rawText);
+        lastDetectedInfo = detectedInfo;
         formattedResult = beautifyCode(rawText);
         
         detectedLangName.textContent = detectedInfo.name;
         languageBadge.classList.remove('hidden');
         languageBadge.classList.add('flex');
+        if (btnDownloadCodeLabel) {
+          btnDownloadCodeLabel.textContent = `Baixar código (${detectedInfo.ext})`;
+        }
       } else if (activeMode === 'table') {
         const lines = rawText.split('\n').filter((l: string) => l.trim().length > 0);
         if (lines.length > 0) {
@@ -755,14 +972,24 @@
       statsSummary.textContent = `${wordCount} palavras · ${charCount} caracteres`;
 
       ocrStatusPill.textContent = '✓ Texto extraído';
+      ocrBtnText.textContent = '✓ Texto extraído';
+      (processOcrBtn as HTMLButtonElement).disabled = false;
       trackEvent('ocr_completed', { words: wordCount, chars: charCount });
       confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
+
+      setTimeout(() => {
+        if (ocrBtnText.textContent === '✓ Texto extraído') {
+          ocrBtnText.textContent = '✨ Extrair texto novamente';
+        }
+      }, 3500);
 
     } catch (err: any) {
       console.error('OCR Error:', err);
       rawTextOutput.value = `Erro durante o reconhecimento OCR: ${err.message || err}`;
       highlightedCodeOutput.textContent = rawTextOutput.value;
       ocrStatusPill.textContent = '❌ Falha no processamento';
+      ocrBtnText.textContent = '⚠️ Tentar novamente';
+      (processOcrBtn as HTMLButtonElement).disabled = false;
     } finally {
       ocrLoaderOverlay.classList.add('hidden');
     }
@@ -1028,6 +1255,129 @@
         copyBtnText.textContent = '📋 Copiar texto';
       }, 2000);
     });
+  });
+
+  // Sample Image Feature Listener
+  sampleImageTrigger?.addEventListener('click', async () => {
+    trackEvent('sample_image_used');
+    try {
+      const res = await fetch('/sample-document.png');
+      if (res.ok) {
+        const blob = await res.blob();
+        if (blob && blob.size > 200) {
+          const sampleFile = new File([blob], 'exemplo-fatura-documento.png', { type: 'image/png' });
+          addFilesToQueue([sampleFile]);
+          return;
+        }
+      }
+    } catch (e) {
+      // fallback to client-side canvas generator
+    }
+    const sampleFile = await createSampleCanvasDocument();
+    addFilesToQueue([sampleFile]);
+  });
+
+  // Download TXT
+  btnDownloadTxt?.addEventListener('click', () => {
+    const text = rawTextOutput.value;
+    if (!text) {
+      alert('Nenhum texto para baixar.');
+      return;
+    }
+    triggerDownload(text, `texto_extraido_${Date.now()}.txt`, 'text/plain;charset=utf-8');
+    trackEvent('text_downloaded', { format: 'txt', length: text.length });
+  });
+
+  // Download Markdown
+  btnDownloadMd?.addEventListener('click', () => {
+    const text = rawTextOutput.value;
+    if (!text) {
+      alert('Nenhum texto para baixar.');
+      return;
+    }
+    triggerDownload(text, `documento_extraido_${Date.now()}.md`, 'text/markdown;charset=utf-8');
+    trackEvent('text_downloaded', { format: 'markdown', length: text.length });
+    downloadDropdownMenu?.classList.add('hidden');
+    btnMoreDownloadsToggle?.setAttribute('aria-expanded', 'false');
+  });
+
+  // Download CSV (for Table Mode)
+  btnDownloadCsv?.addEventListener('click', () => {
+    const text = rawTextOutput.value;
+    if (!text) {
+      alert('Nenhum texto para baixar.');
+      return;
+    }
+    const lines = text.split('\n').filter((l) => l.trim().length > 0);
+    const csvRows: string[] = [];
+
+    for (const line of lines) {
+      if (line.includes('|')) {
+        const cells = line
+          .split('|')
+          .map((c) => c.trim())
+          .filter((c, idx, arr) => !(idx === 0 && c === '') && !(idx === arr.length - 1 && c === ''));
+        if (cells.every((c) => /^[-:\s]+$/.test(c))) continue;
+        if (cells.length > 0) {
+          const row = cells.map((cell) => `"${cell.replace(/"/g, '""')}"`).join(',');
+          csvRows.push(row);
+        }
+      } else {
+        const cells = line.split(/\t+|\s{2,}/).map((c) => c.trim()).filter(Boolean);
+        if (cells.length > 0) {
+          const row = cells.map((cell) => `"${cell.replace(/"/g, '""')}"`).join(',');
+          csvRows.push(row);
+        }
+      }
+    }
+
+    if (csvRows.length === 0) {
+      alert('Nenhuma estrutura de tabela ou colunas identificável para conversão em CSV.');
+      return;
+    }
+
+    const csvContent = '\uFEFF' + csvRows.join('\r\n');
+    triggerDownload(csvContent, `tabela_extraida_${Date.now()}.csv`, 'text/csv;charset=utf-8');
+    trackEvent('text_downloaded', { format: 'csv', rows: csvRows.length });
+    downloadDropdownMenu?.classList.add('hidden');
+    btnMoreDownloadsToggle?.setAttribute('aria-expanded', 'false');
+  });
+
+  // Download Code
+  btnDownloadCode?.addEventListener('click', () => {
+    const text = rawTextOutput.value;
+    if (!text) {
+      alert('Nenhum código para baixar.');
+      return;
+    }
+    const ext = lastDetectedInfo.ext || '.txt';
+    triggerDownload(text, `codigo_extraido_${Date.now()}${ext}`, 'text/plain;charset=utf-8');
+    trackEvent('text_downloaded', { format: 'code', lang: lastDetectedInfo.lang });
+    downloadDropdownMenu?.classList.add('hidden');
+    btnMoreDownloadsToggle?.setAttribute('aria-expanded', 'false');
+  });
+
+  // Toggle More Downloads Menu
+  btnMoreDownloadsToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isHidden = downloadDropdownMenu?.classList.toggle('hidden');
+    btnMoreDownloadsToggle.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+  });
+
+  // Close dropdown on outside click
+  document.addEventListener('click', (e) => {
+    if (!downloadDropdownMenu?.contains(e.target as Node) && e.target !== btnMoreDownloadsToggle) {
+      downloadDropdownMenu?.classList.add('hidden');
+      btnMoreDownloadsToggle?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close dropdown on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !downloadDropdownMenu?.classList.contains('hidden')) {
+      downloadDropdownMenu?.classList.add('hidden');
+      btnMoreDownloadsToggle?.setAttribute('aria-expanded', 'false');
+    }
   });
 
   // Add more / Clear all

@@ -1,34 +1,37 @@
 ---
-// TrustSection.astro - Barra compacta horizontal de confiança logo abaixo do conversor OCR
+// TrustSection.astro - Compact trust bar, inline styles for safe opacity handling
 ---
 
-<section class="py-4 bg-[var(--color-canvas)] border-y border-[var(--color-hairline)]" aria-label="Garantia de Confiança e Privacidade">
+<section class="py-4 bg-[var(--color-canvas)] border-y border-[var(--color-hairline)]" aria-label="Garantias">
   <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col items-center justify-center gap-2 text-center">
-      <!-- Horizontal Trust Badges -->
-      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs sm:text-sm font-medium text-[var(--color-ink)]">
-        <span class="inline-flex items-center gap-1.5">
-          <span>🔒</span>
-          <span>Processamento local</span>
-        </span>
-        <span class="inline-flex items-center gap-1.5">
-          <span>⚡</span>
-          <span>Rápido</span>
-        </span>
-        <span class="inline-flex items-center gap-1.5">
-          <span>🆓</span>
-          <span>Gratuito</span>
-        </span>
-        <span class="inline-flex items-center gap-1.5">
-          <span>🚫</span>
-          <span>Sem cadastro</span>
-        </span>
-      </div>
+    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 text-xs sm:text-sm font-medium text-[var(--color-body)]">
 
-      <!-- Short Reassurance Line -->
-      <p class="text-xs text-[var(--color-mute)] font-normal">
-        Suas imagens são processadas diretamente no navegador.
-      </p>
+      <span class="inline-flex items-center gap-1.5">
+        <span class="w-6 h-6 rounded-lg flex items-center justify-center text-sm text-indigo-600 dark:text-indigo-400" style="background:rgba(99,102,241,0.1);" aria-hidden="true">🔒</span>
+        <span>Processamento local</span>
+      </span>
+
+      <span class="hidden sm:block w-px h-3.5 bg-[var(--color-hairline)]" aria-hidden="true"></span>
+
+      <span class="inline-flex items-center gap-1.5">
+        <span class="w-6 h-6 rounded-lg flex items-center justify-center text-sm text-violet-600 dark:text-violet-400" style="background:rgba(139,92,246,0.1);" aria-hidden="true">⚡</span>
+        <span>Rápido</span>
+      </span>
+
+      <span class="hidden sm:block w-px h-3.5 bg-[var(--color-hairline)]" aria-hidden="true"></span>
+
+      <span class="inline-flex items-center gap-1.5">
+        <span class="w-6 h-6 rounded-lg flex items-center justify-center text-sm text-emerald-600 dark:text-emerald-400" style="background:rgba(16,185,129,0.1);" aria-hidden="true">✓</span>
+        <span>Gratuito</span>
+      </span>
+
+      <span class="hidden sm:block w-px h-3.5 bg-[var(--color-hairline)]" aria-hidden="true"></span>
+
+      <span class="inline-flex items-center gap-1.5">
+        <span class="w-6 h-6 rounded-lg flex items-center justify-center text-sm text-pink-600 dark:text-pink-400" style="background:rgba(236,72,153,0.1);" aria-hidden="true">🚫</span>
+        <span>Sem cadastro</span>
+      </span>
+
     </div>
   </div>
 </section>
