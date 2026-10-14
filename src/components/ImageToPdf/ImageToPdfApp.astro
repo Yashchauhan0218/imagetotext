@@ -2,40 +2,30 @@
 // ImageToPdfApp.astro - Aplicativo interativo de Imagem para PDF 100% no navegador
 ---
 
-<section id="pdf-app" class="relative pt-2 pb-12 sm:pb-16" aria-label="Ferramenta Imagem para PDF">
+<section id="pdf-app" class="relative pt-2 pb-8 sm:pb-10" aria-label="Ferramenta Imagem para PDF">
   <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- Main App Container -->
     <div class="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-canvas)] shadow-[var(--shadow-level-3)] overflow-hidden transition-all duration-300">
       
-      <!-- Top Status / Mode Header -->
-      <div class="px-4 sm:px-6 py-3.5 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)] flex flex-wrap items-center justify-between gap-4">
-        <div class="flex items-center gap-2.5">
-          <div class="w-7 h-7 rounded-md bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-xs">
-            PDF
-          </div>
-          <div>
-            <h2 class="text-sm font-semibold text-[var(--color-ink)] leading-none">
-              Juntar e Converter Imagens em PDF
-            </h2>
-            <p class="text-[11px] text-[var(--color-mute)] mt-0.5">
-              Suporta JPG, PNG, WebP, BMP e GIF · Processamento no navegador
-            </p>
-          </div>
-        </div>
-
-        <!-- Cross Link Badge to OCR -->
-        <a
-          href="/#converter-app"
-          class="text-xs font-medium text-[var(--color-ink)] hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] hover:border-[var(--color-hairline-strong)] shadow-2xs transition-all"
-        >
-          <svg class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 7V4h16v3"></path>
-            <path d="M9 20h6"></path>
-            <path d="M12 4v16"></path>
-          </svg>
-          <span>Quer extrair texto editável? Use Imagem para Texto &rarr;</span>
-        </a>
+      <!-- Friendly Step Indicator -->
+      <div class="px-4 sm:px-6 py-2 bg-[var(--color-canvas-soft)] border-b border-[var(--color-hairline)]">
+        <ol id="pdf-steps" class="flex items-center justify-center gap-2 sm:gap-3 text-xs" aria-label="Etapas">
+          <li data-step="1" class="pdf-step flex items-center gap-1.5 px-2.5 py-1 rounded-full font-medium bg-[var(--color-ink)] text-[var(--color-canvas)]">
+            <span class="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-bold">1</span>
+            <span>Adicionar fotos</span>
+          </li>
+          <li aria-hidden="true" class="w-4 sm:w-8 h-px bg-[var(--color-hairline-strong)]/60"></li>
+          <li data-step="2" class="pdf-step flex items-center gap-1.5 px-2.5 py-1 rounded-full font-medium text-[var(--color-mute)]">
+            <span class="w-4 h-4 rounded-full bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] text-[10px] flex items-center justify-center font-bold">2</span>
+            <span>Organizar páginas</span>
+          </li>
+          <li aria-hidden="true" class="w-4 sm:w-8 h-px bg-[var(--color-hairline-strong)]/60"></li>
+          <li data-step="3" class="pdf-step flex items-center gap-1.5 px-2.5 py-1 rounded-full font-medium text-[var(--color-mute)]">
+            <span class="w-4 h-4 rounded-full bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] text-[10px] flex items-center justify-center font-bold">3</span>
+            <span>Baixar PDF</span>
+          </li>
+        </ol>
       </div>
 
       <!-- STATE 1: UPLOAD DROPZONE (Visible when no images are loaded) -->
@@ -65,10 +55,10 @@
           </div>
 
           <h2 class="text-xl sm:text-2xl font-bold text-[var(--color-ink)] tracking-tight">
-            Arraste suas imagens aqui
+            Comece aqui — adicione suas fotos
           </h2>
           <p class="mt-2 text-sm text-[var(--color-body)] max-w-md mx-auto font-normal">
-            ou cole imagens com <kbd class="font-mono text-xs font-semibold px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded text-[var(--color-ink)]">Ctrl + V</kbd>
+            Arraste arquivos, escolha da galeria ou cole com <kbd class="font-mono text-xs font-semibold px-1.5 py-0.5 bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] rounded text-[var(--color-ink)]">Ctrl + V</kbd>
           </p>
 
           <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -79,6 +69,12 @@
             >
               <span>📤 Escolher imagens</span>
             </button>
+          </div>
+
+          <div class="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs text-[var(--color-body)]">
+            <span class="inline-flex items-center gap-1.5">🔒 <strong class="font-medium">100% privado</strong>&nbsp;— nada sai do seu navegador</span>
+            <span class="inline-flex items-center gap-1.5">⚡ Grátis e instantâneo</span>
+            <span class="inline-flex items-center gap-1.5">💧 Sem marca d'água</span>
           </div>
 
           <!-- Section: Supported Formats -->
@@ -93,13 +89,13 @@
       <div id="pdf-workspace" class="hidden">
         
         <!-- Workspace Top Toolbar -->
-        <div class="px-4 sm:px-6 py-3 bg-[var(--color-canvas)] border-b border-[var(--color-hairline)] flex flex-wrap items-center justify-between gap-3">
+        <div class="px-4 sm:px-6 py-2 bg-[var(--color-canvas)] border-b border-[var(--color-hairline)] flex flex-wrap items-center justify-between gap-2 sm:gap-3">
           <div class="flex items-center gap-3">
-            <span id="pdf-image-count-badge" class="px-2.5 py-1 rounded-md bg-[var(--color-canvas-soft-2)] border border-[var(--color-hairline)] text-xs font-mono font-medium text-[var(--color-ink)]">
-              0 imagens selecionadas
+            <span id="pdf-image-count-badge" class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
+              0 páginas prontas
             </span>
             <span class="text-xs text-[var(--color-mute)] hidden sm:inline">
-              Arraste os cards para reorganizar a ordem das páginas
+              Arraste para mudar a ordem — a 1ª imagem vira a capa
             </span>
           </div>
 
@@ -133,24 +129,25 @@
         </div>
 
         <!-- Split View: Thumbnails Grid (Left/Main) + PDF Options (Right) -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-[var(--color-hairline)] min-h-[480px]">
+        <!-- Compact height so download button stays visible without page scroll -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-[var(--color-hairline)] lg:h-[calc(100vh-340px)] lg:min-h-[380px] lg:max-h-[540px]">
           
           <!-- LEFT: Image Reorder & Preview Grid (Takes 2 cols) -->
-          <div class="lg:col-span-2 p-4 sm:p-6 bg-[var(--color-canvas-soft)] flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xs font-mono uppercase tracking-wider text-[var(--color-mute)] font-semibold">
-                  Ordem das Páginas do PDF
+          <div class="lg:col-span-2 p-3 sm:p-4 bg-[var(--color-canvas-soft)] flex flex-col lg:min-h-0 lg:overflow-hidden">
+            <div class="lg:min-h-0 lg:flex-1 lg:flex lg:flex-col lg:overflow-hidden">
+              <div class="flex items-center justify-between mb-2.5">
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-[var(--color-ink)]">
+                  📄 Suas páginas <span id="pdf-pages-hint" class="ml-1 font-normal normal-case tracking-normal text-[var(--color-mute)]"></span>
                 </h3>
-                <span class="text-[11px] text-[var(--color-mute)]">
-                  Use os botões ou arraste para reordenar
+                <span class="text-[11px] text-[var(--color-mute)] hidden sm:inline">
+                  Arraste ou use ← → para reordenar
                 </span>
               </div>
 
               <!-- Thumbnails Container -->
               <div
                 id="pdf-thumbnails-container"
-                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5 max-h-[540px] overflow-y-auto pr-1"
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-[300px] sm:max-h-[340px] lg:max-h-none lg:flex-1 lg:min-h-0 lg:overflow-y-auto pr-1"
               >
                 <!-- Thumbnail cards injected dynamically via JS -->
               </div>
@@ -159,45 +156,46 @@
             <!-- Drag helper drop area at bottom of gallery -->
             <div
               id="pdf-secondary-dropzone"
-              class="mt-4 border border-dashed border-[var(--color-hairline-strong)]/40 rounded-lg p-3 text-center text-xs text-[var(--color-mute)] hover:bg-[var(--color-canvas)]/60 transition-colors cursor-pointer"
+              class="mt-3 border border-dashed border-[var(--color-hairline-strong)]/40 rounded-lg p-2.5 text-center text-xs text-[var(--color-mute)] hover:bg-[var(--color-canvas)]/60 hover:text-[var(--color-ink)] transition-colors cursor-pointer shrink-0"
             >
-              + Solte mais imagens aqui para adicionar páginas
+              ➕ Arraste mais fotos aqui ou <span class="font-semibold underline underline-offset-2">clique para adicionar</span>
             </div>
           </div>
 
           <!-- RIGHT: PDF Configuration & Generation Panel (Takes 1 col) -->
-          <div class="p-4 sm:p-6 bg-[var(--color-canvas)] flex flex-col justify-between space-y-6">
+          <!-- Settings scroll, download button pinned at bottom -->
+          <div class="bg-[var(--color-canvas)] flex flex-col lg:min-h-0 lg:overflow-hidden">
             
-            <div class="space-y-5">
-              <div class="border-b border-[var(--color-hairline)] pb-3">
+            <div class="p-3 sm:p-4 space-y-3 lg:flex-1 lg:min-h-0 lg:overflow-y-auto">
+              <div class="border-b border-[var(--color-hairline)] pb-2">
                 <h3 class="text-sm font-semibold text-[var(--color-ink)]">
-                  Configurações do PDF
+                  ⚙️ Ajustes do PDF <span class="font-normal text-[var(--color-mute)]">— opcional</span>
                 </h3>
                 <p class="text-xs text-[var(--color-body)] mt-0.5">
-                  Personalize o layout das páginas e qualidade do documento
+                  Tudo já vem pronto. Mude só se quiser um resultado diferente.
                 </p>
               </div>
 
               <!-- Option 1: Page Size -->
               <div class="space-y-1.5">
                 <label for="pdf-page-size" class="text-xs font-medium text-[var(--color-ink)] flex items-center justify-between">
-                  <span>Tamanho da Página:</span>
+                  <span>📐 Tamanho da folha</span>
                   <span class="text-[11px] font-mono text-[var(--color-mute)]" id="page-size-desc">210 x 297 mm</span>
                 </label>
                 <select
                   id="pdf-page-size"
                   class="w-full text-xs bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] rounded-md px-3 py-2 text-[var(--color-ink)] font-medium focus:outline-none focus:border-[var(--color-primary)] cursor-pointer"
                 >
-                  <option value="a4" selected>A4 (Padrão Internacional)</option>
-                  <option value="letter">Carta / Letter (EUA & Américas)</option>
-                  <option value="fit">Ajustar à Imagem (Mesmo tamanho da foto)</option>
+                  <option value="a4" selected>A4 — ideal para imprimir</option>
+                  <option value="letter">Carta — padrão EUA / Américas</option>
+                  <option value="fit">Do tamanho da foto — sem bordas extras</option>
                 </select>
               </div>
 
               <!-- Option 2: Orientation -->
               <div class="space-y-1.5">
                 <label class="text-xs font-medium text-[var(--color-ink)]">
-                  Orientação da Página:
+                  🔄 Folha em pé ou deitada? <span class="font-normal text-[var(--color-mute)]">— Auto detecta sozinho</span>
                 </label>
                 <div class="grid grid-cols-3 gap-2">
                   <button
@@ -238,7 +236,7 @@
               <!-- Option 3: Margin -->
               <div class="space-y-1.5">
                 <label class="text-xs font-medium text-[var(--color-ink)]">
-                  Margens das Páginas:
+                  ↔️ Borda branca ao redor da foto
                 </label>
                 <div class="grid grid-cols-3 gap-2">
                   <button
@@ -268,22 +266,22 @@
               <!-- Option 4: Image Compression / Quality -->
               <div class="space-y-1.5">
                 <label for="pdf-quality-select" class="text-xs font-medium text-[var(--color-ink)]">
-                  Qualidade da Imagem:
+                  ✨ Qualidade final
                 </label>
                 <select
                   id="pdf-quality-select"
                   class="w-full text-xs bg-[var(--color-canvas-soft)] border border-[var(--color-hairline)] rounded-md px-3 py-2 text-[var(--color-ink)] font-medium focus:outline-none focus:border-[var(--color-primary)] cursor-pointer"
                 >
-                  <option value="0.95" selected>Alta Resolução (Original / Imprimir)</option>
-                  <option value="0.82">Equilibrada (Ideal para Envio Web)</option>
-                  <option value="0.65">Compacta (Tamanho de Arquivo Menor)</option>
+                  <option value="0.95" selected>Alta — melhor para imprimir ⭐ recomendado</option>
+                  <option value="0.82">Média — boa para WhatsApp e e-mail</option>
+                  <option value="0.65">Leve — arquivo bem pequeno</option>
                 </select>
               </div>
 
               <!-- Option 5: Filename -->
               <div class="space-y-1.5">
                 <label for="pdf-filename-input" class="text-xs font-medium text-[var(--color-ink)]">
-                  Nome do Arquivo PDF:
+                  📝 Nome do arquivo
                 </label>
                 <div class="relative flex items-center">
                   <input
@@ -300,8 +298,8 @@
 
             </div>
 
-            <!-- Action Area: Generate & Download -->
-            <div class="pt-4 border-t border-[var(--color-hairline)] space-y-3">
+            <!-- Action Area: Generate & Download — always visible, never scrolls away -->
+            <div class="p-3 sm:p-4 pt-3 border-t border-[var(--color-hairline)] space-y-2 bg-[var(--color-canvas)] shrink-0 sticky bottom-3 lg:static z-10 rounded-b-2xl shadow-[0_-8px_24px_-12px_rgba(0,0,0,0.25)] lg:shadow-none">
               
               <!-- Progress Indicator (Hidden during idle) -->
               <div id="pdf-progress-container" class="hidden space-y-1.5">
@@ -318,7 +316,7 @@
               <button
                 type="button"
                 id="pdf-generate-btn"
-                class="w-full py-3 px-4 rounded-lg bg-[var(--color-primary)] text-[var(--color-on-primary)] font-medium text-sm flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.99] transition-all shadow-md cursor-pointer"
+                class="w-full py-2.5 px-4 rounded-lg bg-[var(--color-primary)] text-[var(--color-on-primary)] font-medium text-sm flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.99] transition-all shadow-md cursor-pointer"
               >
                 <svg class="w-4 h-4 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -330,11 +328,11 @@
                 <span id="pdf-generate-btn-text">Baixar PDF Agora</span>
               </button>
 
-              <div class="flex items-center justify-center gap-2 text-[11px] text-[var(--color-mute)]">
-                <svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <div class="flex items-center justify-center gap-2 text-[11px] text-[var(--color-mute)] text-center">
+                <svg class="w-3.5 h-3.5 text-emerald-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 </svg>
-                <span>Sem limite de páginas · Sem marcas d'água</span>
+                <span id="pdf-trust-line">Tudo acontece no seu aparelho · Nada é enviado</span>
               </div>
             </div>
 
@@ -345,6 +343,12 @@
       </div>
 
     </div>
+
+    <!-- Subtle cross-link kept for SEO, moved out of the tool header -->
+    <p class="mt-4 text-center text-xs text-[var(--color-mute)]">
+      Precisa copiar o texto da foto em vez de montar um PDF?
+      <a href="/#converter-app" class="font-medium text-[var(--color-ink)] underline underline-offset-2 hover:text-blue-600">Use Imagem para Texto →</a>
+    </p>
 
   </div>
 </section>
@@ -404,6 +408,44 @@
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
+  // Helper: escape text for safe HTML injection (filenames can contain quotes/< >)
+  function escapeHtml(text: string) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // Helper: friendly fallback name for pasted images (clipboard files often have no name)
+  let pastedCounter = 0;
+  function friendlyName(original: string, type: string) {
+    const clean = (original || '').trim();
+    if (clean) return clean;
+    pastedCounter += 1;
+    const ext = type.includes('png') ? 'png' : type.includes('webp') ? 'webp' : 'jpg';
+    return `foto-colada-${pastedCounter}.${ext}`;
+  }
+
+  // Helper: update 3-step indicator (1 add → 2 organize → 3 ready)
+  function updateSteps() {
+    const steps = document.querySelectorAll('#pdf-steps .pdf-step');
+    const activeStep = imageList.length === 0 ? 1 : 2;
+    steps.forEach((el) => {
+      const stepNum = parseInt((el as HTMLElement).dataset.step || '1', 10);
+      const isActive = stepNum === activeStep;
+      const isDone = stepNum < activeStep;
+      (el as HTMLElement).className =
+        'pdf-step flex items-center gap-1.5 px-2.5 py-1 rounded-full font-medium ' +
+        (isActive
+          ? 'bg-[var(--color-ink)] text-[var(--color-canvas)]'
+          : isDone
+            ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300'
+            : 'text-[var(--color-mute)]');
+    });
+  }
+
   // Helper: Read file as ImageItem
   function processFile(file: File): Promise<ImageItem> {
     return new Promise((resolve, reject) => {
@@ -420,7 +462,7 @@
           resolve({
             id: Math.random().toString(36).substring(2, 9),
             file,
-            name: file.name,
+            name: friendlyName(file.name, file.type),
             sizeFormatted: formatBytes(file.size),
             dataUrl,
             width: img.naturalWidth || img.width,
@@ -461,6 +503,8 @@
 
   // Render Thumbnails & Workspace UI
   function renderWorkspace() {
+    updateSteps();
+
     if (imageList.length === 0) {
       uploadZone?.classList.remove('hidden');
       workspace?.classList.add('hidden');
@@ -471,8 +515,28 @@
     uploadZone?.classList.add('hidden');
     workspace?.classList.remove('hidden');
 
+    const totalBytes = imageList.reduce((acc, it) => acc + (it.file?.size || 0), 0);
+
     if (countBadge) {
-      countBadge.textContent = `${imageList.length} ${imageList.length === 1 ? 'imagem' : 'imagens'} (${imageList.length} ${imageList.length === 1 ? 'página' : 'páginas'})`;
+      countBadge.textContent = imageList.length === 1
+        ? `1 página pronta · ${formatBytes(totalBytes)}`
+        : `${imageList.length} páginas prontas · ${formatBytes(totalBytes)}`;
+    }
+
+    const pagesHint = document.getElementById('pdf-pages-hint');
+    if (pagesHint) {
+      pagesHint.textContent = imageList.length === 1 ? '· 1 foto' : `· ${imageList.length} fotos`;
+    }
+
+    if (generateBtnText) {
+      generateBtnText.textContent = imageList.length === 1
+        ? 'Baixar PDF com 1 página'
+        : `Baixar PDF com ${imageList.length} páginas`;
+    }
+
+    const trustLine = document.getElementById('pdf-trust-line');
+    if (trustLine) {
+      trustLine.textContent = `Tudo acontece no seu aparelho · ${formatBytes(totalBytes)} no total · Nada é enviado`;
     }
 
     if (!thumbnailsContainer) return;
@@ -480,23 +544,24 @@
 
     imageList.forEach((item, index) => {
       const card = document.createElement('div');
-      card.className = 'group relative rounded-lg border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-2 shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between';
+      card.className = 'group relative rounded-lg border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-1.5 shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between';
       card.dataset.id = item.id;
       card.dataset.index = index.toString();
       card.draggable = true;
 
       card.innerHTML = `
-        <div class="relative aspect-3/4 rounded bg-[var(--color-canvas-soft-2)] flex items-center justify-center overflow-hidden border border-[var(--color-hairline)] mb-2">
+        <div class="relative aspect-[4/3] max-h-[180px] w-full rounded bg-[var(--color-canvas-soft-2)] flex items-center justify-center overflow-hidden border border-[var(--color-hairline)] mb-1.5">
           <!-- Page Number Badge -->
-          <span class="absolute top-1.5 left-1.5 z-10 px-1.5 py-0.5 rounded bg-[var(--color-ink)]/80 text-[var(--color-canvas)] text-[10px] font-mono font-medium backdrop-blur-xs">
-            Pág. ${index + 1}
+          <span class="absolute top-1.5 left-1.5 z-10 px-1.5 py-0.5 rounded bg-[var(--color-ink)]/80 text-[var(--color-canvas)] text-[10px] font-semibold backdrop-blur-xs">
+            Página ${index + 1}
           </span>
           
           <!-- Delete Button -->
           <button
             type="button"
-            class="thumb-delete-btn absolute top-1.5 right-1.5 z-10 w-6 h-6 rounded-full bg-red-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 hover:scale-110 active:scale-95 transition-all shadow-xs cursor-pointer"
-            title="Remover esta página"
+            class="thumb-delete-btn absolute top-1.5 right-1.5 z-10 w-6 h-6 rounded-full bg-red-600 text-white flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 hover:scale-110 active:scale-95 transition-all shadow-xs cursor-pointer"
+            title="Remover página ${index + 1}"
+            aria-label="Remover página ${index + 1}"
             data-id="${item.id}"
           >
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -508,8 +573,9 @@
           <!-- Rotate Button -->
           <button
             type="button"
-            class="thumb-rotate-btn absolute bottom-1.5 right-1.5 z-10 w-6 h-6 rounded-full bg-[var(--color-canvas)]/90 border border-[var(--color-hairline)] text-[var(--color-ink)] flex items-center justify-center opacity-0 group-hover:opacity-100 hover:scale-110 active:scale-95 transition-all shadow-xs cursor-pointer"
-            title="Girar 90°"
+            class="thumb-rotate-btn absolute bottom-1.5 right-1.5 z-10 w-6 h-6 rounded-full bg-[var(--color-canvas)]/90 border border-[var(--color-hairline)] text-[var(--color-ink)] flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 hover:scale-110 active:scale-95 transition-all shadow-xs cursor-pointer"
+            title="Girar página ${index + 1} em 90°"
+            aria-label="Girar página ${index + 1} em 90 graus"
             data-id="${item.id}"
           >
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -520,27 +586,29 @@
           <!-- Image Preview -->
           <img
             src="${item.dataUrl}"
-            alt="${item.name}"
+            alt="Página ${index + 1} do PDF"
+            title="${escapeHtml(item.name)}"
             class="w-full h-full object-contain transition-transform duration-200"
             style="transform: rotate(${item.rotation}deg);"
+            draggable="false"
           />
         </div>
 
         <div class="px-1">
-          <p class="text-[11px] font-medium text-[var(--color-ink)] truncate" title="${item.name}">
-            ${item.name}
-          </p>
-          <div class="flex items-center justify-between text-[10px] text-[var(--color-mute)] font-mono mt-0.5">
-            <span>${item.width}x${item.height}</span>
-            <span>${item.sizeFormatted}</span>
+          <div class="flex items-center justify-between gap-2">
+            <p class="text-[11px] font-semibold text-[var(--color-ink)]">
+              Página ${index + 1}${index === 0 ? ' · capa' : ''}
+            </p>
+            <span class="text-[10px] text-[var(--color-mute)] font-mono shrink-0">${item.sizeFormatted}</span>
           </div>
 
           <!-- Bottom Move Controls -->
-          <div class="flex items-center justify-between mt-2 pt-1.5 border-t border-[var(--color-hairline)]">
+          <div class="flex items-center justify-between mt-1.5 pt-1.5 border-t border-[var(--color-hairline)]">
             <button
               type="button"
-              class="thumb-move-left-btn text-xs p-1 rounded hover:bg-[var(--color-canvas-soft-2)] text-[var(--color-body)] hover:text-[var(--color-ink)] disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
-              title="Mover para a esquerda"
+              class="thumb-move-left-btn text-xs p-1.5 rounded hover:bg-[var(--color-canvas-soft-2)] text-[var(--color-body)] hover:text-[var(--color-ink)] disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
+              title="Mover página ${index + 1} para antes"
+              aria-label="Mover página ${index + 1} para antes"
               data-index="${index}"
               ${index === 0 ? 'disabled' : ''}
             >
@@ -549,12 +617,13 @@
               </svg>
             </button>
 
-            <span class="text-[9px] font-mono text-[var(--color-mute)] uppercase">#${index + 1}</span>
+            <span class="text-[10px] text-[var(--color-mute)]">Arraste para reordenar</span>
 
             <button
               type="button"
-              class="thumb-move-right-btn text-xs p-1 rounded hover:bg-[var(--color-canvas-soft-2)] text-[var(--color-body)] hover:text-[var(--color-ink)] disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
-              title="Mover para a direita"
+              class="thumb-move-right-btn text-xs p-1.5 rounded hover:bg-[var(--color-canvas-soft-2)] text-[var(--color-body)] hover:text-[var(--color-ink)] disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
+              title="Mover página ${index + 1} para depois"
+              aria-label="Mover página ${index + 1} para depois"
               data-index="${index}"
               ${index === imageList.length - 1 ? 'disabled' : ''}
             >
@@ -696,7 +765,7 @@
     // UI Loading State
     generateBtn.setAttribute('disabled', 'true');
     generateBtn.classList.add('opacity-75', 'cursor-not-allowed');
-    generateBtnText.textContent = 'Gerando PDF...';
+    generateBtnText.textContent = `Montando seu PDF...`;
     if (progressContainer) progressContainer.classList.remove('hidden');
 
     const pageSize = pageSizeSelect ? pageSizeSelect.value : 'a4';
@@ -801,7 +870,11 @@
       // Reset UI state
       generateBtn.removeAttribute('disabled');
       generateBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-      generateBtnText.textContent = 'Baixar PDF Agora';
+      if (generateBtnText) {
+        generateBtnText.textContent = imageList.length === 1
+          ? 'Baixar PDF com 1 página'
+          : `Baixar PDF com ${imageList.length} páginas`;
+      }
       if (progressContainer) {
         setTimeout(() => {
           progressContainer.classList.add('hidden');
@@ -812,8 +885,15 @@
   }
 
   // Event Listeners Initialization
+  updateSteps();
   browseBtn?.addEventListener('click', () => fileInput?.click());
   dropArea?.addEventListener('click', () => fileInput?.click());
+  dropArea?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fileInput?.click();
+    }
+  });
   addMoreBtn?.addEventListener('click', () => fileInput?.click());
   secondaryDropzone?.addEventListener('click', () => fileInput?.click());
 
@@ -875,7 +955,8 @@
 
   // Clear All
   clearAllBtn?.addEventListener('click', () => {
-    if (confirm('Tem certeza de que deseja remover todas as imagens?')) {
+    const label = imageList.length === 1 ? '1 foto' : `${imageList.length} fotos`;
+    if (confirm(`Remover ${label} e começar de novo?`)) {
       imageList = [];
       renderWorkspace();
     }

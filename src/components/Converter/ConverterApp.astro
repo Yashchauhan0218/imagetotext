@@ -2,7 +2,7 @@
 // ConverterApp.astro - Aplicativo interativo principal de Imagem para Texto & Código OCR
 ---
 
-<section id="converter-app" class="relative pt-4 pb-12 sm:pb-16 scroll-mt-20" aria-label="Ferramenta Conversor OCR">
+<section id="converter-app" class="relative pt-4 pb-8 sm:pb-10 scroll-mt-20" aria-label="Ferramenta Conversor OCR">
   <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- App Container Card -->
@@ -248,13 +248,15 @@
         </div>
 
         <!-- Split Grid Workspace -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[560px]">
+        <!-- Compact height so copy/download buttons stay visible without page scroll -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 lg:h-[calc(100vh-340px)] lg:min-h-[380px] lg:max-h-[540px]">
           
           <!-- LEFT PANE: Image Viewer & Pre-processing (5 cols) -->
-          <div class="lg:col-span-5 bg-[var(--color-canvas-soft)] p-4 sm:p-5 border-b lg:border-b-0 lg:border-r border-[var(--color-hairline)] flex flex-col justify-between">
-            <div>
+          <!-- Preview compact, extract button pinned at bottom -->
+          <div class="lg:col-span-5 bg-[var(--color-canvas-soft)] p-3 sm:p-4 border-b lg:border-b-0 lg:border-r border-[var(--color-hairline)] flex flex-col lg:min-h-0 lg:overflow-hidden">
+            <div class="lg:flex-1 lg:min-h-0 lg:overflow-y-auto">
               <!-- Left Toolbar -->
-              <div class="flex items-center justify-between mb-3 text-xs">
+              <div class="flex items-center justify-between mb-2 text-xs">
                 <span class="font-mono text-[11px] text-[var(--color-body)] font-medium flex items-center gap-1.5">
                   <span class="w-2 h-2 rounded-full bg-emerald-500" aria-hidden="true"></span>
                   <span id="image-meta-info">Imagem de Origem</span>
@@ -286,18 +288,18 @@
                 </div>
               </div>
 
-              <!-- Main Canvas / Image Container -->
-              <div class="relative w-full aspect-[4/3] max-h-[380px] bg-[var(--color-canvas)] rounded-xl border border-[var(--color-hairline)] overflow-hidden flex items-center justify-center p-2 group shadow-2xs">
+              <!-- Main Canvas / Image Container — smaller so button fits -->
+              <div class="relative w-full aspect-[16/10] max-h-[220px] lg:max-h-[230px] bg-[var(--color-canvas)] rounded-xl border border-[var(--color-hairline)] overflow-hidden flex items-center justify-center p-2 group shadow-2xs">
                 <canvas id="image-canvas" class="max-w-full max-h-full object-contain rounded transition-transform"></canvas>
               </div>
             </div>
 
-            <!-- OCR Trigger Bar -->
-            <div class="mt-4 pt-4 border-t border-[var(--color-hairline)] flex items-center justify-between gap-3">
+            <!-- OCR Trigger Bar — pinned, always visible -->
+            <div class="mt-2.5 pt-2.5 border-t border-[var(--color-hairline)] flex items-center justify-between gap-3 shrink-0 bg-[var(--color-canvas-soft)] sticky bottom-0 lg:static z-10">
               <button
                 type="button"
                 id="process-ocr-btn"
-                class="px-6 py-2.5 text-sm font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full shadow-xs transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
+                class="px-5 py-2 text-sm font-semibold text-[var(--color-on-primary)] bg-[var(--color-primary)] hover:opacity-90 rounded-full shadow-xs transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
               >
                 <span id="ocr-btn-text">✨ Extrair texto</span>
               </button>
@@ -309,10 +311,11 @@
           </div>
 
           <!-- RIGHT PANE: Output Workspace, Code Highlighter & Tools (7 cols) -->
-          <div class="lg:col-span-7 bg-[var(--color-canvas)] p-4 sm:p-5 flex flex-col justify-between">
-            <div>
+          <!-- Header + copy/download pinned, only text output scrolls -->
+          <div class="lg:col-span-7 bg-[var(--color-canvas)] flex flex-col lg:min-h-0 lg:overflow-hidden">
+            <div class="flex flex-col p-3 sm:p-4 lg:min-h-0 lg:flex-1 lg:overflow-hidden">
               <!-- Output Header & Tabs -->
-              <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[var(--color-hairline)]">
+              <div class="flex flex-wrap items-center justify-between gap-3 pb-2.5 border-b border-[var(--color-hairline)] shrink-0">
                 <!-- Result Format Tabs -->
                 <div class="flex items-center gap-1 bg-[var(--color-canvas-soft)] p-0.5 rounded-lg border border-[var(--color-hairline)] text-xs">
                   <button
@@ -351,8 +354,8 @@
                 </div>
               </div>
 
-              <!-- Post-Processing & Download Action Strip -->
-              <div class="flex flex-wrap items-center justify-between gap-2.5 py-2.5 border-b border-[var(--color-hairline)]/80 text-xs">
+              <!-- Post-Processing & Download Action Strip — always visible, never scrolls away -->
+              <div class="flex flex-wrap items-center justify-between gap-2 py-2 border-b border-[var(--color-hairline)]/80 text-xs shrink-0 bg-[var(--color-canvas)] sticky bottom-3 lg:static z-10">
                 <!-- Advanced Clean & Format Tools -->
                 <div class="flex flex-wrap items-center gap-1.5">
                   <button
@@ -483,8 +486,8 @@
                 </div>
               </div>
 
-              <!-- Output Workspace Display Area -->
-              <div class="mt-3 relative min-h-[300px] max-h-[420px] rounded-xl border border-[var(--color-hairline)] overflow-hidden bg-[var(--color-canvas-soft)]">
+              <!-- Output Workspace Display Area — only this scrolls -->
+              <div class="mt-2.5 relative min-h-[200px] max-h-[280px] lg:max-h-none lg:flex-1 lg:min-h-0 lg:overflow-y-auto rounded-xl border border-[var(--color-hairline)] bg-[var(--color-canvas-soft)]">
                 
                 <!-- Progress & Loader Bar (Overlay during OCR) -->
                 <div id="ocr-loader-overlay" class="hidden absolute inset-0 bg-white/85 dark:bg-black/85 backdrop-blur-xs z-20 flex flex-col items-center justify-center p-6 text-center">
@@ -502,7 +505,7 @@
                 <div id="view-plain-container" class="w-full h-full p-2">
                   <textarea
                     id="raw-text-output"
-                    class="w-full h-[360px] p-3 text-sm bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-lg text-[var(--color-ink)] font-mono resize-none focus:outline-none focus:border-[var(--color-primary)]"
+                    class="w-full h-[200px] lg:h-full lg:min-h-[220px] p-3 text-sm bg-[var(--color-canvas)] border border-[var(--color-hairline)] rounded-lg text-[var(--color-ink)] font-mono resize-none focus:outline-none focus:border-[var(--color-primary)]"
                     placeholder="O texto extraído aparecerá aqui. Você pode editar este texto diretamente..."
                     aria-label="Texto extraído editável"
                   ></textarea>
@@ -514,7 +517,7 @@
                 </div>
 
                 <!-- Tab 3: Markdown Rendered Preview -->
-                <div id="view-markdown-container" class="hidden w-full h-[360px] p-4 overflow-auto bg-[var(--color-canvas)] text-sm prose prose-neutral max-w-none">
+                <div id="view-markdown-container" class="hidden w-full h-[200px] lg:h-full lg:min-h-[220px] p-4 overflow-auto bg-[var(--color-canvas)] text-sm prose prose-neutral max-w-none">
                   <div id="markdown-rendered-output">A visualização formatada em Markdown será renderizada aqui...</div>
                 </div>
               </div>
